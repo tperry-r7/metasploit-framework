@@ -2,8 +2,11 @@
 title: "Framework Documentation Style Guide"
 description: 
 ---
+Remember a style guide is a living document. It can change as the documentation evolves or we find better ways to do things. 
+
 * [Inclusivity](#inclusivity)
 * [Colloquialisms, idioms, humor, and metaphor](#colloquialisms-idioms-humor-and-metaphor)
+* [Documentation Types](#documentation-types)
 * [Links, URLs, and websites](#links-urls-and-websites)
 * [Headers](#headers)
 * [Punctiation](#punctiation)
@@ -11,7 +14,16 @@ description:
 * [Dates](#dates)
 * [Measurements](#measurements)
 * [Text Format](#text-format)
+* [Backticks](#backticks)
 * [Code](#code)
+* [Examples](#examples)
+* [When to use a list vs table](#when-to-use-a-list-vs-table)
+* [Tables](#tables)
+* [Lists](#lists)
+* [Images](#images)
+* [Capitalization](#capitalization)
+* [What's Next?](#whats-next)
+* [Common Spellings](#common-spellings)
 
 The Framework documentation should be:
 
@@ -155,6 +167,7 @@ If it's not in this table, it needs to be spelled out.
 | gigabytes | GB |
 
 ## Text Format
+
 * Use bolded text to emphasize an important word or phrase, when referring to the name of a UI section or field, or to create visual separation and callouts
 * Do not use italics. Use bold.
 * Do not use underline. Use bold. 
@@ -183,10 +196,11 @@ The following list includes items that should be in code font, but it's not an e
 
 ## Code
 
-Code should be executable. Don't abbreviate code examples. 
+Code should be executable. Don't abbreviate code examples. They reader should be able to copy and paste and use the sample with minimal effort. 
 
 - When referring to code in a sentence use backticks. 
 - If the code spans more than one line, use a code block. For example, functions will be a code block.
+- Use code blocks for executable code.
   - Use common sense, if it's hard to read, move it to a new line. 
 - Label each code block with the language.
 - Placeholders should use brackets <>. 
@@ -209,15 +223,30 @@ def name():
 name()
 ```
 
-
 ## Examples
 
-* Code blocks should have a preceding in sentence providing context. 
+* Introductory information should be provided if some context is needed to orient the user and can also be used to introduce code blocks.  
+* All code examples should have a title. The title should start with a verb and should describe the task the example is outlining. It should use sentance case.
+
+**Do**
+
+Lead in:
+
+If you want to get the raw HTTP response (including the response message/code, headers, body, etc), then you can use:
+
+```ruby
+res = send_request_cgi({'uri'=>'/index.php'})
+```
 
 
-## Tables
+Title:
 
-In many contexts, tables are the best way to represent sets of related pieces of data. However, in some contexts, other approaches are better choices.
+Grabbing an element from a specific element tree.
+
+```ruby
+html = res.get_html_document
+greeting = html.at('div//div')
+```
 
 ## When to use a list vs table
 
@@ -231,6 +260,10 @@ Tables and lists are both ways to present a set of similarly structured items; s
 | Each item is a pair of pieces of related data. | A list of term/definition pairs.| Use a description list.|
 | Each item is three or more pieces of related data. | A set of parameters, where each parameter has a name, a data type, and a description. | Use a table. |
 
+## Tables
+
+In many contexts, tables are the best way to represent sets of related pieces of data. However, in some contexts, other approaches are better choices.
+
 * Don’t add more than one paragraph in a table cell. 
 * Use sentence case for table headings.
 * Don't end table headings with punctuation, including a period, an ellipsis, or a colon.
@@ -241,18 +274,17 @@ Tables and lists are both ways to present a set of similarly structured items; s
 
 ## Lists
 
-### Ordered vs. Unordered Lists
-
 Use ordered list when describing a procedure or when a user needs to take an action before taking another, such as a tutorial. Use unordered lists for defintions and when the order of the data doesn't matter.
 
-## List Punctuation and Format
-
-In general, capitalize the initial letter in each list item and use a period to end a list item only if the item is a complete sentence or combining the list item and the lead-in creates a complete sentence. If using a list for defintions, then bold the definition.
+- Capitalize the initial letter in each list item and use a period to end a list item only if the item is a complete sentence  
+- If using a list for defintions, then bold the definition.
+- Use a lead in sentence for lists with a colon. 
 
 **Do**
 
 Unordered list example:
 
+Before you begin: 
 - You have installed an apt-based Linux environment, such as Ubuntu or Kali.
 - You have created a GitHub account and associated an ssh key with it.
 - You have familiarity with Git and Github, or have completed the Github bootcamp.
@@ -277,7 +309,7 @@ Use sentence case for:
 * Table headings
 * Page headings
 
-
+Title case is reserved for page titles. 
 
 ## What's Next?
 
