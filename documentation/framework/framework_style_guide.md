@@ -2,7 +2,16 @@
 title: "Framework Documentation Style Guide"
 description: 
 ---
-
+* [Inclusivity](#inclusivity)
+* [Colloquialisms, idioms, humor, and metaphor](#colloquialisms-idioms-humor-and-metaphor)
+* [Links, URLs, and websites](#links-urls-and-websites)
+* [Headers](#headers)
+* [Punctiation](#punctiation)
+* [Numbers](#numbers)
+* [Dates](#dates)
+* [Measurements](#measurements)
+* [Text Format](#text-format)
+* [Code](#code)
 
 The Framework documentation should be:
 
@@ -31,17 +40,259 @@ Avoid using language that isolates or excludes. For example, don’t reference a
 
 Slang, humor, regional phrases, and metaphor can be confusing, even to native speakers, and rarely translate well. Expressions like “an app portfolio is a complex beast” are not universally understood or appreciated, and it’s hard to find equivalent meanings in other languages. So it's usually best to avoid language with implied or regional meaning. That includes anthropomorphism, a type of metaphor that attributes human characteristics or behavior to non-humans.
 
+## Documentation Types
+
+To do:
+
+* [ ] Tutorials
+* [ ] Concept
+* [ ] Reference and task based
+* [ ] Create templates for each
+* [ ] Provide links to the best examples of each
+
+ 
 ## Links, URLs, and websites
 
 We discuss and direct people to online locations and resources a lot, so let's do it right.
 
-### Descriptive hypertext
-
-Descriptive link text makes navigation easier and more efficient because it’s easier to skim and allows users to make informed decisions about whether to follow them. Using the article title is the easiest ways to do this. 
+* Use descriptive hypertext when linking between articles. Descriptive link text makes navigation easier and more efficient because it’s easier to skim and allows users to make informed decisions about whether to follow them. Using the article title is the easiest ways to do this. 
+* Use full links when directing to an external link. Make sure to reference the entire link. Do not embed like descriptive text.
 
 **Do**
+
 * To learn more about Login Scanners, see `[Creating Metasploit Framework LoginScanners](#link)`. 
+* * If you are still confused about rebasing in Git, see https://git-scm.com/book/en/v2/Git-Branching-Rebasing. 
 
 **Don't**
-* To learn more about Login Scanners, click `[here](#link)`. 
+
+* To learn more about Login Scanners, click `[here](#link)`.
+* Learn more about rebasing in [Git](https://git-scm.com/book/en/v2/Git-Branching-Rebasing). 
+
+## Headers
+
+* Headers should be sequential. 
+* Start a page at h2 `##`. Titles are rendered using an h1 and should not be used. 
+* Headers use sentence-case.
+* Enter a line break between a heading and its content.
+* We use h2 `##`, h3 `###` and h4 `####`. Use caution with h4 since they often look bold. 
+* Be informative and descriptive
+* Concise and scannable
+* Avoid empty headings
+
+
+## Punctiation
+
+* Limit semicolon usage. Instead, try two simple sentences.
+* Don't use end punctuation (e.g., periods or colons) in headings.
+* Use periods at the end of list items if it is a sentence or completes a sentence.
+* Use the [Oxford (a.k.a. serial) comma](https://en.wikipedia.org/wiki/Serial_comma).
+
+## Numbers
+
+Numerals attract the eye because they typically represent the facts readers want and are visually different from the words that populate the majority of the page. Using them enhances the scannability of web content because they provide points of visual fixation.
+
+* Spell-out numbers when they don’t represent specific facts, for example, “There are thousands of modules.”
+* Use an en dash, not a hyphen, to form negative numbers. Hyphens are small and easy to miss. 
+* Use commas in numbers that have four or more digits.
+* Use numerals when writing about a specific number, regardless of how big it is or where it appears in the sentence.
+* Spell out ordinal numbers in text.
+* Do not add -ly to ordinal numbers, as in firstly and secondly.
+* Do not use ordinal numbers for dates.
+* Use an en dash in a range of numbers. Try to avoid between and through. 
+
+**Do**
+
+* 1,024 bytes
+* 1,093 pages
+* We support Java versions 7–11
+* Ruby versions 2.0–2.5
+* There 250 pages of documentation. 
+* –75
+* There are thousands of modules.
+
+**Don't**
+
+* We support Java versions from 7-11.
+* Ruby versions between 2.0 and 2.5
+* 1024 bytes
+* 1093 pages
+* There are 1,000's of modules.
+
+## Dates
+We use ISO 8601 https://www.iso.org/iso-8601-date-and-time-format.html for time and date formats. `YYYY-MM-DD-[hh]:[mm]:[ss]`
+
+**Do**
+
+* 2019-09-04
+
+**Don't**
+
+* September 04, 2019
+
+## Measurements
+
+* Use numerals for all measurements instead of spelling-out the numbers.
+* For 2 or more quantities, repeat the unit of measure.
+* Add a space betwen the number and term. 
+
+**Do**
+
+* 1 GB or 2 GB of disk space for each 10 GB of data
+
+**Don't**
+
+* 1 or 2 GB of disk space for each 10 GB
+
+If it's not in this table, it needs to be spelled out. 
+
+| Term | Accepted abbrevetation |
+|---|---|
+| gigabits per second| Gbps |
+| megabits per second	 | Mbps |
+| megabytes per second	| MBps |	
+| kilobytes| KB|
+| megabytes| MB|
+| gigabytes | GB |
+
+## Text Format
+* Use bolded text to emphasize an important word or phrase, when referring to the name of a UI section or field, or to create visual separation and callouts
+* Do not use italics. Use bold.
+* Do not use underline. Use bold. 
+* Use quotation marks ("") to indicate a direct, word-for-word quotation.
+
+## Backticks
+
+The following list includes items that should be in code font, but it's not an exhaustive list.
+
+* Attribute names and values.
+* Class names.
+* Command-line utility names.
+* Defined (constant) values for an element or attribute.
+* Environment variable names.
+* Data types.
+* XML and HTML element names. 
+* Filenames and paths.
+* HTTP verbs.
+* HTTP status codes.
+* HTTP content-type values.
+* Language keywords.
+* Method and function names.
+* Namespace aliases.
+* Query parameter names and values.
+* DNS record types.
+
+## Code
+
+Code should be executable. Don't abbreviate code examples. 
+
+- When referring to code in a sentence use backticks. 
+- If the code spans more than one line, use a code block. For example, functions will be a code block.
+  - Use common sense, if it's hard to read, move it to a new line. 
+- Label each code block with the language.
+- Placeholders should use brackets <>. 
+
+**Do**
+
+```
+```python
+def name():
+  print("Metasploit")
+name()
+```
+
+**Don't**
+
+
+```
+def name():
+  print("Metasploit")
+name()
+```
+
+
+## Examples
+
+* Code blocks should have a preceding in sentence providing context. 
+
+
+## Tables
+
+In many contexts, tables are the best way to represent sets of related pieces of data. However, in some contexts, other approaches are better choices.
+
+## When to use a list vs table
+
+`Pulled from https://developers.google.com/style/tables.`
+
+Tables and lists are both ways to present a set of similarly structured items; sometimes it's not obvious when to choose one presentation over the other. To decide which presentation to use, consult the following table:
+
+|Item type| Example | How to present |
+|---|---|---|
+| Each item is a single unit. |A list of programming language names, or a list of steps to follow. |
+| Each item is a pair of pieces of related data. | A list of term/definition pairs.| Use a description list.|
+| Each item is three or more pieces of related data. | A set of parameters, where each parameter has a name, a data type, and a description. | Use a table. |
+
+* Don’t add more than one paragraph in a table cell. 
+* Use sentence case for table headings.
+* Don't end table headings with punctuation, including a period, an ellipsis, or a colon.
+* If you have only one column in your table, turn the table into a list.
+* Don't use tables to lay out code snippets.
+* Don't use tables to lay out long one-dimensional lists in multiple columns. For example, if you have a long list of function names, don't try to save space by splitting the list in half and presenting the two halves as a two-column table. Use tables only to present two-dimensional data—that is, material that semantically makes sense to display in rows and columns.
+* Add a lead-in sentace that explains the tables contents. 
+
+## Lists
+
+### Ordered vs. Unordered Lists
+
+Use ordered list when describing a procedure or when a user needs to take an action before taking another, such as a tutorial. Use unordered lists for defintions and when the order of the data doesn't matter.
+
+## List Punctuation and Format
+
+In general, capitalize the initial letter in each list item and use a period to end a list item only if the item is a complete sentence or combining the list item and the lead-in creates a complete sentence. If using a list for defintions, then bold the definition.
+
+**Do**
+
+Unordered list example:
+
+- You have installed an apt-based Linux environment, such as Ubuntu or Kali.
+- You have created a GitHub account and associated an ssh key with it.
+- You have familiarity with Git and Github, or have completed the Github bootcamp.
+- For optional database and REST API functionality, you will need regular user account that is not root.
+
+Definition list example:
+
+- **SSH** - Secure Shell (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. 
+
+**Don't**
+- SSH - Secure Shell (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. 
+
+
+
+## Images
+
+## Capitalization
+
+Use sentence case for:
+
+* List lead-ins
+* Table headings
+* Page headings
+
+
+
+## What's Next?
+
+## Common Spellings
+
+Below are common words and the accepted spelling. If a word is on this list, please use the accepted spelling. This list is subject to change.
+
+- Metasploit 
+- Rapid7
+- Metasploit Pro
+- Metasploit Framework
+- module
+- exploit
+- Msfvenom or msfvenom
+- Kali Linux
+- Powershell
+- Post exploitation
 
