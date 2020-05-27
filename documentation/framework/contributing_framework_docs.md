@@ -1,6 +1,6 @@
 # Contributing to Framework documentation
 
-Looking for module documentation? See [Module Docs](#link)
+Looking for module documentation? See [Module Docs](link)
 
 ---
 
