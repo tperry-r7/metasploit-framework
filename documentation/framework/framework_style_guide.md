@@ -6,6 +6,7 @@ Remember a style guide is a living document. It can change as the documentation 
 
 - [Inclusivity](#inclusivity)
 - [Colloquialisms, idioms, humor, and metaphor](#colloquialisms-idioms-humor-and-metaphor)
+- [Language](#language)
 - [Documentation Types](#documentation-types)
 - [Capitalization](#capitalization)
 - [Headers](#headers)
@@ -114,6 +115,24 @@ In many contexts, tables are the best way to represent sets of related pieces of
 * Don't use tables to lay out code snippets.
 * Don't use tables to lay out long one-dimensional lists in multiple columns. For example, if you have a long list of function names, don't try to save space by splitting the list in half and presenting the two halves as a two-column table. Use tables only to present two-dimensional data—that is, material that semantically makes sense to display in rows and columns.
 * Add a lead-in sentace that explains the tables contents. 
+* Keep table formatting simple. 
+
+**Do**
+
+```
+| Name | Description |
+| ---|---|
+| Value one | Description of value |
+```
+
+**Don't**
+
+```
+| Syntax | Description |
+| --- | ----------- |
+| Header | Title |
+| Paragraph | Text |
+```
 
 ## Lists
 
@@ -203,6 +222,7 @@ greeting = html.at('div//div')
 - Do not use underline. Use bold. 
 - Use quotation marks ("") to indicate a direct, word-for-word quotation.
 - See [Backticks](#backticks) for more on referring to files and variable names etc. 
+- Use `<br>` if you need to add space between elements. 
 
 ## Links, URLs, and websites
 
@@ -220,8 +240,6 @@ We discuss and direct people to online locations and resources a lot, so let's d
 
 * To learn more about Login Scanners, click `[here](#link)`.
 * Learn more about rebasing in [Git](https://git-scm.com/book/en/v2/Git-Branching-Rebasing). 
-
-
 
 ## Punctiation
 
@@ -291,8 +309,8 @@ If it's not in this table, it needs to be spelled out.
 | Term | Accepted abbrevetation |
 |---|---|
 | gigabits per second| Gbps |
-| megabits per second	 | Mbps |
-| megabytes per second	| MBps |	
+| megabits per second	| Mbps |
+| megabytes per second| MBps |	
 | kilobytes| KB|
 | megabytes| MB|
 | gigabytes | GB |
