@@ -329,4 +329,8 @@ Below are common words and the accepted spelling. If a word is on this list, ple
 * Msfvenom or msfvenom
 * Kali Linux
 * Powershell
+<<<<<<< HEAD
 * Post exploitation
+=======
+* Post exploitation
+>>>>>>> accb5ff2ea8fc439e0864508df3e799ddfa961e4
