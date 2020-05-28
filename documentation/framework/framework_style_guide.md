@@ -25,9 +25,9 @@ Remember a style guide is a living document. It can change as the documentation 
 
 The Framework documentation should be:
 
-- **Clear** -  The documentation is easy to read. It’s concise, specific, and organized. And it’s simple, not oversimplified, so readers can get the information they need without wasting time or effort.
+- **Clear** -  The documentation is easy to read. It’s concise, specific, and organized. It’s simple, not oversimplified, so readers can get the information they need without wasting time or effort.
 
-- **Accessible and inclusive** - We strive to write for everyone. We make sure our content is for beginners to advanced readers. We avoid language that isolates or excludes others. And we make sure our content is available to people with a diverse range of hearing, movement, sight, and cognitive abilities.
+- **Accessible and inclusive** - We strive to write for everyone. We make sure our content is for beginners to advanced readers. We avoid language that isolates or excludes others. We make sure our content is available to people with a diverse range of hearing, movement, sight, and cognitive abilities.
 
 - **Correct** - Work hard to make sure the documentation you are writing is accurate. Others rely on your expertise, so provide the best information you have at the time. 
 
@@ -48,20 +48,21 @@ Avoid using language that isolates or excludes. For example, don’t reference a
 
 ## Colloquialisms, idioms, humor, and metaphor
 
-Slang, humor, regional phrases, and metaphor can be confusing, even to native speakers, and rarely translate well. Expressions like “an app portfolio is a complex beast” are not universally understood or appreciated, and it’s hard to find equivalent meanings in other languages. So it's usually best to avoid language with implied or regional meaning. That includes anthropomorphism, a type of metaphor that attributes human characteristics or behavior to non-humans.
+Slang, humor, regional phrases, and metaphor can be confusing, even to native speakers, and rarely translate well. Expressions like “under the hood” are not universally understood or appreciated, and it’s hard to find equivalent meanings in other languages. So it's usually best to avoid language with implied or regional meaning. That includes anthropomorphism, a type of metaphor that attributes human characteristics or behavior to non-humans.
 
 ## Language
 
-This is a list of guidlines that can help make the documentation easy to scan and parse. 
+This is a list of guidelines that can help make the documentation easy to scan and parse. 
 
-- Try write more consise sentances. Avoid filler words like simply or just. 
-- Don't use plurals in parenthesis. For example, module(s)
+- Try write more concise sentences. Avoid filler words like simply or just. 
+- Don't use plurals in parenthesis. For example, module(s).
 - Keep sentences short. Less than 40 words is a good guide. 
-- Don't use foo, bar or foobar for code. Use actual data.
+- Don't use `foo`, `bar` or `foobar` for code. Use actual data.
 - Use question marks and exclamation points sparingly. 
 - Spell out words if they are unfamiliar to the audience. 
+- If using an acronym, if it's not well know, write it out in the first use. For example, VS Code (Visual Studio Code). 
 
-## Documentation Types
+## Documentation types
 
 To do:
 
@@ -71,7 +72,15 @@ To do:
 - [ ] Create templates for each
 - [ ] Provide links to the best examples of each
 
-## Capitalization
+## Components
+
+The following sections detail how elements should be formatted. 
+
+### Markdown
+
+If you haven't, install the Markdown Lint https://github.com/DavidAnson/markdownlint plugin for your text editor. See [Contributing to Framework documentation](#link) for more on configuration.  This is to make sure the markdown is easy to read and all the documentation is the same for anyone who wants to edit. 
+
+###  Capitalization
 
 Use sentence case for:
 
@@ -81,18 +90,19 @@ Use sentence case for:
 
 Title case is reserved for page titles. 
 
-## Headers
+### Headers
 
 - Headers should be sequential. 
 - Start a page at h2 `##`. Titles are rendered using an h1 and should not be used. 
 - Headers use sentence-case.
 - Enter a line break between a heading and its content.
-- We use h2 `##`, h3 `###` and h4 `####`. Use caution with h4 since they often look bold. 
+- We use h2 `##`, h3 `###` and h4 `####`. 
+- Try to only use bold in a sentence or for emphasis. 
 - Be informative and descriptive
 - Concise and scannable
 - Avoid empty headings
 
-## When to use a list vs table
+### When to use a list vs table
 
 `Pulled from https://developers.google.com/style/tables.`
 
@@ -100,11 +110,11 @@ Tables and lists are both ways to present a set of similarly structured items; s
 
 |Item type| Example | How to present |
 |---|---|---|
-| Each item is a single unit. |A list of programming language names, or a list of steps to follow. |
-| Each item is a pair of pieces of related data. | A list of term/definition pairs.| Use a description list.|
+| Each item is a single unit. |A list of programming language names, or a list of steps to follow. |Use a numbered list or bulleted list.|
+| Each item is a pair of pieces of related data. | A list of term/definition pairs.| Use a definition list.|
 | Each item is three or more pieces of related data. | A set of parameters, where each parameter has a name, a data type, and a description. | Use a table. |
 
-## Tables
+### Tables
 
 In many contexts, tables are the best way to represent sets of related pieces of data. However, in some contexts, other approaches are better choices.
 
@@ -134,13 +144,13 @@ In many contexts, tables are the best way to represent sets of related pieces of
 | Paragraph | Text |
 ```
 
-## Lists
+### Lists
 
-Use ordered list when describing a procedure or when a user needs to take an action before taking another, such as a tutorial. Use unordered lists for defintions and when the order of the data doesn't matter.
-
-- Capitalize the initial letter in each list item and use a period to end a list item only if the item is a complete sentence  
-- If using a list for defintions, then bold the definition.
-- Use a lead in sentence for lists with a colon. 
+ * Ordered list - Use an ordered list when describing a procedure or when a user needs to take an action before taking another, such as a tutorial. 
+ * Unordered list - Use unordered lists for definitions and when the order of the data doesn't matter.
+* Capitalize the initial letter in each list item and use a period to end a list item only if the item is a complete sentence . 
+* If using a list for definitions, then bold the definition.
+* Use a lead in sentence for lists with a colon. 
 
 **Do**
 
@@ -161,9 +171,9 @@ Definition list example:
 
 - SSH - Secure Shell (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. 
 
-## Code
+### Code
 
-Code should be executable. Don't abbreviate code examples. They reader should be able to copy and paste and use the sample with minimal effort. 
+Code should be executable. Don't abbreviate code examples. The reader should be able to copy and paste and use the sample with minimal effort. 
 
 - When referring to code in a sentence use backticks. 
 - If the code spans more than one line, use a code block. For example, functions will be a code block.
@@ -183,36 +193,24 @@ name()
 
 **Don't**
 
-
 ```
 def name():
   print("Metasploit")
 name()
 ```
 
+
 ## Examples
 
 * Introductory information should be provided if some context is needed to orient the user and can also be used to introduce code blocks.  
-* All code examples should have a title. The title should start with a verb and should describe the task the example is outlining. It should use sentance case.
+
 
 **Do**
-
-Lead in:
 
 If you want to get the raw HTTP response (including the response message/code, headers, body, etc), then you can use:
 
 ```ruby
 res = send_request_cgi({'uri'=>'/index.php'})
-```
-
-
-Title:
-
-Grabbing an element from a specific element tree.
-
-```ruby
-html = res.get_html_document
-greeting = html.at('div//div')
 ```
 
 ## Text Format
@@ -228,25 +226,25 @@ greeting = html.at('div//div')
 
 We discuss and direct people to online locations and resources a lot, so let's do it right.
 
-* Use descriptive hypertext when linking between articles. Descriptive link text makes navigation easier and more efficient because it’s easier to skim and allows users to make informed decisions about whether to follow them. Using the article title is the easiest ways to do this. 
-* Use full links when directing to an external link. Make sure to reference the entire link. Do not embed like descriptive text.
+* Use descriptive hypertext when linking between articles within Framework. Descriptive link text makes navigation easier and more efficient because it’s easier to skim and allows users to make informed decisions about whether to follow them. Using the article title is the easiest ways to do this.
+* Use full links when redirecting to an external link. Make sure to reference the entire link. Do not embed like descriptive text.
 
 **Do**
 
 * To learn more about Login Scanners, see `[Creating Metasploit Framework LoginScanners](#link)`. 
-* * If you are still confused about rebasing in Git, see https://git-scm.com/book/en/v2/Git-Branching-Rebasing. 
+* If you are still confused about rebasing in Git, see https://git-scm.com/book/en/v2/Git-Branching-Rebasing. 
 
 **Don't**
 
 * To learn more about Login Scanners, click `[here](#link)`.
 * Learn more about rebasing in [Git](https://git-scm.com/book/en/v2/Git-Branching-Rebasing). 
 
-## Punctiation
+## Punctuation
 
 * Limit semicolon usage. Instead, try two simple sentences.
 * Don't use end punctuation (e.g., periods or colons) in headings.
 * Use periods at the end of list items if it is a sentence or completes a sentence.
-* Use the [Oxford (a.k.a. serial) comma](https://en.wikipedia.org/wiki/Serial_comma).
+* Use the Oxford (a.k.a. serial) comma. https://en.wikipedia.org/wiki/Serial_comma
 
 ## Numbers
 
@@ -280,15 +278,18 @@ Numerals attract the eye because they typically represent the facts readers want
 * There are 1,000's of modules.
 
 ## Dates
-We use ISO 8601 https://www.iso.org/iso-8601-date-and-time-format.html for time and date formats. `YYYY-MM-DD-[hh]:[mm]:[ss]`
+
+We use ISO 8601 https://www.iso.org/iso-8601-date-and-time-format.html for time and date formats. `YYYY-MM-DD-[hh]:[mm]:[ss]`. You can also use `Month-Day-Year`. The month should always be spelled out. 
 
 **Do**
 
 * 2019-09-04
+* September 4, 2019
 
 **Don't**
 
-* September 04, 2019
+* Sept 4, 2019
+* 20190904
 
 ## Measurements
 
@@ -319,13 +320,13 @@ If it's not in this table, it needs to be spelled out.
 
 Below are common words and the accepted spelling. If a word is on this list, please use the accepted spelling. This list is subject to change.
 
-- Metasploit 
-- Rapid7
-- Metasploit Pro
-- Metasploit Framework
-- module
-- exploit
-- Msfvenom or msfvenom
-- Kali Linux
-- Powershell
-- Post exploitation
+* Metasploit 
+* Rapid7
+* Metasploit Pro
+* Metasploit Framework
+* module
+* exploit
+* Msfvenom or msfvenom
+* Kali Linux
+* Powershell
+* Post exploitation
