@@ -4,24 +4,26 @@ description:
 ---
 Remember a style guide is a living document. It can change as the documentation evolves or we find better ways to do things. 
 
-- [Inclusivity](#inclusivity)
-- [Colloquialisms, idioms, humor, and metaphor](#colloquialisms-idioms-humor-and-metaphor)
-- [Language](#language)
-- [Documentation Types](#documentation-types)
-- [Capitalization](#capitalization)
-- [Headers](#headers)
-- [When to use a list vs table](#when-to-use-a-list-vs-table)
-- [Tables](#tables)
-- [Lists](#lists)
-- [Code](#code)
-- [Examples](#examples)
-- [Text Format](#text-format)
-- [Links, URLs, and websites](#links-urls-and-websites)
-- [Punctiation](#punctiation)
-- [Numbers](#numbers)
-- [Dates](#dates)
-- [Measurements](#measurements)
-- [Common Spellings](#common-spellings)
+* [Inclusivity](#inclusivity)
+* [Colloquialisms, idioms, humor, and metaphor](#colloquialisms-idioms-humor-and-metaphor)
+* [Language](#language)
+* [Documentation types](#documentation-types)
+* [Components](#components)
+  * [Markdown](#markdown)
+  * [Capitalization](#capitalization)
+  * [Headers](#headers)
+  * [When to use a list vs table](#when-to-use-a-list-vs-table)
+  * [Tables](#tables)
+  * [Lists](#lists)
+  * [Code](#code)
+* [Examples](#examples)
+* [Text Format](#text-format)
+* [Links, URLs, and websites](#links-urls-and-websites)
+* [Punctuation](#punctuation)
+* [Numbers](#numbers)
+* [Dates](#dates)
+* [Measurements](#measurements)
+* [Common Spellings](#common-spellings)
 
 The Framework documentation should be:
 
@@ -329,8 +331,4 @@ Below are common words and the accepted spelling. If a word is on this list, ple
 * Msfvenom or msfvenom
 * Kali Linux
 * Powershell
-<<<<<<< HEAD
 * Post exploitation
-=======
-* Post exploitation
->>>>>>> accb5ff2ea8fc439e0864508df3e799ddfa961e4
