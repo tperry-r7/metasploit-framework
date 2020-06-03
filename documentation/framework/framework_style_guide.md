@@ -59,10 +59,10 @@ This is a list of guidelines that can help make the documentation easy to scan a
 - Try write more concise sentences. Avoid filler words like simply or just. 
 - Don't use plurals in parenthesis. For example, module(s).
 - Keep sentences short. Less than 40 words is a good guide. 
-- Don't use `foo`, `bar` or `foobar` for code. Use actual data.
+- Don't use `foo`, `bar` or `foobar` for code. Use actual data or code.
 - Use question marks and exclamation points sparingly. 
 - Spell out words if they are unfamiliar to the audience. 
-- If using an acronym, if it's not well know, write it out in the first use. For example, VS Code (Visual Studio Code). 
+- If using an acronym and it's not well known, write it out in the first use. For example, VS Code (Visual Studio Code). 
 
 ## Documentation types
 
@@ -82,7 +82,7 @@ The following sections detail how elements should be formatted.
 
 If you haven't, install the Markdown Lint https://github.com/DavidAnson/markdownlint plugin for your text editor. See [Contributing to Framework documentation](#link) for more on configuration.  This is to make sure the markdown is easy to read and all the documentation is the same for anyone who wants to edit. 
 
-###  Capitalization
+### Capitalization
 
 Use sentence case for:
 
@@ -99,7 +99,7 @@ Title case is reserved for page titles.
 - Headers use sentence-case.
 - Enter a line break between a heading and its content.
 - We use h2 `##`, h3 `###` and h4 `####`. 
-- Try to only use bold in a sentence or for emphasis. 
+- Try to only use bold in a sentence or for emphasis.
 - Be informative and descriptive
 - Concise and scannable
 - Avoid empty headings
@@ -148,8 +148,8 @@ In many contexts, tables are the best way to represent sets of related pieces of
 
 ### Lists
 
- * Ordered list - Use an ordered list when describing a procedure or when a user needs to take an action before taking another, such as a tutorial. 
- * Unordered list - Use unordered lists for definitions and when the order of the data doesn't matter.
+* Ordered list - Use an ordered list when describing a procedure or when a user needs to take an action before taking another, such as a tutorial. 
+* Unordered list - Use unordered lists for definitions and when the order of the data doesn't matter.
 * Capitalize the initial letter in each list item and use a period to end a list item only if the item is a complete sentence . 
 * If using a list for definitions, then bold the definition.
 * Use a lead in sentence for lists with a colon. 
@@ -204,7 +204,7 @@ name()
 
 ## Examples
 
-* Introductory information should be provided if some context is needed to orient the user and can also be used to introduce code blocks.  
+Introductory information should be provided if some context is needed to orient the user and can also be used to introduce code blocks.  
 
 
 **Do**
