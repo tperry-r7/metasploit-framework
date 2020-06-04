@@ -1,0 +1,30 @@
+extends: existence
+message: Avoid language that isolate or excludes. Remove '%s'
+link: "https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#inclusivity"
+ignorecase: true
+level: error
+tokens: 
+  - young
+  - old
+  - elderly
+  - suffer
+  - victim
+  - handicapped
+  - a victim of
+  - able-bodied
+  - affected by
+  - an epileptic
+  - crippled
+  - disabled
+  - dumb
+  - handicaps
+  - healthy
+  - lame
+  - maimed
+  - missing a limb
+  - mute
+  - normal
+  - sight-impaired
+  - stricken with
+  - suffers from
+  - vision-impaired

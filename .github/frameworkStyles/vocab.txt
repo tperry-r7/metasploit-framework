@@ -1,0 +1,8 @@
+Metasploit
+Rapid7
+MSI
+config
+msfvenom
+Kali
+
+

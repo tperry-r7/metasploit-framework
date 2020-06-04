@@ -1,0 +1,11 @@
+extends: existence
+message: "Avoid italics '%s'. Instead use bold for emphasis."
+link: ''
+ignorecase: true
+level: error
+scope: emphasis
+nonword: true
+raw:
+  - '.+' 
+  
+# Checks for any characters within an <em> tag.

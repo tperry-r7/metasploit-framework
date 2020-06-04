@@ -1,0 +1,7 @@
+extends: existence
+message: "Avoid abbreviations of months unless necessary to save space ('%s')."
+link: 'https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#dates'
+nonword: false
+level: error
+tokens:
+  - (jan|feb|mar|apr|jul|aug|sept|oct|nov|dec)
