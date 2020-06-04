@@ -1,0 +1,17 @@
+extends: existence
+message: "Use descriptive text for links. '%s'"
+link: 'https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#links-urls-and-websites'
+ignorecase: true
+level: warning
+scope: link
+tokens:
+  - this
+  - link
+  - here
+  - this topic
+  - this document
+  - article
+  - topic
+  - see here
+  - learn more here
+  - learn more
