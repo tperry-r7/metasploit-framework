@@ -1,6 +1,6 @@
 extends: existence
 message: Try to write more concise sentances '%s'
-link: ""
+link: "https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#sentences"
 ignorecase: true
 level: warning
 tokens: 

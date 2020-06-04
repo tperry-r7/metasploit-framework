@@ -1,6 +1,6 @@
 extends: existence
 message: Avoid using negative language removing '%s'
-link: "https://docs.google.com/document/d/1kT8423WTLIRHZC-5wQuu3_fuiNqqmDQ7zny7f4VqBPA/edit#heading=h.o43jmuzbje2r"
+link: "https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#language-and-tone"
 ignorecase: true
 level: suggestion
 tokens: 

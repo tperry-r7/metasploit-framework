@@ -1,6 +1,6 @@
 extends: existence
 message: Avoid using cliché, slang and other terms that might not translate to other languages. '%s'
-link: ""
+link: "https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#colloquialisms-idioms-humor-and-metaphor-1"
 ignorecase: true
 level: warning
 tokens: 

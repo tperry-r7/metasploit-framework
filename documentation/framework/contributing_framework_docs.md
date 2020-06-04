@@ -1,18 +1,31 @@
 # Contributing to Framework documentation
 
-Looking for module documentation? See [Module Docs](https://github.com/rapid7/metasploit-framework/wiki/Generating-Module-Documentation)
+Looking for module documentation? See [Module Docs](https://github.com/rapid7/metasploit-framework/wiki/Module-Documentation)
 
 ---
 
-Thanks for wanting to contribute to the Framework documentation! Let's get setup. This setup is optional, but it will make your workflow much easier and cut down on errors. This includes adding a markdown formatter and setting up the style guide.
+* [Contributing to Framework documentation](#contributing-to-framework-documentation)
+  * [To get started](#to-get-started)
+  * [Plugins](#plugins)
+    * [Markdown lint](#markdown-lint)
+    * [Excluded rules](#excluded-rules)
+    * [Vale](#vale)
+      * [Install Vale](#install-vale)
+      * [Vale commands](#vale-commands)
+      * [Vale error levels](#vale-error-levels)
+  * [All plugins](#all-plugins)
+  * [Visual Studo Code (VS Code) workspace file](#visual-studo-code-vs-code-workspace-file)
+  * [What's next](#whats-next)
+  * [FAQ](#faq)
+    * [I ran Vale but don't agree with the results](#i-ran-vale-but-dont-agree-with-the-results)
 
-We do enforce formatting on the Markdown files. This is make them easier to quickly read and edit. 
+Thanks for wanting to contribute to the Framework documentation! Let's get setup. This setup is optional, but it will make your workflow much easier and cut down on errors. This includes adding a markdown formatter, which is enforced, and setting up the style guide.
 
 ## To get started
 
-1. Review the Framework Style Guide
-2. Review the plugins.
-3. Install Markdown lint and Vale
+1. Review the [Framework Style Guide](/documentation/framework/framework_style_guide.md)
+2. Review the [plugins](#plugins).
+3. Install [Markdown lint](#markdown-lint) and [Vale](#vale)
 4. Check the project for documentation ideas or just get started writing!
 
 ## Plugins
@@ -21,9 +34,9 @@ These plugins are recommended before writing Framework documentation. The two th
 
 ### Markdown lint
 
-Enforces markdown formatting rules for Framework documentation. You can review all the rules under Rules and Aliases, https://github.com/DavidAnson/markdownlint#rules--aliases. Some rules have been modified or excluded. 
+Enforces markdown formatting rules for Framework documentation. You can review all the rules under Rules and Aliases, https://github.com/DavidAnson/markdownlint#rules--aliases. Some rules have been excluded. In case you're wondering what markdown that has been enforced looks like, this file is a good example. Of course if you need to ignore the rules to make what you are writing easier to read, that's fine too. But...follow the formatter rules. 
 
-### Modified rules Markdown lint
+### Excluded rules
 
 * "MD047": false,
 * "MD034": false,
@@ -40,7 +53,15 @@ Vale https://errata-ai.gitbook.io/vale/ is a prose style linter that can enforce
 Vale is just a reminder. It does not know your intent or meaning by choosing a certain wording or phrase. If you think it adds to the understanding of the documentation, leave it it. Be ready to defend it if someone asks about it. 
 
 * Framework already has a `.vale.ini` file and the style yaml files are in the `.github` folder. 
-* After installing Vale, you may need to restart your text editor. 
+* Vale can be used using the command line or in a text editor. https://errata-ai.gitbook.io/vale/getting-started/installation#using-vale-with-a-text-editor-or-another-third-party-application. 
+
+#### Install Vale
+
+1. Follow the instructions to install Vale here https://errata-ai.gitbook.io/vale/#installation. 
+   1. If you prefer Vale also provides a Docker image. https://errata-ai.gitbook.io/vale/getting-started/installation#using-vale-from-the-command-line
+2. Run Vale aganist a markdown file. `vale filePath/fileName`. Try this one `vale documentation/framework/contributing_framework_docs.md`. 
+   1. There are intentional spelling and grammar errors. You'll also notice not every error is applicable. Vale is a tool and doesn't know intent. 
+3. If you are using a text editor and the terminal in the text editor, you may need to restart the text editor. 
 
 #### Vale commands
 
@@ -55,7 +76,9 @@ It's recommended to run Vale aganist your file after you are done writing it.
 * **warning** - This might be okay, but be prepared to defend it. 
 * **suggestion** - This is okay as is. But following this rule could make it better.
 
-### All plugins
+## All plugins
+
+This is a list of plugins that could help you write Framework documentation.
 
 | Name | Function | Availibiity | Recommended |
 | ---|---|---|---|
@@ -65,8 +88,7 @@ It's recommended to run Vale aganist your file after you are done writing it.
 | HTTP/s and relative link checker https://github.com/microsoft/linkcheckermd |  Check if markdown and web links are valid. | VS Code | No |
 | Vale https://errata-ai.gitbook.io/vale/ | Compare articles aganist the style guide | Any system. Install locally | Yes |
 
-
-#### Visual Studo Code (VS Code) workspace file
+## Visual Studo Code (VS Code) workspace file
 
 Feel free to edit this file for how you like to work. The important configurations are `markdown.extension` and `markdownlint`. 
 

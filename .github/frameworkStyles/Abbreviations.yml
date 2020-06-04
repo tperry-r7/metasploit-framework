@@ -1,6 +1,6 @@
 extends: conditional
 message: "Spell out '%s', if it's unfamiliar to the audience."
-link: 'Need Link'
+link: 'https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#acronyms'
 level: suggestion
 ignorecase: false
 # Ensures that the existence of 'first' implies the existence of 'second'.

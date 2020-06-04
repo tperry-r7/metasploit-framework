@@ -1,6 +1,6 @@
 extends: capitalization
 message: "'%s' should use sentence-style capitalization."
-link: ''
+link: 'https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#headers'
 level: error
 scope: heading
 match: $sentence

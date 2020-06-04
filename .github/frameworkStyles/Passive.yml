@@ -1,8 +1,8 @@
 extends: existence
-link: 'https://docs.google.com/document/d/1kT8423WTLIRHZC-5wQuu3_fuiNqqmDQ7zny7f4VqBPA/edit#heading=h.5zi6tblnv4ol'
+link: 'https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#language-and-tone'
 message: "In general, use active voice instead of passive voice ('%s')."
 ignorecase: true
-level: suggestion
+level: warning
 raw:
   - \b(am|are|were|being|is|been|was|be)\b\s*
 tokens:

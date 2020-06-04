@@ -1,6 +1,6 @@
 extends: substitution
 message: "Review your use of '%s'. Make sure it matches its intented use. Try '%s'. These are commonly misspelled or missused words. "
-link: 'https://docs.google.com/document/d/1kT8423WTLIRHZC-5wQuu3_fuiNqqmDQ7zny7f4VqBPA/edit#heading=h.6itroue98z9w'
+link: ''
 level: warning
 ignorecase: true
 swap:
@@ -20,7 +20,6 @@ swap:
   click at: Click in the window
   code snipped: code example | code sample
   code snippet: code example | code sample
-  default: built-in
   preset: built-in
   doubleclick: double-click
   doubleclicking: double-clicking
@@ -42,7 +41,7 @@ swap:
   blank: empty
   above: previous | preceding | earlier
   current: active | open
-  and/or: and | or
+  and/or: Use one or the other
   as well as: in addtion | and | such as
   below: later | following
   unmark: clear | deselect

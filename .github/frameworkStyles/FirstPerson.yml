@@ -1,7 +1,7 @@
 # Should this be a rule we check for or is it understood.
 extends: existence
 message: "Use first person (such as '%s') sparingly."
-link: ''
+link: 'https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#language-and-tone'
 ignorecase: true
 level: warning
 nonword: true

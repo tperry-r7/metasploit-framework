@@ -1,39 +1,36 @@
----
-title: "Framework Documentation Style Guide"
-description: 
----
+# Framework Documentation Style Guide
 
 Remember a style guide is a living document. It can change as the documentation evolves or we find better ways to do things. 
 
-* [Inclusivity](#inclusivity)
-* [Colloquialisms, idioms, humor, and metaphor](#colloquialisms-idioms-humor-and-metaphor)
-* [Language and tone](#language-and-tone)
-* [Colloquialisms, idioms, humor, and metaphor](#colloquialisms-idioms-humor-and-metaphor-1)
-* [Capitalization](#capitalization)
-* [Formatting](#formatting)
-  * [Headers](#headers)
-  * [Sentances](#sentances)
-  * [Lists](#lists)
-  * [Tables](#tables)
-  * [When to use a list vs table](#when-to-use-a-list-vs-table)
-  * [Code](#code)
-  * [Markdown](#markdown)
-* [Text Format](#text-format)
-  * [Bold Text](#bold-text)
-  * [Spacing](#spacing)
-  * [Italics](#italics)
-* [Links, URLs, and websites](#links-urls-and-websites)
-* [Punctuation](#punctuation)
-  * [Dashes](#dashes)
-    * [Hyphen](#hyphen)
-    * [En Dash](#en-dash)
-    * [Em Dash](#em-dash)
-* [Numbers](#numbers)
-* [Dates](#dates)
-* [Measurements](#measurements)
-* [Acronyms](#acronyms)
-* [Common Spellings](#common-spellings)
-* [Documentation types](#documentation-types)
+* [Framework Documentation Style Guide](#framework-documentation-style-guide)
+  * [Inclusivity](#inclusivity)
+  * [Language and tone](#language-and-tone)
+  * [Colloquialisms, idioms, humor, and metaphor](#colloquialisms-idioms-humor-and-metaphor)
+  * [Capitalization](#capitalization)
+  * [Formatting](#formatting)
+    * [Headers](#headers)
+    * [Sentences](#sentences)
+    * [Lists](#lists)
+    * [Tables](#tables)
+    * [When to use a list vs table](#when-to-use-a-list-vs-table)
+    * [Code](#code)
+    * [Markdown](#markdown)
+  * [Text Format](#text-format)
+    * [Bold Text](#bold-text)
+    * [Spacing](#spacing)
+    * [Italics](#italics)
+  * [Links, URLs, and websites](#links-urls-and-websites)
+  * [Punctuation](#punctuation)
+    * [Dashes](#dashes)
+      * [Hyphen](#hyphen)
+      * [En Dash](#en-dash)
+      * [Em Dash](#em-dash)
+  * [Numbers](#numbers)
+  * [Dates](#dates)
+  * [Measurements](#measurements)
+  * [Acronyms and abbreviations](#acronyms-and-abbreviations)
+  * [Common Spellings](#common-spellings)
+  * [Documentation types](#documentation-types)
 
 The Framework documentation should be:
 
@@ -58,10 +55,6 @@ Avoid using language that isolates or excludes. For example, don’t reference a
 - Don’t refer to people using age-related descriptors like young, old, or elderly.
 - When writing about a person with disabilities, don’t use the words suffer, victim, or handicapped.
 
-## Colloquialisms, idioms, humor, and metaphor
-
-Slang, humor, regional phrases, and metaphor can be confusing, even to native speakers, and rarely translate well. Expressions like “under the hood” are not universally understood or appreciated, and it’s hard to find equivalent meanings in other languages. So it's usually best to avoid language with implied or regional meaning. That includes anthropomorphism, a type of metaphor that attributes human characteristics or behavior to non-humans.
-
 ## Language and tone
 
 The documentation should be easy to read and understand. It should be  friendly and helpful. 
@@ -69,7 +62,7 @@ The documentation should be easy to read and understand. It should be  friendly 
 * Use active instead of passive voice when possible. [https://www.grammarly.com/blog/active-vs-passive-voice/](https://www.grammarly.com/blog/active-vs-passive-voice/)
 * Use present tense. Assume the reader is doing the activity while reading the documentation. [https://en.wikipedia.org/wiki/Present_tense](https://en.wikipedia.org/wiki/Present_tense)
 * Avoid the use of "may". Either they can or cannot do something. 
-	* If they cannot add a troubleshooting section to lead them through errors. 
+  * If they cannot add a troubleshooting section to lead them through errors. 
 * Use second person, "you". It makes the documentation more personable. [https://www.grammarly.com/blog/first-second-and-third-person/](https://www.grammarly.com/blog/first-second-and-third-person/)
 
 | Do | Don't|
@@ -122,7 +115,7 @@ This section details how to format the markdown.
 |Create a LoginScanners | Creating Metasploit Framework LoginScanners |
 How to use the Obfuscation CRandomizer| How to use Metasploit Framework Obfuscation CRandomizer |
 
-### Sentances
+### Sentences
 
 * Try write more concise sentences. Avoid filler words like simply or just. 
 * Keep sentences short. Less than 40 words is a good guide. 
@@ -163,7 +156,7 @@ In many contexts, tables are the best way to represent sets of related pieces of
 * If you have only one column in your table, turn the table into a list.
 * Don't use tables to lay out code snippets.
 * Don't use tables to lay out long one-dimensional lists in multiple columns. 
-* Add a lead-in sentace that explains the tables contents. 
+* Add a lead-in sentence that explains the tables contents. 
 * Keep table formatting simple. 
 	* You can use more than 3 dashes, but they dashes need to be equal for all columns. 
 
@@ -321,13 +314,15 @@ Numerals attract the eye because they typically represent the facts readers want
 | Ruby versions 2.0–2.5 (en dash) | Ruby versions 2.0-2.5 (hyphen) |
 |Ruby versions 2.0–2.5 (en dash) | Ruby versions between 2.0 and 2.5 |
 | There 250 pages of documentation.  |There are two-hundred and fifty pages of documentation.|
-| –75 (en dash) | -75 (hypen) |
+| –75 (en dash) | -75 (hyphen) |
 | There are thousands of modules. | There are 1,000s of modules.|
 
 
 ## Dates
 
 We use ISO 8601 https://www.iso.org/iso-8601-date-and-time-format.html for time and date formats. `YYYY-MM-DD-[hh]:[mm]:[ss]`. You can also use `Month-Day-Year`. The month should always be spelled out. 
+
+Avoid abbreviating dates unless you need to save space, such as a table. 
 
 If the date appears differently in the code sample, no need to change them to match this formatting. Just copy and paste as is. 
 
@@ -357,7 +352,7 @@ If it's not in this table, it needs to be spelled out.
 | megabytes| MB|
 | gigabytes | GB |
 
-## Acronyms
+## Acronyms and abbreviations
 
 If using an acronym and it's not well known, write it out in the first use. For example, VS Code (Visual Studio Code). 
 
