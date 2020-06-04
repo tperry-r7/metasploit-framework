@@ -2,7 +2,7 @@ extends: existence
 message: "Use 'ISO-8601 format, not '%s'."
 link: 'https://github.com/rapid7/metasploit-framework/blob/master/documentation/framework/framework_style_guide.md#dates'
 ignorecase: true
-level: error
+level: warning
 nonword: true
 tokens:
   - '\d{1,2}-\d{1,2}-\d{4}' # 1-23-2018
