@@ -1,9 +1,10 @@
 # Framework Documentation Style Guide
 
 To do:
-[ ] - Add content type examples
-[ ] - Add a debugging or troubleshooting?
-[ ] - Define what a recipe or how to is for quick examples?
+
+- [ ] Add content type examples
+- [ ] Add a debugging or troubleshooting?
+- [ ] Define what a recipe or how to is for quick examples?
  
 Remember a style guide is a living document. It can change as the documentation evolves or we find better ways to do things. 
 
