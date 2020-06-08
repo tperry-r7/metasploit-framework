@@ -5,10 +5,13 @@ To do:
 - [ ] Add content type examples
 - [ ] Add a debugging or troubleshooting?
 - [ ] Define what a recipe or how to is for quick examples?
+- [ ] Work on exactly how we should use versions
+- [ ] Should we add description to the front matter as well?
  
 Remember a style guide is a living document. It can change as the documentation evolves or we find better ways to do things. 
 
 ## On this page
+
 * [Framework Documentation Style Guide](#framework-documentation-style-guide)
   * [On this page](#on-this-page)
   * [Inclusivity](#inclusivity)
@@ -63,14 +66,14 @@ Remember a style guide is a living document. It can change as the documentation 
     * [What's next](#whats-next)
       * [What's next do](#whats-next-do)
       * [What's next don't](#whats-next-dont)
-  * [Documentation templates](#documentation-templates)
+  * [Documentation types](#documentation-types)
     * [Concepts and explanations](#concepts-and-explanations)
       * [Concepts do](#concepts-do)
     * [Procedural / Tutorial](#procedural--tutorial)
       * [Procedural do](#procedural-do)
     * [Reference](#reference)
       * [Reference DO](#reference-do)
-    * [General Template](#general-template)
+  * [General Template](#general-template)
 
 The Framework documentation should be:
 
@@ -650,3 +653,7 @@ If you want to emphasize additional or important information, you can use a call
 * Link to related article
 * Link to related article
 ```
+
+> **Success**
+> You did it!
+> :star: Either you scrolled to the bottom or read the whole page. Either way congratulations. :star:
