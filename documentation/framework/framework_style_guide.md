@@ -7,6 +7,7 @@ To do:
 - [ ] Define what a recipe or how to is for quick examples?
 - [ ] Work on exactly how we should use versions
 - [ ] Should we add description to the front matter as well?
+- [ ] Review this for spelling / grammar
  
 Remember a style guide is a living document. It can change as the documentation evolves or we find better ways to do things. 
 
@@ -654,6 +655,11 @@ If you want to emphasize additional or important information, you can use a call
 * Link to related article
 ```
 
-> **Success**
-> You did it!
+> **Success**  
+> You did it!  
 > :star: Either you scrolled to the bottom or read the whole page. Either way congratulations. :star:
+
+## What's next?
+
+* Read our Contributing guidelines
+* Check out the project for inspiration
