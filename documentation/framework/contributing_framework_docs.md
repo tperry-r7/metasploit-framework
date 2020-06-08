@@ -1,10 +1,10 @@
 # Contributing to Framework documentation
 
 Looking for module documentation? See [Module Docs](https://github.com/rapid7/metasploit-framework/wiki/Module-Documentation)
-
 ---
 
 * [Contributing to Framework documentation](#contributing-to-framework-documentation)
+  * [Looking for module documentation? See Module Docs](#looking-for-module-documentation-see-module-docs)
   * [To get started](#to-get-started)
   * [Plugins](#plugins)
     * [Markdown lint](#markdown-lint)
@@ -53,7 +53,7 @@ Vale https://errata-ai.gitbook.io/vale/ is a prose style linter that can enforce
 Vale is just a reminder. It does not know your intent or meaning by choosing a certain wording or phrase. If you think it adds to the understanding of the documentation, leave it it. Be ready to defend it if someone asks about it. 
 
 * Framework already has a `.vale.ini` file and the style yaml files are in the `.github` folder. 
-* Vale can be used using the command line or in a text editor. https://errata-ai.gitbook.io/vale/getting-started/installation#using-vale-with-a-text-editor-or-another-third-party-application. 
+* Vale can be used using the command line or in a text editor terminal. https://errata-ai.gitbook.io/vale/getting-started/installation#using-vale-with-a-text-editor-or-another-third-party-application. 
 
 #### Install Vale
 
@@ -61,7 +61,7 @@ Vale is just a reminder. It does not know your intent or meaning by choosing a c
    1. If you prefer Vale also provides a Docker image. https://errata-ai.gitbook.io/vale/getting-started/installation#using-vale-from-the-command-line
 2. Run Vale aganist a markdown file. `vale filePath/fileName`. Try this one `vale documentation/framework/contributing_framework_docs.md`. 
    1. There are intentional spelling and grammar errors. You'll also notice not every error is applicable. Vale is a tool and doesn't know intent. 
-3. If you are using a text editor and the terminal in the text editor, you may need to restart the text editor. 
+3. If you are using a text editor and the terminal in the text editor, you may need to restart the text editor after installing Vale.
 
 #### Vale commands
 
