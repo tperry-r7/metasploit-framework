@@ -3,6 +3,8 @@ title: HTTP and HTTPS communications in Meterpreter and Metasploit Stagers
 version: [] //Metasploit versions this applies to.
 ---
 
+> This is meant to be an example of a [concept or explanation](/frame). You can compare the original at https://github.com/rapid7/metasploit-framework/wiki/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.
+
 This article will go over the differences between WinInet and WinHTTP in Windows and the issues that can arise with Meterpreter and Metasploit.
 
 ## Windows HTTP APIs
