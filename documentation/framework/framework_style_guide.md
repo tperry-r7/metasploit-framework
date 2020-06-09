@@ -3,6 +3,17 @@
 To do:
 
 - [ ] Add content type examples
+  - [ ] **Troubleshooting** https://github.com/rapid7/metasploit-framework/wiki/Debugging-Dead-Meterpreter-Sessions
+  - [ ] **Troubleshooting** https://github.com/rapid7/metasploit-framework/wiki/Handling-module-failures-with-%60fail_with%60
+  - [ ] **Best Practice** https://github.com/rapid7/metasploit-framework/wiki/How-to-get-started-with-writing-an-exploit
+  - [ ] **Reference** https://github.com/rapid7/metasploit-framework/wiki/Metasploit-module-reference-identifiers
+  - [ ] **Reference** https://github.com/rapid7/metasploit-framework/wiki/Exploit-Ranking
+  - [ ] **Concept** https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Configuration
+  - [ ] **Concept**  https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Transport-Control
+  - [ ] **Recipe** https://github.com/rapid7/metasploit-framework/wiki/How-to-use-Metasploit-Framework-Compiler-Windows-to-compile-C-code
+  - [ ] **Recipe** https://github.com/rapid7/metasploit-framework/wiki/How-to-use-a-reverse-shell-in-Metasploit
+  - [ ] **Tutorial** https://github.com/rapid7/metasploit-framework/wiki/Setting-Up-a-Metasploit-Development-Environment
+  - [ ]  **Tutorial** https://github.com/rapid7/metasploit-framework/wiki/How-to-get-Oracle-Support-working-with-Kali-Linux
 - [ ] Add a debugging or troubleshooting?
 - [ ] Define what a recipe or how to is for quick examples?
 - [ ] Work on exactly how we should use versions
