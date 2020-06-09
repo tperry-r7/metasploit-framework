@@ -75,6 +75,7 @@ Remember a style guide is a living document. It can change as the documentation 
     * [Reference](#reference)
       * [Reference DO](#reference-do)
   * [General Template](#general-template)
+  * [What's next?](#whats-next-1)
 
 The Framework documentation should be:
 
@@ -617,7 +618,7 @@ title: Page title
 version: [] //Metasploit versions this applies to.
 ---
 
-# On this page
+## On this page
 //generate a table of contents here. If there is only one element on the page, you can skip this. See this pages toc as an example of a toc. 
 
 After your table of contents, you’ll have an introduction that helps users understand what’s on the page and why they should read it--keep it brief while providing some context. 
