@@ -559,12 +559,13 @@ This gives us the chance to lead users to the next step in a chronological seque
 These are the most common documentation types, along with basic templates and some helpful hints for writing.
 
 | Name | Description | Guidelines | Examples|
-|---|---|---|---|---|
+|---|---|---|---|
 | Conceptual article | Use this type when your readers need to know or understand something. Conceptual articles explain abstract ideas or convey general knowledge. Concept pages help lay the groundwork for, and usually includes links to, other types of content. May contain use cases and best practices. | [Guidelines](#concepts-and-explanations)| [Meterpreter Configuration](https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Configuration) [Meterpreter Transport Control](https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Transport-Control)|
 | Procedural / Tutorial | Use this type when your readers need to do something. Procedural articles provide information needed to perform a task. They should build on and link to supporting conceptual and reference content. May contain use cases, best practices, and troubleshooting. | [Guidelines](#procedural--tutorial)| [Setting up a Metasploit Developer Environment](https://github.com/rapid7/metasploit-framework/wiki/Setting-Up-a-Metasploit-Development-Environment) 
 | Reference article | Use this type when your readers need to check or interpret something. Reference articles provide definitions or simple, fact-driven coverage of a topic. Examples include glossaries and data tables. | [Guidelines](#reference) | [Module Reference Identifier](https://github.com/rapid7/metasploit-framework/wiki/Module-Reference-Identifier) [Exploit Ranking](https://github.com/rapid7/metasploit-framework/wiki/Exploit-Ranking)|
 | Recipe | We can put quick items here. Something that does not need a tutorial, but is good to know. New concepts shouldn’t be introduced with a how-to. It should build on Metasploit and ways to extend it. We assume knowledge of Metasploit, command line and mid-level programming experience. | [Guidelines](#recipes) | [How to use Metasploit Framework Compiler Windows to compile C code](https://github.com/rapid7/metasploit-framework/wiki/How-to-use-Metasploit-Framework-Compiler-Windows-to-compile-C-code)|
 | Debugging and Troubleshooting | In terms of documentation, Troubleshooting and debugging are used interchangeably. Not because they mean the same thing, but the purpose is the same; to give the reader the ability to problem-solve. | [Guidelines](#troubleshooting-and-debugging) | [Debugging Dead Meterpreter Sessions](https://github.com/rapid7/metasploit-framework/wiki/Debugging-Dead-Meterpreter-Sessions)|
+
 
 ### Concepts and explanations
 
@@ -686,10 +687,6 @@ If you want to emphasize additional or essential information, you can use a call
 * Link to related article
 * Link to related article
 ```
-
-> **Success**  
-> You did it!  
-> :star: Either you scrolled to the bottom or read the whole page. Either way, congratulations. :star:
 
 ## What's next?
 
@@ -925,3 +922,7 @@ Below are words that are used in the context of Metasploit. They show the correc
 * Powershell
 * Post exploitation
 * Meterpreter
+
+> **Success**  
+> You did it!  
+> :star: Either you scrolled to the bottom or read the whole page. Either way, congratulations. :star:
