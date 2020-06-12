@@ -1,6 +1,7 @@
 # Contributing to Framework documentation
 
 Looking for module documentation? See [Module Docs](https://github.com/rapid7/metasploit-framework/wiki/Module-Documentation)
+
 ---
 
 * [Contributing to Framework documentation](#contributing-to-framework-documentation)
