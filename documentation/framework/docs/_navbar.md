@@ -1,3 +1,0 @@
-- [API](https://rapid7.github.io/metasploit-framework/api/)
-- [GitHub](https://github.com/rapid7/metasploit-framework)
-- [Pull Request Stats](https://resources.metasploit.com/pull_requests.html)

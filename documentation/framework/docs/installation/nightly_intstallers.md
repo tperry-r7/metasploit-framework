@@ -1,1 +1,0 @@
-[filename](https://raw.githubusercontent.com/rapid7/metasploit-framework/master/README.md ':include')
