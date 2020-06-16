@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Setting up a Metasploit Developer Enviroment</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li><a href=".././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+<li>Getting-Started/
+<ul>
+<li><strong>Setting up a Metasploit Developer Enviroment</strong></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href=".././Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+</ul></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href=".././markdown-cheat-sheet.html">←prev</a></div><div class="nav-bar-push"><a href=".././Utilities/complier-windows-c.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Setting up a Metasploit Developer Enviroment</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#install-dependencies">Install dependencies</a></li>
+<li><a href="#set-up-your-local-copy-of-the-repository">Set up your local copy of the repository</a></li>
+<li><a href="#install-ruby">Install Ruby</a></li>
+<li><a href="#install-gems">Install gems</a></li>
+<li><a href="#optional-set-up-the-rest-api-and-postgresql-database">Optional: Set up the REST API and PostgreSQL database</a></li>
+<li><a href="#tips-to-speed-up-common-workflows">Tips to speed up common workflows</a></li>
+<li><a href="#great-now-what">Great! Now what?</a></li>
+</ul>
+</nav>
+<p>This is a guide for setting up a developer environment to contribute modules, documentation, and fixes to the Metasploit Framework. If you just want to use Metasploit for legal, authorized hacking, we recommend instead you:</p>
+<ul>
+<li>Install the <a href="https://github.com/rapid7/metasploit-framework/wiki/Nightly-Installers">open-source Omnibus installer</a>, or</li>
+<li>Use the pre-installed Metasploit on <a href="https://docs.kali.org/general-use/starting-metasploit-framework-in-kali">Kali Linux</a> or <a href="https://docs.parrotsec.org/doku.php/metasploit-framework#start-metasploit">Parrot Linux</a>.</li>
+</ul>
+<p>If you want to contribute to Metasploit, start by reading our <a href="https://github.com/rapid7/metasploit-framework/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>, then follow the rest of this guide.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>You have installed an apt-based Linux environment, such as <a href="https://www.ubuntu.com/download/desktop">Ubuntu</a> or <a href="https://www.kali.org/downloads/">Kali</a>.</li>
+<li>You have created a GitHub account and associated an <a href="https://help.github.com/articles/generating-ssh-keys/">ssh key</a> with it.</li>
+<li>You have familiarity with Git and GitHub, or have completed the <a href="https://help.github.com/articles/set-up-git/">GitHub bootcamp</a>.</li>
+<li>For optional database and REST API functionality, you will need regular user account that is not <code>root</code>.</li>
+</ul>
+<h2 id="install-dependencies">Install dependencies</h2>
+<ol type="1">
+<li>Open a terminal on your Linux host and set up Git, build tools, and Ruby dependencies:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install -y git autoconf build-essential libpcap-dev libpq-dev zlib1g-dev libsqlite3-dev</span></code></pre></div>
+<h2 id="set-up-your-local-copy-of-the-repository">Set up your local copy of the repository</h2>
+<p>You will need to use Github to create a fork for your contributions and receive the latest updates from our repository.</p>
+<ol type="1">
+<li><p>Login to Github and click the “Fork” button in the top-right corner of the <a href="https://github.com/rapid7/metasploit-framework/">metasploit-framework</a> repository.</p></li>
+<li><p>Create a <code>git</code> directory in your home folder and clone your fork to your local machine:</p></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">export</span> <span class="va">GITHUB_USERNAME=</span>YOUR_USERNAME_FOR_GITHUB</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="bu">export</span> <span class="va">GITHUB_EMAIL=</span>YOUR_EMAIL_ADDRESS_FOR_GITHUB</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">mkdir</span> -p ~/git</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="bu">cd</span> ~/git</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">git</span> clone git@github.com:<span class="va">$GITHUB_USERNAME</span>/metasploit-framework</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="bu">cd</span> ~/git/metasploit-framework</span></code></pre></div>
+<ol start="3" type="1">
+<li><p>If you encounter a “permission denied” error on the above command, research the error message. If there isn’t an explicit reason given, confirm that your <a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/">Github SSH key is configured correctly</a>.</p></li>
+<li><p>To receive updates, you will create an <code>upstream-master</code> branch to track the Rapid7 remote repository, alongside your <code>master</code> branch which will point to your personal repository’s fork:</p></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">git</span> remote add upstream git@github.com:rapid7/metasploit-framework.git</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">git</span> fetch upstream</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">git</span> checkout -b upstream-master --track upstream/master</span></code></pre></div>
+<ol start="5" type="1">
+<li>Configure your Github username, email address, and username. Ensure your <code>user.email</code> matches the email address you registered with your Github account.</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">git</span> config --global user.name <span class="st">&quot;</span><span class="va">$GITHUB_USERNAME</span><span class="st">&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">git</span> config --global user.email <span class="st">&quot;</span><span class="va">$GITHUB_EMAIL</span><span class="st">&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">git</span> config --global github.user <span class="st">&quot;</span><span class="va">$GITHUB_USERNAME</span><span class="st">&quot;</span></span></code></pre></div>
+<ol start="6" type="1">
+<li>Set up <a href="https://www.oreilly.com/library/view/metasploit-revealed-secrets/9781788624596/91660ab9-a260-4de8-a4ea-c1af64eafbec.xhtml">msftidy</a> to run before each <code>git commit</code> and after each <code>git merge</code> to quickly identify potential issues with your contributions:</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">cd</span> ~/git/metasploit-framework</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">ln</span> -sf ../../tools/dev/pre-commit-hook.rb .git/hooks/pre-commit</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">ln</span> -sf ../../tools/dev/pre-commit-hook.rb .git/hooks/post-merge</span></code></pre></div>
+<h2 id="install-ruby">Install Ruby</h2>
+<p>Linux distributions do not ship with the latest Ruby, nor are package managers routinely updated. Additionally, if you are working with multiple Ruby projects, each one has dependencies and Ruby versions which can start to conflict. For these reasons, it is advisable to use a Ruby manager.</p>
+<p>You could just install Ruby directly (eg. <code>sudo apt install ruby-dev</code>), but you may likely end up with the incorrect version and no way to update. Instead, consider using one of the many different <a href="https://www.ruby-lang.org/en/documentation/installation/#managers">Ruby environment managers</a> available. The Metasploit team prefers <a href="https://github.com/rbenv/rbenv#basic-github-checkout">rbenv</a> and <a href="https://github.com/rvm/ubuntu_rvm#install">rvm</a> (note that <a href="https://github.com/rvm/ubuntu_rvm#install">rvm</a> does require a re-login to complete).</p>
+<p>Regardless of your choice, you’ll want to make sure that, when inside the <code>~/git/metasploit-framework</code> directory, you are running the correct version of Ruby:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a>$ <span class="bu">cd</span> ~/git/metasploit-framework</span>
+<span id="cb6-2"><a href="#cb6-2"></a>$ <span class="fu">cat</span> .ruby-version </span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">2.5.3</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>$ <span class="ex">ruby</span> -v</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">ruby</span> 2.5.3p105 (2018-10-18 revision 65156) [<span class="ex">x86_64-linux-gnu</span>]</span></code></pre></div>
+<p>Note: the Ruby version is likely to change over time, so don’t rely on the output in the above example. Instead, confirm your <code>ruby -v</code> output with the version number listed in the <code>.ruby-version</code> file.</p>
+<p>If the two versions don’t match, restart your terminal. If that does not work, consult the troubleshooting documentation for your Ruby environment manager. Unfortunately, troubleshooting the Ruby environment is beyond the scope of this document, but feel free to reach out for community support using the links at the bottom of this document.</p>
+<h2 id="install-gems">Install gems</h2>
+<p>Before you run Metasploit, you will need to update the gems (Ruby libraries) that Metasploit depends on:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">cd</span> ~/git/metasploit-framework/</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ex">gem</span> install bundler</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="bu">cd</span> .</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ex">bundle</span> install</span></code></pre></div>
+<p>If you encounter an error with the above command, refer to the <code>bundle</code> output and search for the error message along with the name of the gem that failed. Likely, you’ll need to <code>apt get install</code> a dependency that is required by that particular gem.</p>
+<p>Congratulations! You have now set up a development environment and the latest version of the Metasploit Framework. If you followed this guide step-by-step, and you ran into any problems, it would be super great if you could open a <a href="https://github.com/rapid7/metasploit-framework/issues/new">new issue</a> so we can either help you, or, more likely, update the docs.</p>
+<h2 id="optional-set-up-the-rest-api-and-postgresql-database">Optional: Set up the REST API and PostgreSQL database</h2>
+<p>The following optional section describes how to manually install PostgreSQL and set up the Metasploit database. Alternatively, use our Omnibus installer which handles this more reliably. Click to expand.</p>
+<ol type="1">
+<li>Confirm that the PostgreSQL server and client are installed:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt-get install -y postgresql postgresql-client</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">sudo</span> service postgresql start <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> update-rc.d postgresql enable</span></code></pre></div>
+<ol start="2" type="1">
+<li><p>Ensure that you are not running as the root user.</p></li>
+<li><p>Initialize the Metasploit database:</p></li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">cd</span> ~/git/metasploit-framework</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">./msfdb</span> init</span></code></pre></div>
+<ol start="4" type="1">
+<li><p>If you receive an error about a component not being installed, confirm that the binaries shown are in your path using the <a href="https://linux.die.net/man/1/which">which</a> and <a href="https://linux.die.net/man/1/find">find</a> commands, then modifying your <a href="https://askubuntu.com/questions/109381/how-to-add-path-of-a-program-to-path-environment-variable">$PATH</a> environment variable. If it was something else, open a <a href="https://github.com/rapid7/metasploit-framework/issues/new">new issue</a> to let us know what happened.</p></li>
+<li><p>If the <code>msfdb init</code> command succeeds, then confirm that the database is accessible to Metasploit:</p></li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a>$ <span class="ex">./msfconsole</span> -qx <span class="st">&quot;db_status; exit&quot;</span></span></code></pre></div>
+<p>Congratulations! You have now set up the <a href="https://github.com/rapid7/metasploit-framework/wiki/Metasploit-Web-Service">Metasploit Web Service (REST API)</a> and the backend database.</p>
+<h2 id="tips-to-speed-up-common-workflows">Tips to speed up common workflows</h2>
+<p>The following section is optional but may improve your efficiency.</p>
+<ul>
+<li>Making sure you’re in the right directory to run <code>msfconsole</code> can become tedious, so consider using the following Bash alias:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">echo</span> <span class="st">&#39;alias msfconsole=&quot;pushd $HOME/git/metasploit-framework &amp;&amp; ./msfconsole &amp;&amp; popd&quot;&#39;</span> <span class="op">&gt;&gt;</span> ~/.bash_aliases</span></code></pre></div>
+<ul>
+<li>Consider generating a GPG key to sign your commits. Read about <a href="https://mikegerwitz.com/papers/git-horror-story#trust-ensure">why</a> and <a href="https://github.com/rapid7/metasploit-framework/wiki/Committer-Keys#signing-howto">how</a>.</li>
+<li>Developers tend to customize their own <a href="https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases">git aliases</a> to speed up common commands, but here are a few common ones:</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode rc"><code class="sourceCode xml"><span id="cb12-1"><a href="#cb12-1"></a>[alias]</span>
+<span id="cb12-2"><a href="#cb12-2"></a># An easy, colored oneline log format that shows signed/unsigned status</span>
+<span id="cb12-3"><a href="#cb12-3"></a>nicelog = log --pretty=format:&#39;%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<span class="er">&lt;</span>%aE&gt;%Creset [%G?]&#39;</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a># Shorthand commands to always sign (-S) and always edit the commit message.</span>
+<span id="cb12-6"><a href="#cb12-6"></a>m = merge -S --no-ff --edit</span>
+<span id="cb12-7"><a href="#cb12-7"></a>c = commit -S --edit</span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a># Shorthand to always blame (praise) without looking at whitespace changes</span>
+<span id="cb12-10"><a href="#cb12-10"></a>b= blame -w</span></code></pre></div>
+<ul>
+<li>If you plan on working with other contributor’s pull requests, you may run the following script which makes it easier to do so:</li>
+</ul>
+<pre><code>tools/dev/add_pr_fetch.rb</code></pre>
+<p>After running the above script, you can <code>checkout</code> other pull requests more easily:</p>
+<pre><code>git fetch upstream
+git checkout fixes-to-pr-12345 upstream/pr/12345</code></pre>
+<ul>
+<li>If you’re writing test cases (which you should), then make sure <a href="https://www.rubyguides.com/2018/07/rspec-tutorial/">rspec</a> works:</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">rake</span> spec</span></code></pre></div>
+<p>You should see over 9000 tests run, mostly resulting in green dots, a few in yellow stars, and no red errors.</p>
+<h2 id="great-now-what">Great! Now what?</h2>
+<p>We’re excited to see your upcoming contributions of new modules, documentation, and fixes! Check out our <a href="https://github.com/rapid7/metasploit-framework/wiki#metasploit-development">wiki documentation</a> and, if you’re looking for inspiration, keep an eye out for <a href="https://github.com/rapid7/metasploit-framework/issues?q=is%3Aopen+label%3Anewbie-friendly">newbie-friendly pull requests and issues</a>. Please <a href="https://help.github.com/articles/about-pull-requests/">submit your new pull requests</a> and reach out to us on <a href="https://www.metasploit.com/slack">Slack</a> for community help.</p>
+<p>Finally, we welcome your feedback on this guide, so feel free to reach out to us on <a href="https://www.metasploit.com/slack">Slack</a> or open a <a href="https://github.com/rapid7/metasploit-framework/issues/new">new issue</a>. For their significant contributions to this guide, we would like to thank <span class="citation" data-cites="kernelsmith">[@kernelsmith]</span>, <span class="citation" data-cites="corelanc0d3r">[@corelanc0d3r]</span>, and <span class="citation" data-cites="ffmike">[@ffmike]</span>.</p>
+<p><span class="citation" data-cites="kernelsmith">[@kernelsmith]</span>:https://github.com/kernelsmith <span class="citation" data-cites="corelanc0d3r">[@corelanc0d3r]</span>:https://github.com/corelanc0d3r <span class="citation" data-cites="ffmike">[@ffmike]</span>:https://github.com/ffmike</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href=".././markdown-cheat-sheet.html">←prev</a></div><div class="nav-bar-push"><a href=".././Utilities/complier-windows-c.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="setting-up-metasploit-dev-enviroment.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

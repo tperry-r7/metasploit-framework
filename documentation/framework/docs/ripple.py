@@ -549,14 +549,14 @@ body {
 
 #nav-box {
     float: left;
-    width: 280px;
+    width: 320px;
     padding: 10px;
     font-size: small;
 }
 
 #article-box {
-    margin-left: 320px;
-    width: 800px;
+    margin-left: 370px;
+    width: 850px;
 }
 
 #header-nav-bar, #footer-nav-bar {
