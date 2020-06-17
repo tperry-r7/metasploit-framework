@@ -1,5 +1,5 @@
-% Module Reference Identifiers
-% Metasploit Versions 4, 5
+% Reference Identifiers
+% Metasploit Versions 4,5
 
 A reference in a Metasploit module is a source of information related to the module. This can be a link to the vulnerability advisory, a news article, a blog post about a specific technique the module uses, a specific tweet, etc. The more you have the better. However, you should not use this as a form of advertisement.
 

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Keep in sync with master</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+    </ul>
+  </nav>
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li><a href="../.././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+<li>Getting-Started/
+<ul>
+<li><a href="../.././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li><a href="../.././Getting-Started/Contact.html">Contact</a></li>
+<li>Contributing/
+<ul>
+<li><a href="Committer-Keys.html">Committer Keys</a></li>
+<li><a href="Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href="How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href="Committer-Rights.html">Metasploit Committers</a></li>
+<li><a href="Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href="Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href="Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href="How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><strong>Keep in sync with master</strong></li>
+<li><a href="Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href="Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href="Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href="Style-Tips.html">Style Tips</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href="../.././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href="../.././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href="../.././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href="../.././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href="../.././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href="../.././Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="../.././Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="../.././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="../.././Modules/How-to-get-started-with-writing-a-post-module.html">Post module development</a></li>
+<li><a href="../.././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li>How-To/
+<ul>
+<li><a href="../.././Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="../.././Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="../.././Modules/How-To/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href="../.././Modules/How-To/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href="../.././Modules/How-To/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="../.././Modules/How-To/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href="../.././Modules/How-To/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href="../.././Modules/How-To/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+</ul></li>
+<li><a href="../.././Modules/Module-Documentation.html">Module documentation</a></li>
+<li><a href="../.././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href="../.././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li><a href="../.././Modules/Module-Reference-Identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="../.././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="../.././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li><a href="../.././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li>How-To/
+<ul>
+<li><a href="../.././Exploits/How-To/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privledge attack with WbemExec</a></li>
+<li><a href="../.././Exploits/How-To/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href="../.././Exploits/How-To/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href="../.././Exploits/How-To/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href="../.././Exploits/How-To/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-command-stagers.html">Use command stagers</a></li>
+</ul></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href="../.././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href="../.././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="../.././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use Metasploit::Framework::Obfuscation::CRandomizer</a></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="../.././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href="../.././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href="../.././Payloads/Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href="../.././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="../.././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href="../.././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href="../.././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+<li><a href="../.././Payloads/Payload-UUID.html">Payload UUID</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href="../.././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+</ul></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="How-to-deprecate-a-Metasploit-module.html">←prev</a></div><div class="nav-bar-push"><a href="Landing-Pull-Requests.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Keep in sync with master</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#some-terminology">Some Terminology</a></li>
+<li><a href="#the-easy-way">The Easy Way</a></li>
+<li><a href="#the-hard-way">The Hard Way</a></li>
+<li><a href="#the-max-powers-way">The Max Powers Way</a></li>
+</ul>
+</nav>
+<h2 id="some-terminology">Some Terminology</h2>
+<p>In this quick HOWTO, we’ll be referring to the <code>rapid7</code> fork of <code>metasploit-framework</code> as <code>upstream</code>. It’s a pretty common local configuration, advocated by the <a href="http://r-7.co/MSF-DEV">development environment setup</a>. Your fork of <code>metasploit-framework</code> will be referred to as <code>origin</code>.</p>
+<p>The term ‘repo’ is short for ‘Repository.’ Also known as ‘fork’ (as a noun).</p>
+<h2 id="the-easy-way">The Easy Way</h2>
+<p>The easiest way to keep in sync with master is to trash your fork of <code>metasploit-framework</code>, and re-fork. This is a surprisingly common practice, since most people in the world don’t work with Metasploit every day. If you’re the sort to be struck by hackerish inspiration every few months, and couldn’t give a whit about preserving branches, history, or pull requests, simply nuke your local fork.</p>
+<p>On your fork, in the GitHub UI, go to <strong>Settings</strong>, scroll down to the <strong>Danger Zone</strong>, and hit <strong>Delete this repository</strong>. Once you’ve re-authenticated, re-fork the <code>metasploit-framework</code> repository by going to the <a href="https://github.com/rapid7/metasploit-framework">Rapid7 repo</a> and hit <strong>Fork</strong> as hard as you possibly can.</p>
+<h2 id="the-hard-way">The Hard Way</h2>
+<p>If you’re contributing to the Metasploit Framework a lot, first off, THANK YOU. Metasploit is more than a framework, it’s a collective and a community of people around the world who are driven to make the Internet – and therefore, human civilization – a better place.</p>
+<p>Gushing aside, if you want to keep in sync with upstream, the hard way (and therefore, best way), is to have a local clone of <code>origin/mestasploit-framework</code> on your local workstation. (Linux is preferred, but there are servicable solutions for OSX and Windows).</p>
+<p>And, with <em>that</em> said, the GitHub documentation is pretty excellent in explaining how to do this – it’s really not all that hard. Take a look at their <a href="https://help.github.com/articles/fork-a-repo/">Fork A Repo</a> docs, and do what it says.</p>
+<p>One thing I like to do is to keep separate branches for <code>master</code> (which tracks <code>origin/master</code>), and <code>upstream-master</code> (which tracks, unsurprisingly, <code>upstream/master</code>). If you just want to know how to add an <code>upstream</code> remote, <a href="https://help.github.com/articles/configuring-a-remote-for-a-fork/">check it out</a>. Once you’ve done that, all you need to do is to pull one of these:</p>
+<pre><code>git checkout -b upstream-master --track upstream/master
+git checkout master
+git merge --ff-only upstream-master
+git commit
+git push origin</code></pre>
+<p>Now, this only works well if you <strong>never commit to master</strong>. If you do, you’re going to have a bad time, as you’ll eventually hit a dreaded <a href="https://help.github.com/articles/resolving-merge-conflicts/">merge conflict</a>.</p>
+<p>Any change you make, be it for local experimentation or public proposal, should be done in a branch <em>from</em> the <code>master</code> branch (or, if you’re a habitual committer, a branch off the <code>upstream-master</code> branch).</p>
+<p>Ignore this advice at your own peril.</p>
+<h2 id="the-max-powers-way">The Max Powers Way</h2>
+<p><em>It’s like the wrong way, but faster.</em> <em>- Max Powers</em></p>
+<p>If you are allergic to the command line, it <em>is possible</em> to sync with upstream/master via the GitHub web UI. This is a little messy, but it’s handy if you have small changes that you don’t care to sign (by the way, <a href="http://mikegerwitz.com/papers/git-horror-story">you should sign your commits</a>).</p>
+<p>First, go to the <a href="https://github.com/rapid7/metasploit-framework">Rapid7 branch</a>, and click the green, somewhat subtle mini-PR button. Then, click <strong>Compare across forks</strong>, and set <strong>base fork</strong> to your fork, while leaving the head fork pointing to Rapid7’s fork. That’ll take you to a URL like this: https://github.com/rapid7/metasploit-framework/compare/YOURGITHUBNAME:master…master</p>
+<p>Next, you’ll hit the big green <strong>Create a Pull Request</strong> button, which will drop you to a new PR page, against your own fork. Fill it in, then immediately click the <strong>PRs</strong> icon on the left side, find your new PR, and merge it.</p>
+<p>This will keep your GitHub-hosted fork up-to-date, and if you prefer using the GitHub UI over a real development environment, you can jump in and start making changes there.</p>
+<p>This method is especially handy for light changes, like documentation or cosmetic changes to modules. However, using the GitHub UI means that you are necessarily not testing new modules or libraries, and you of course cannot sign your commits, which is <a href="http://mikegerwitz.com/papers/git-horror-story">horrifying</a>. It’s also nice for people very new to GitHub as a collaborative platform.</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="How-to-deprecate-a-Metasploit-module.html">←prev</a></div><div class="nav-bar-push"><a href="Landing-Pull-Requests.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="Keeping-in-sync-with-rapid7-master.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

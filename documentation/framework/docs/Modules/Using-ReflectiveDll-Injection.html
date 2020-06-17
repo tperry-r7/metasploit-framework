@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Using the ReflectiveDll loader in a Metasploit module</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+    </ul>
+  </nav>
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li><a href=".././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+<li>Getting-Started/
+<ul>
+<li><a href=".././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li><a href=".././Getting-Started/Contact.html">Contact</a></li>
+<li>Contributing/
+<ul>
+<li><a href=".././Getting-Started/Contributing/Committer-Keys.html">Committer Keys</a></li>
+<li><a href=".././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href=".././Getting-Started/Contributing/Committer-Rights.html">Metasploit Committers</a></li>
+<li><a href=".././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href=".././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href=".././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href=".././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href=".././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href=".././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href=".././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href=".././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href=".././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href=".././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href=".././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href="get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="How-to-get-started-with-writing-a-post-module.html">Post module development</a></li>
+<li><a href="How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li>How-To/
+<ul>
+<li><a href=".././Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href=".././Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href=".././Modules/How-To/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href=".././Modules/How-To/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href=".././Modules/How-To/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href=".././Modules/How-To/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href=".././Modules/How-To/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href=".././Modules/How-To/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+</ul></li>
+<li><a href="Module-Documentation.html">Module documentation</a></li>
+<li><a href="Running-Private-Modules.html">Run private modules</a></li>
+<li><strong>Using the ReflectiveDll loader in a Metasploit module</strong></li>
+<li><a href="Module-Reference-Identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href=".././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li><a href=".././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li>How-To/
+<ul>
+<li><a href=".././Exploits/How-To/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privledge attack with WbemExec</a></li>
+<li><a href=".././Exploits/How-To/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href=".././Exploits/How-To/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href=".././Exploits/How-To/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href=".././Exploits/How-To/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href=".././Exploits/How-To/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href=".././Exploits/How-To/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href=".././Exploits/How-To/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+<li><a href=".././Exploits/How-To/How-to-use-command-stagers.html">Use command stagers</a></li>
+</ul></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href=".././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href=".././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href=".././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use Metasploit::Framework::Obfuscation::CRandomizer</a></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href=".././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href=".././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href=".././Payloads/Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href=".././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href=".././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href=".././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter.html">About Meterpreter</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href=".././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href=".././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href=".././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+<li><a href=".././Payloads/Payload-UUID.html">Payload UUID</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href=".././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+</ul></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="Running-Private-Modules.html">←prev</a></div><div class="nav-bar-push"><a href="Module-Reference-Identifiers.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Using the ReflectiveDll loader in a Metasploit module</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#step-1--make-your-dll">Step 1- make your dll</a></li>
+<li><a href="#step-2-write-the-dll-using-an-extern-c-linkage-entry-point-to-make-testing-easier">Step 2 Write the dll using an extern, C-linkage entry point to make testing easier</a></li>
+<li><a href="#step-3-add-reflectivedll-injection-to-it.">Step 3 Add ReflectiveDll Injection to it.</a></li>
+<li><a href="#now-that-we-have-the-binary-we-need-to-execute-it-on-target--enter-framework">Now that we have the binary, we need to execute it on target- Enter Framework!</a></li>
+<li><a href="#step-4-adding-the-framework-module">Step 4: Adding the framework module</a></li>
+</ul>
+</nav>
+<p>First, let’s be clear. I have used this exactly once, but there exists little in the way of guidance on how ReflectiveDll injection works in Framework, so I figure poor guidance is better than none. I am in part hoping that someone who knows how it works will come along and correct this, ala Cunningham’s Law.</p>
+<p>This documentation assumes that you have some familiarity with DLLs already.</p>
+<h3 id="step-1--make-your-dll">Step 1- make your dll</h3>
+<p>Use Visual studio 2013 and make a standard, empty dll. Do not attempt to add the reflective dll stuff yet. When you make the dll, make sure that you have at least three files: A header file with the function declarations, a c(pp) file with the functions that ‘do’ the exploit, and a dllMain file with the <code>DllMain</code> function. I find that testing the dll outside the reflective loader helps tremendously, so in the header file, I declare my working function as an <code>extern</code>, C-style function: <code>extern "C" __declspec (dllexport) void PrivEsc(void);</code></p>
+<p>I think using C as the language over cpp would make life marginally easier, as you can combine the source code into one project. Using cpp meant I needed to have separate projects, or at least using my limited compiler knowledge that’s how I got it to work. I noticed OJ was able to extend his c project (https://github.com/rapid7/metasploit-framework/tree/master/external/source/exploits/capcom_sys_exec) to include the reflectiveloader, but I could not seem to do the same for my cpp project.</p>
+<p>Store your project in <code>external/source/exploits/&lt;identifier&gt;/&lt;projectname&gt;</code>. That’s not written in stone. The project I just finished had both dll and exe, so I have <code>external/source/exploits/&lt;identifier&gt;/dll</code> and <code>external/source/exploits/&lt;identifier&gt;/exe</code>. Just don’t be a jerk and do something hard to follow. Your requirements may differ, and we’re not super particular as long as it makes sense. I suggest the identifier to make life easier, then a project name because you’ll be bringing the reflective loader project into the identifier folder, and at least I like to have some separation between the two.</p>
+<h3 id="step-2-write-the-dll-using-an-extern-c-linkage-entry-point-to-make-testing-easier">Step 2 Write the dll using an extern, C-linkage entry point to make testing easier</h3>
+<p>In this case, I was writing a privesc, so I called it <code>PrivEsc</code> because I am super-imaginative and I have done enough code maintenance that I try to be nice to the next dev. By declaring it an external function and using C-style linkages, you can test the function independently using the <code>rundll32.exe</code> binary.</p>
+<p>For example, if the dll were named mydll.dll, you can run the privEsc alone with the command <code>&gt; rundll.exe mydll.dll, PrivEsc</code></p>
+<p>That way, you can isolate the behavior of the exploit before adding a payload. Because I was using a privesc, I just made the last line of the privesc <code>system(“cmd.exe”);</code> so I could verify that on the target machine. If I got a system-level cmd prompt, I won!</p>
+<h3 id="step-3-add-reflectivedll-injection-to-it.">Step 3 Add ReflectiveDll Injection to it.</h3>
+<p>This is actually pretty simple. Once your code is doing what it is supposed to do, add the ReflectiveDll injection to it. Move the rdi (ReflectiveDll injection) code into your existing project and add the inject project into your solution. Again, this worked for me and appears to be a popular choice.</p>
+<p>When you copy the RefelctiveDll code into your project, you are going to replace your <code>DllMain</code> file with the <code>ReflectiveDll.c</code> file. Include the header file containing your desired entry point so that when <code>DllMain</code> gets launched, it can find your desired entry point.</p>
+<p>I also noticed and appreciated that others structured the code into two parts: Exploit and Exploiter. Exploiter does the heavy lifting with functions, and Exploit calls the functions and runs the shellcode after the exploit completes. For example, I made a privesc and the code required to accomplish the elevation was bundled in a function called <code>PrivEsc</code> contained within my <code>Exploiter.cpp</code> file. The Exploit file was very simple in comparison:</p>
+<pre><code>#include &lt;Windows.h&gt;
+#include &quot;Exploit.h&quot;
+#include &quot;Exploiter.h&quot;
+
+static VOID ExecutePayload(LPVOID lpPayload)
+{
+    VOID(*lpCode)() = (VOID(*)())lpPayload;
+    lpCode();
+    return;
+}
+
+VOID Exploit(LPVOID lpPayload)
+{
+    PrivEsc();
+    ExecutePayload(lpPayload);
+}</code></pre>
+<p>That <code>ExecutePayload</code> function is there to… well…. Execute the payload. We’ll talk about it later, but make sure that you have it accepting a pointer and executing it. That’ll be how we get a payload into the running thread.</p>
+<p>All the <code>Exploit.cpp</code> needs to do is give a clear way for me to run the code I wanted to get system, then call the function responsible for starting the shellcode. In my case, all I needed to do was to somehow run <code>PrivEsc</code> and then <code>ExecutePayload(pPayload)</code>.</p>
+<p>Sure enough, if you check out the <code>ReflectiveDll.c</code> file, you can see that it is really straightforward and should look a lot like your previous <code>DllMain</code> function, except there’s a function call in <code>DLL_PROCESS_ATTACH</code>:</p>
+<pre><code>#include &quot;ReflectiveLoader.h&quot;
+#include &quot;Exploit.h&quot;
+
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, LPVOID lpReserved)
+{
+    BOOL bReturnValue = TRUE;
+    switch (dwReason)
+    {
+    case DLL_QUERY_HMODULE:
+        if (lpReserved != NULL)
+            *(HMODULE *)lpReserved = hAppInstance;
+        break;
+    case DLL_PROCESS_ATTACH:
+        hAppInstance = hinstDLL;
+        //MessageBox(0, &quot;In DLLMain&quot;, &quot;Status&quot;, MB_OK);
+        Exploit(lpReserved);
+        break;
+    case DLL_PROCESS_DETACH:
+    case DLL_THREAD_ATTACH:
+    case DLL_THREAD_DETACH:
+        break;
+    }
+    return bReturnValue;
+}</code></pre>
+<p>One thing to understand- despite the feelings I had reading through the framework side, you must specify the entry point for the code you want executed in <code>DLL_PROCESS_ATTACH</code>. We are going to be (quasi) calling <code>DllMain</code>, and <code>DLL_PROCESS_ATTACH</code> will fire, thus giving us code execution in the remote process context. As you create the rest of your code, remember that <code>lpReserved</code> from <code>DllMain</code> will contain the address of your payload. Be sure that <code>lpReserve</code> has a clear path to your call of <code>ExecutePayload()</code>.</p>
+<p>Some of the output from the framework side of the injection was confusing to me because I am used to loading DLLs explicitly and implicitly, and some of the framework methods made it sound like we were not relying on DLL_PROCESS_ATTACH. We are, but in a slightly more round-about way. That said, remember if you go back to troubleshooting just your exploit code in the <code>extern</code> function, <code>DLL_PROCESS_ATTACH</code> will still execute if you use <code>rundll32.exe</code> to call your function. Be sure to comment out your calls in <code>DLL_PROCESS_ATTACH</code> if you go back to debugging unless you want dueling exploits.</p>
+<p>OK, so at this point, you’ve got a DLL with a function that does something you want, and even better, it compiles! Move that binary to the data directory corresponding to the external directory you used above. i.e. if you used <code>external/source/exploits/myfancyexploit</code>, put your binary in <code>data/exploits/myfancyexploit/</code>. If you can automate that move as a post build step, even better!</p>
+<h3 id="now-that-we-have-the-binary-we-need-to-execute-it-on-target--enter-framework">Now that we have the binary, we need to execute it on target- Enter Framework!</h3>
+<h2 id="step-4-adding-the-framework-module">Step 4: Adding the framework module</h2>
+<p>Once you’ve got the DLL working and have it compiling with ReflectiveLoader, you have to make a framework module to use it. OJ’s https://github.com/rapid7/metasploit-framework/tree/master/external/source/exploits/capcom_sys_exec is a great place to start looking as an examples; it is super easy and simple to read, so let’s review:</p>
+<ol type="1">
+<li><p>Make sure you have a handle to a process…. The easiest way be able to get a handle to a process is to launch your own: <code>notepad_process = client.sys.process.execute('notepad.exe', nil, {'Hidden' =&gt; true})</code></p></li>
+<li><p>We need to write to that process and launch a thread in the process, so let’s get a handle to the process with ALL_ACCESS attributes: <code>process = client.sys.process.open(notepad_process.pid, PROCESS_ALL_ACCESS)</code></p></li>
+<li><p>Grab the path to your binary file: <code>library_path = ::File.join(Msf::Config.data_directory, 'exploits', 'myfancyexploit', 'myfancyexploit.dll')</code></p></li>
+</ol>
+<p>Replace the directory and file names with the ones to your binary.</p>
+<p>(3.5) OJ went ahead and expanded the path; likely this is because he’s used filepath hijacking in the past: <code>library_path = ::File.expand_path(library_path)</code></p>
+<ol start="4" type="1">
+<li>Now, here’s where things get fun- inject your dll directly into the memory of notepad: <code>exploit_mem, offset = inject_dll_into_process(process, library_path)</code></li>
+</ol>
+<p>That function allocates memory in the process and loads up the dll. There is a second method that allows you to upload dll data, so you could create a payload using a template and load that without the dll touching the local or remote disk, but I have not had cause to use it.</p>
+<p>Unfortunately, this is where my grasp of things gets tenuous because it departs from my experience of traditional DLL loading with LoadLibrary and GetProcAddress. We copied the DLL into the remote process memory, but we have not “loaded” it, so DLL_PROCESS_ATTACH is not executed. That’s a good thing, as we have not yet provided the payload!</p>
+<p>I square this by basically treating it like process hollowing, but on a thread-level. Watching OJ’s ReflectiveDll injection video might help: https://www.youtube.com/watch?v=ZKznMBWUQ_c</p>
+<p>You may want to watch it daily for a month or so.</p>
+<p>Regardless, now we have a process with our exploit dll mapped into its memory, but not doing anything. Now we need to get the payload into the process too, so we can get exploit and payload execution. Getting the payload in there is honestly not much different that getting the DLL data in there.</p>
+<ol start="5" type="1">
+<li>Just allocate some RWX memory and copy the shellcode over. There’s a method for that: <code>payload_mem = inject_into_process(process, payload.encoded)</code></li>
+</ol>
+<p>To be clear, That’s the first time you should have dealt with the payload, because while it is annoying how much goes on in the background in Framework, when you know it is happening, Framework is awesome!</p>
+<p>Now, if you’ve been paying attention to the return values from the above methods, we have three important values: (1) <code>exploit_mem</code> that has the address of the dll loaded into memory, (2) <code>offset</code> that (I think) contains the offset to the <code>DllMain</code> function inside the DLL loaded into memory, and (3) <code>payload_mem</code>, that contains the address of your payload.</p>
+<ol start="6" type="1">
+<li><p>Now, With those three values, and our code stored in the process’s memory, things make a lot more sense. We just need to create a thread in the process and point it to the <code>DllMain</code> function with the address of our payload as the <code>lpReserve</code> parameter. <code>process.thread.create(exploit_mem + offset, payload_mem)</code></p></li>
+<li><p>What I’m Still unclear about: (6.1) How do we get the offset value? If we check out <code>inject_dll_into_process</code>, it shows that it is searching the pe for <code>ReflectiveLoader</code> and that’s not a string I can find as an entry point. I do not understand why that gives us the offset to what I believe to be DllMain when it appears to be searching to ReflectiveLoader…? (6.2) There are a few ways to use <code>ReflectiveDllLoader</code>, and I wish I could read more on using it as an import like OJ does in that <code>capcom_sys_exec</code>.</p></li>
+</ol>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="Running-Private-Modules.html">←prev</a></div><div class="nav-bar-push"><a href="Module-Reference-Identifiers.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="Using-ReflectiveDll-Injection.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-% Committer keys
+% Committer Keys
 
 This page lists the keys in use by [Metasploit committers][msf-committers] and
 can be used to verify merge commits made to https://github.com/rapid7/metasploit-framework.
@@ -9,7 +9,7 @@ Keybase.io is used by Metasploit as an easy way to verify identities of committe
 
 <sup>Altering this table's layout will almost certainly break [import-dev-keys.sh](https://github.com/rapid7/metasploit-framework/blob/master/tools/dev/import-dev-keys.sh), so please don't.</sup>
 
-| Github Username                                   | Keybase.io Username                                |
+| GitHub Username                                   | Keybase.io Username                                |
 | ------------------------------------------------- | -------------------------------------------------- |
 | [@acammack-r7](https://github.com/acammack-r7)    | [acammackr7](https://keybase.io/acammackr7)        |
 | [@bcoles](https://github.com/bcoles)              | [bcoles](https://keybase.io/bcoles)                |

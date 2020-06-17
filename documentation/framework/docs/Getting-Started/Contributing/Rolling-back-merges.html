@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Roll back merges</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+    </ul>
+  </nav>
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li><a href="../.././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+<li>Getting-Started/
+<ul>
+<li><a href="../.././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li><a href="../.././Getting-Started/Contact.html">Contact</a></li>
+<li>Contributing/
+<ul>
+<li><a href="Committer-Keys.html">Committer Keys</a></li>
+<li><a href="Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href="How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href="Committer-Rights.html">Metasploit Committers</a></li>
+<li><a href="Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href="Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href="Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href="How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href="Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href="Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href="Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><strong>Roll back merges</strong></li>
+<li><a href="Style-Tips.html">Style Tips</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href="../.././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href="../.././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href="../.././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href="../.././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href="../.././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href="../.././Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="../.././Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="../.././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="../.././Modules/How-to-get-started-with-writing-a-post-module.html">Post module development</a></li>
+<li><a href="../.././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li>How-To/
+<ul>
+<li><a href="../.././Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="../.././Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="../.././Modules/How-To/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href="../.././Modules/How-To/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href="../.././Modules/How-To/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="../.././Modules/How-To/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href="../.././Modules/How-To/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href="../.././Modules/How-To/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+</ul></li>
+<li><a href="../.././Modules/Module-Documentation.html">Module documentation</a></li>
+<li><a href="../.././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href="../.././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li><a href="../.././Modules/Module-Reference-Identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="../.././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="../.././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li><a href="../.././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li>How-To/
+<ul>
+<li><a href="../.././Exploits/How-To/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privledge attack with WbemExec</a></li>
+<li><a href="../.././Exploits/How-To/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href="../.././Exploits/How-To/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href="../.././Exploits/How-To/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href="../.././Exploits/How-To/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-command-stagers.html">Use command stagers</a></li>
+</ul></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href="../.././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href="../.././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="../.././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use Metasploit::Framework::Obfuscation::CRandomizer</a></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="../.././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href="../.././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href="../.././Payloads/Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href="../.././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="../.././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href="../.././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href="../.././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+<li><a href="../.././Payloads/Payload-UUID.html">Payload UUID</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href="../.././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+</ul></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="Reporting-a-Bug.html">←prev</a></div><div class="nav-bar-push"><a href="Style-Tips.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Roll back merges</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#whats-a-bad-merge">What’s a bad merge?</a></li>
+<li><a href="#a-merge-revert-example">A merge revert example</a>
+<ul>
+<li><a href="#figure-out-what-broke-things.">Figure out what broke things.</a></li>
+<li><a href="#check-out-the-bad-merge-tip.">Check out the bad merge tip.</a></li>
+<li><a href="#revert-the-merge">Revert the merge</a></li>
+<li><a href="#create-a-new-pr.">Create a new PR.</a></li>
+<li><a href="#bug-the-committers-until-your-revert-lands.">Bug the committers until your revert lands.</a></li>
+<li><a href="#thats-it">That’s it!</a></li>
+</ul></li>
+</ul>
+</nav>
+<p>Since the Metasploit-framework repository’s master branch is the bleeding edge of development, occasionally mistakes happen. This page will attempt to give some guidance on how to roll back a bad merge.</p>
+<h2 id="whats-a-bad-merge">What’s a bad merge?</h2>
+<ul>
+<li>Anything that causes <a href="https://travis-ci.org/rapid7/metasploit-framework/builds">Travis-CI</a> to fail rspec tests consistently.</li>
+<li>Anything that hits untested code that otherwise causes problems with <code>msfconsole</code>, <code>msfcli</code>, <code>msfvenom</code>, and other console commands.</li>
+</ul>
+<p>Sometimes, Travis-CI does choke up, due to network weather. Every build is a fresh clone, and all gems have to be reinstalled every time. Also, some rspec tests require network connections to assets on the Internet. Sometimes, Travis-CI itself is under a lot of load, and builds time out.</p>
+<p>The best way to diagnose these problems is simply to restart the build. Note, only <a href="https://github.com/rapid7/metasploit-framework/wiki/Committer-Rights">Committers</a> have rights to do this. If that doesn’t clear things up, or if it’s obvious that there are real failures (since you’ve read the rspec results and have read the tests), the first order of business is to undo your bad commit.</p>
+<p><strong>Note</strong>: in branches other than <code>master</code>, you can usually just fix things normally with new commits. There are plenty of “whoops” commit messages in our history.</p>
+<h1 id="a-merge-revert-example">A merge revert example</h1>
+<p>Once, there was a bad merge on <a href="https://github.com/rapid7/metasploit-framework/pull/2320">PR #2320</a>. The fellow landing this pull request ran into a merge conflict while landing, thought he fixed it, and pushed the results, which ended up breaking about a dozen Rspec tests. Whoops. That was a bad merge. <a href="https://github.com/rapid7/metasploit-framework/pull/2624">PR #2624</a> fixed it. Here’s the procedure used.</p>
+<h3 id="figure-out-what-broke-things.">Figure out what broke things.</h3>
+<p>In this case, the failed build was pretty obvious: <a href="https://travis-ci.org/rapid7/metasploit-framework/builds/13816889">Build #5216</a> was red, and rerunning Travis-CI didn’t solve. Reading the build log, we can see this was <a href="http://github.com/rapid7/metasploit-framework/commit/3996557ec61a6eeefaa3448480012205b8825374">merge commit 3996557</a>.</p>
+<h3 id="check-out-the-bad-merge-tip.">Check out the bad merge tip.</h3>
+<p>These commands will put the local repo back to the bad merge, and create a local branch as such:</p>
+<p><code>git checkout 3996557</code> <code>git checkout -b bad-merge</code></p>
+<p>You can inspect exactly what commits are contained in this merge with the following:</p>
+<p><code>git log bad-merge...bad-merge~ --oneline</code></p>
+<p>Like so:</p>
+<pre><code>$ git log bad-merge...bad-merge~ --oneline
+3996557 Fix conflcit lib/msf/util/exe.rb
+6296c4f Merge pull request #9 from tabassassin/retab/pr/2320
+d0a3ea6 Retab changes for PR #2320
+bff7d0e Merge for retab
+4c9e6a8 Default to exe-small</code></pre>
+<p>The syntax is a little wacky, but this is saying, "Show me all the commit hashes that occur from the <code>bad-merge</code> point to one back from <code>bad-merge</code> (in other words, from right before <code>bad-merge</code> was merged). That’s what the tilde (~) means. You could also use <code>bad-merge^</code> or <code>bad-merge^1</code>, they’re all equivalent.</p>
+<p>You can see the diff with the following command. Note the reverse placement of the <code>bad-merge</code> and <code>bad-merge~</code> commit points!</p>
+<p><code>git diff bad-merge~ bad-merge</code></p>
+<p>Take a look at that, confirm that yes, this is exactly what you want to revert, and then pull the trigger.</p>
+<h3 id="revert-the-merge">Revert the merge</h3>
+<p><code>git revert -m 1 bad-merge</code></p>
+<p>The <code>-m 1</code> bit is important, because that specifies that you want the branch to return to the point from before the merge – I have never had reason to revert a merge and throw out the other side of the merge, but I imagine it comes up often enough for other people to not have it be the default behavior.</p>
+<p>Note that this does /not/ reach into the repo and change history; for that, you would need to git push –force, and you <a href="https://www.reddit.com/r/programming/comments/1qefox/jenkins_developers_accidentally_do_git_push_force/">never want to do that on the master branch</a>. Instead, you are generating a new commit that reverses the contents of the merge commit. As usual, you will want to edit the commit message to be meaningful – mention the affected commit hash and the affected pull request.</p>
+<p>You will also want to <code>git commit -S --amend</code> after this to sign the commit; <code>git revert</code> does not take a <code>-S</code> option. Bummer.</p>
+<h3 id="create-a-new-pr.">Create a new PR.</h3>
+<p>You will now create a new PR with your revert commit. That’s simple enough. Again, be sure that the affected PRs are also informed; they may think their material landed, and while it technically did, it’s no longer there; they will need to open new PRs and figure out how to resubmit their changes (hopefully, this time without causing merge conflicts).</p>
+<h3 id="bug-the-committers-until-your-revert-lands.">Bug the committers until your revert lands.</h3>
+<p>Until your revert commit lands, master will remain broken, so dealing with this situation should be blocking basically anything else. Be vocal.</p>
+<h2 id="thats-it">That’s it!</h2>
+<p>If you have suggestions for fixes on this page, please bother <span class="citation" data-cites="todb-r7">[@todb-r7]</span>(https://github.com/todb-r7) with them.</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="Reporting-a-Bug.html">←prev</a></div><div class="nav-bar-push"><a href="Style-Tips.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="Rolling-back-merges.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

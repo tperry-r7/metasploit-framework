@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Metasploit Versions 4,5" />
+  <title>How to write a HTTP LoginScanner Module</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+    </ul>
+  </nav>
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li><a href="../.././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+<li>Getting-Started/
+<ul>
+<li><a href="../.././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li><a href="../.././Getting-Started/Contact.html">Contact</a></li>
+<li>Contributing/
+<ul>
+<li><a href="../.././Getting-Started/Contributing/Committer-Keys.html">Committer Keys</a></li>
+<li><a href="../.././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href="../.././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href="../.././Getting-Started/Contributing/Committer-Rights.html">Metasploit Committers</a></li>
+<li><a href="../.././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href="../.././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href="../.././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href="../.././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href="../.././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href="../.././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href="../.././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href="../.././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href="../.././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href="../.././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href="../.././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href="../.././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href="../.././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href="../.././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href="../.././Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="../.././Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="../.././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="../.././Modules/How-to-get-started-with-writing-a-post-module.html">Post module development</a></li>
+<li><a href="../.././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li>How-To/
+<ul>
+<li><a href="login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href="How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><strong>How to write a HTTP LoginScanner Module</strong></li>
+<li><a href="Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href="Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href="Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+</ul></li>
+<li><a href="../.././Modules/Module-Documentation.html">Module documentation</a></li>
+<li><a href="../.././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href="../.././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li><a href="../.././Modules/Module-Reference-Identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="../.././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="../.././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li><a href="../.././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li>How-To/
+<ul>
+<li><a href="../.././Exploits/How-To/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privledge attack with WbemExec</a></li>
+<li><a href="../.././Exploits/How-To/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href="../.././Exploits/How-To/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href="../.././Exploits/How-To/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href="../.././Exploits/How-To/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+<li><a href="../.././Exploits/How-To/How-to-use-command-stagers.html">Use command stagers</a></li>
+</ul></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href="../.././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href="../.././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="../.././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use Metasploit::Framework::Obfuscation::CRandomizer</a></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="../.././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href="../.././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href="../.././Payloads/Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href="../.././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="../.././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href="../.././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href="../.././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+<li><a href="../.././Payloads/Payload-UUID.html">Payload UUID</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href="../.././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+</ul></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="How-to-write-a-module-using-HttpServer-and-HttpClient.html">←prev</a></div><div class="nav-bar-push"><a href="Writing-External-GoLang-Modules.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">How to write a HTTP LoginScanner Module</h1>
+<p class="author">Metasploit Versions 4,5</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#step-1-set-up-your-target-environment">Step 1: Set up your target environment</a></li>
+<li><a href="#step-2-set-up-a-client">Step 2: Set up a client</a></li>
+<li><a href="#step-3-start-with-a-loginscanner-template">Step 3: Start with a LoginScanner template</a></li>
+<li><a href="#step-4-write-the-auxiliary-module">Step 4: Write the auxiliary module</a></li>
+<li><a href="#test">Test</a></li>
+</ul>
+</nav>
+<p>This is a step-by-step guide on how to write a HTTP login module using the latest LoginScanner and Credential APIs.</p>
+<p>Before we begin, it’s probably a good idea to read <a href="https://github.com/rapid7/metasploit-framework/wiki/Creating-Metasploit-Framework-LoginScanners">Creating Metasploit Framework LoginScanners</a>, which explains about the APIs in-depth. The LoginScanner API can be found in the <a href="https://github.com/rapid7/metasploit-framework/tree/master/lib/metasploit/framework/login_scanner">lib/metasploit/framework/loginscanner</a> directory, and the Credential API can found as a <a href="https://github.com/rapid7/metasploit-credential">metasploit-credential gem here</a>. You will most likely want to read them while writing the login module.</p>
+<h2 id="step-1-set-up-your-target-environment">Step 1: Set up your target environment</h2>
+<p>For our demonstration, we will be using <a href="https://www.broadcom.com/products/cyber-security/web-and-email/gateway/">Symantec Web Gateway</a>. A trial is available at the vendor’s website. Obviously downloading/installing it would be your first step.</p>
+<h2 id="step-2-set-up-a-client">Step 2: Set up a client</h2>
+<p>The purpose of setting up a client is to sample the login request and response. Normally you can do this with:</p>
+<ul>
+<li><p><strong>A web browser plus a sniffer</strong></p>
+<ol type="1">
+<li>For the sniffer, you can download <a href="https://www.wireshark.org/download.html">Wireshark</a>, and have it running.</li>
+<li>Use a web browser to login.</li>
+<li>Go back to Wireshark and save the HTTP request, this is exactly what you will send in the login module. You will also need to save the HTTP response so that you can check for a successful and a failed login.</li>
+</ol></li>
+<li><p><strong>A browser with Burp</strong></p>
+<p><a href="http://portswigger.net/burp/download.html">Burp</a> is a tool for performing security testing of web applications. You can download the free version from the vendor’s website. In some cases, Burp is way better than a sniffer because you can modify HTTP requests, it’s also a very convenient way to capture HTTPS traffic.</p>
+<p>Here’s what you do.</p>
+<ol type="1">
+<li>Start Burp.</li>
+<li>Configure your web browser’s proxy so Burp can forward traffic.</li>
+<li>Use the web browser to login.</li>
+<li>Go back to Burp, you can find the history of all the requests and responses.</li>
+</ol></li>
+</ul>
+<p>For our example, this is the request the browser sends to Symantec Web Gateway:</p>
+<pre><code>POST /spywall/login.php HTTP/1.1
+Host: 192.168.1.176
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:27.0) Gecko/20100101 Firefox/27.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: https://192.168.1.176/spywall/login.php
+Cookie: PHPSESSID=otgam4mgjrl00h2esk3o2npt05
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 54
+
+USERNAME=gooduser&amp;PASSWORD=GoodPassword&amp;loginBtn=Login</code></pre>
+<p>And this is the response Symantec Web Gateway returns for a successful login:</p>
+<pre><code>HTTP/1.1 302 Found
+Date: Tue, 12 May 2015 19:32:31 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Set-Cookie: PHPSESSID=vmb56vhd7740oqcmth8cqtagq5; path=/; secure; HttpOnly
+Location: https://192.168.1.176/spywall/executive_summary.php
+Content-Length: 0
+Keep-Alive: timeout=15, max=5000
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8</code></pre>
+<p>A failed login response is an HTTP 200 with the following message in the body:</p>
+<pre><code>We&#39;re sorry, but the username or password you have entered is incorrect.  Please retype your username and password. The username and password are case sensitive.</code></pre>
+<h2 id="step-3-start-with-a-loginscanner-template">Step 3: Start with a LoginScanner template</h2>
+<p>Your login module mainly consists of three components: the LoginScanner portion, the auxiliary portion, and rpsec. The actual HTTP requests and responses are handled in the LoginScanner portion, so we’ll start from there.</p>
+<p>Your most basic HTTP LoginScanner template will look like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a>require <span class="st">&#39;metasploit/framework/login_scanner/http&#39;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">module</span> <span class="dt">Metasploit</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="kw">module</span> <span class="dt">Framework</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="kw">module</span> <span class="dt">LoginScanner</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>      <span class="kw">class</span> <span class="dt">SymantecWebGateway</span> &lt; <span class="dt">HTTP</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a>        <span class="co"># Attemps to login to the server.</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>        <span class="co">#</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>        <span class="co"># @param [Metasploit::Framework::Credential] credential The credential information.</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>        <span class="co"># @return [Result] A Result object indicating success or failure</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>        <span class="kw">def</span> attempt_login(credential)</span>
+<span id="cb4-14"><a href="#cb4-14"></a></span>
+<span id="cb4-15"><a href="#cb4-15"></a>        <span class="kw">end</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a>      <span class="kw">end</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>    <span class="kw">end</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>  <span class="kw">end</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="kw">end</span></span></code></pre></div>
+<p>Save it under lib/metasploit/framework/login_scanner/.</p>
+<p><strong>The #attempt_login method</strong></p>
+<p>The #attempt_login is called automatically. You can write your entire login code there, but it’s better to break in down into multiple methods so that the code is cleaner, and easier to document and rspec. Typically, all you want #attempt_login to do is focusing on crafting the Result object, pass it to a custom #login routine, and then return the Result object. It almost always looks something like this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">def</span> attempt_login(credential)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="co"># Default Result</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  result_opts = {</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="st">credential: </span>credential,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="st">status: </span><span class="dt">Metasploit</span>::<span class="dt">Model</span>::<span class="dt">Login</span>::<span class="dt">Status</span>::<span class="dt">INCORRECT</span>,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="st">proof: </span><span class="dv">nil</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="st">host: </span>host,</span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="st">port: </span>port,</span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="st">protocol: &#39;tcp&#39;</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  }</span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a>  <span class="co"># Merge login result</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>  <span class="co"># credential.public is the username</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>  <span class="co"># credential.private is the password</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>  result_opts.merge!(<span class="kw">do</span>_login(credential.public, credential.private))</span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a>  <span class="co"># Return the Result object</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>  <span class="dt">Result</span>.new(result_opts)</span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="kw">end</span></span></code></pre></div>
+<p>Notice that:</p>
+<ul>
+<li>By default, our proof is nil.</li>
+<li>The status is Metasploit::Model::Login::Status::INCORRECT.</li>
+<li>We’re calling #do_login, which is our custom login method.</li>
+<li>The #do_login method will have to update status and proof before we return the Result object.</li>
+</ul>
+<p><strong>The custom login method</strong></p>
+<p>Ok, now let’s talk about building this #do_login method. This is where we send the same HTTP request we sampled earlier.</p>
+<p>If you’re already familiar with writing a Metasploit module that sends an HTTP request, the first thing that comes to mind is probably using the <a href="https://github.com/rapid7/metasploit-framework/wiki/How-to-Send-an-HTTP-Request-Using-HTTPClient">HttpClient</a>. Well, you can’t do that at all over here, so we have to fall back to <a href="https://github.com/rapid7/metasploit-framework/wiki/How-to-send-an-HTTP-request-using-Rex%3A%3AProto%3A%3AHttp%3A%3AClient">Rex::Proto::Http::Client</a>. Fortunately for you, we made all this a little bit easier by creating another request called #send_request, here’s an example of how to use that:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb6-1"><a href="#cb6-1"></a>send_request({<span class="st">&#39;uri&#39;</span>=&gt;<span class="ch">&#39;/&#39;</span>})</span></code></pre></div>
+<p>You will rely on this method a lot to accomplish most of what you need to do here.</p>
+<p>Ok, now, let’s move on and talk about how to use #send_request to send a login request. Remember in the login request, there is actually a PHPSESSID cookie, you should obtain this first. Usually the web application will give you the session cookie when you request the login page for the very first time, and this happens a lot.</p>
+<p>Here’s an example of how to grab PHPSESSID:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">def</span> get_session_id</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  login_uri = normalize_uri(<span class="st">&quot;</span><span class="ot">#{</span>uri<span class="ot">}</span><span class="st">/spywall/login.php&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  res = send_request({<span class="st">&#39;uri&#39;</span> =&gt; login_uri})</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  sid = res.get_cookies.scan(<span class="ot">/(PHPSESSID=\w+);*/</span>).flatten[<span class="dv">0</span>] || <span class="st">&#39;&#39;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="kw">return</span> sid</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">end</span></span></code></pre></div>
+<p>Now that you have a session ID, you can finally make the login request. Remember in the sample, we have to submit the username, password, loginBtn as a POST request. So let’s do that with #send_request:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb8-1"><a href="#cb8-1"></a>protocol  = ssl ? <span class="st">&#39;https&#39;</span> : <span class="st">&#39;http&#39;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>peer      = <span class="st">&quot;</span><span class="ot">#{</span>host<span class="ot">}</span><span class="st">:</span><span class="ot">#{</span>port<span class="ot">}</span><span class="st">&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>login_uri = normalize_uri(<span class="st">&quot;</span><span class="ot">#{</span>uri<span class="ot">}</span><span class="st">/spywall/login.php&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>res = send_request({</span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="st">&#39;uri&#39;</span> =&gt; login_uri,</span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="st">&#39;method&#39;</span> =&gt; <span class="st">&#39;POST&#39;</span>,</span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="st">&#39;cookie&#39;</span> =&gt; get_session_id,</span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="st">&#39;headers&#39;</span> =&gt; { <span class="st">&#39;Referer&#39;</span> =&gt; <span class="st">&quot;</span><span class="ot">#{</span>protocol<span class="ot">}</span><span class="st">://</span><span class="ot">#{</span>peer<span class="ot">}</span><span class="st">/</span><span class="ot">#{</span>login_uri<span class="ot">}</span><span class="st">&quot;</span> },</span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="st">&#39;vars_post&#39;</span> =&gt; {</span>
+<span id="cb8-11"><a href="#cb8-11"></a>    <span class="st">&#39;USERNAME&#39;</span> =&gt; username,</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="st">&#39;PASSWORD&#39;</span> =&gt; password,</span>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="st">&#39;loginBtn&#39;</span> =&gt; <span class="st">&#39;Login&#39;</span> <span class="co"># Found in the HTML form</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>  }</span>
+<span id="cb8-15"><a href="#cb8-15"></a>})</span></code></pre></div>
+<p>Now that the request is sent, we need to check the response (the res variable). Typically, you have a few choices to determine a successful login:</p>
+<ul>
+<li><strong>Check the HTTP response code</strong>. In this case, we have a 302 (redirect), but know that sometimes the response code can lie so this should not be your first choice.</li>
+<li><strong>Check the HTML</strong>. With some web applications, you might get a “successful login” message, and you can regex that. This is most likely the most accurate way.</li>
+<li><strong>Check the location header</strong>. In our case, Symantec returns a 302 and contains no body. But it redirects us to a spywall/executive_summary.php page in the location header, so we can use that. We can also try to access executive_summary.php with a renewed session ID, and make sure we can actually see the admin interface, but requesting an extra page adds more penalty to performance, so this is up to you.</li>
+</ul>
+<p>In the end, your custom login method will probably look something like this:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">def</span> <span class="kw">do</span>_login(username, password)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  protocol  = ssl ? <span class="st">&#39;https&#39;</span> : <span class="st">&#39;http&#39;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  peer      = <span class="st">&quot;</span><span class="ot">#{</span>host<span class="ot">}</span><span class="st">:</span><span class="ot">#{</span>port<span class="ot">}</span><span class="st">&quot;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  login_uri = normalize_uri(<span class="st">&quot;</span><span class="ot">#{</span>uri<span class="ot">}</span><span class="st">/spywall/login.php&quot;</span>)</span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  res = send_request({</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="st">&#39;uri&#39;</span> =&gt; login_uri,</span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="st">&#39;method&#39;</span> =&gt; <span class="st">&#39;POST&#39;</span>,</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="st">&#39;cookie&#39;</span> =&gt; get_session_id,</span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="st">&#39;headers&#39;</span> =&gt; {</span>
+<span id="cb9-11"><a href="#cb9-11"></a>      <span class="st">&#39;Referer&#39;</span> =&gt; <span class="st">&quot;</span><span class="ot">#{</span>protocol<span class="ot">}</span><span class="st">://</span><span class="ot">#{</span>peer<span class="ot">}</span><span class="st">/</span><span class="ot">#{</span>login_uri<span class="ot">}</span><span class="st">&quot;</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>    },</span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="st">&#39;vars_post&#39;</span> =&gt; {</span>
+<span id="cb9-14"><a href="#cb9-14"></a>      <span class="st">&#39;USERNAME&#39;</span> =&gt; username,</span>
+<span id="cb9-15"><a href="#cb9-15"></a>      <span class="st">&#39;PASSWORD&#39;</span> =&gt; password,</span>
+<span id="cb9-16"><a href="#cb9-16"></a>      <span class="st">&#39;loginBtn&#39;</span> =&gt; <span class="st">&#39;Login&#39;</span> <span class="co"># Found in the HTML form</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>    }</span>
+<span id="cb9-18"><a href="#cb9-18"></a>  })</span>
+<span id="cb9-19"><a href="#cb9-19"></a></span>
+<span id="cb9-20"><a href="#cb9-20"></a>  <span class="kw">if</span> res &amp;&amp; res.headers[<span class="st">&#39;Location&#39;</span>].include?(<span class="st">&#39;executive_summary.php&#39;</span>)</span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="kw">return</span> {<span class="st">:status</span> =&gt; <span class="dt">LOGIN_STATUS</span>::<span class="dt">SUCCESSFUL</span>, <span class="st">:proof</span> =&gt; res.to_s}</span>
+<span id="cb9-22"><a href="#cb9-22"></a>  <span class="kw">end</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a></span>
+<span id="cb9-24"><a href="#cb9-24"></a>  {<span class="st">:proof</span> =&gt; res.to_s}</span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="kw">end</span></span></code></pre></div>
+<p>The <a href="https://github.com/rapid7/metasploit-model/blob/d4c4f444c79937698dc703f89c0a4c576cde628c/lib/metasploit/model/login/status.rb">exact statuses</a> you can return are:</p>
+<table>
+<colgroup>
+<col style="width: 59%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Constant</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Metasploit::Model::Login::Status::DENIED_ACCESS</td>
+<td>Access is denied</td>
+</tr>
+<tr class="even">
+<td>Metasploit::Model::Login::Status::DISABLED</td>
+<td>Account is disabled</td>
+</tr>
+<tr class="odd">
+<td>Metasploit::Model::Login::Status::INCORRECT</td>
+<td>Credential is incorrect</td>
+</tr>
+<tr class="even">
+<td>Metasploit::Model::Login::Status::LOCKED_OUT</td>
+<td>Account has been locked out</td>
+</tr>
+<tr class="odd">
+<td>Metasploit::Model::Login::Status::NO_AUTH_REQUIRED</td>
+<td>No authentication</td>
+</tr>
+<tr class="even">
+<td>Metasploit::Model::Login::Status::SUCCESSFUL</td>
+<td>Successful login</td>
+</tr>
+<tr class="odd">
+<td>Metasploit::Model::Login::Status::UNABLE_TO_CONNECT</td>
+<td>Unable to connect to the service</td>
+</tr>
+<tr class="even">
+<td>Metasploit::Model::Login::Status::UNTRIED</td>
+<td>Credential has not been tried</td>
+</tr>
+<tr class="odd">
+<td>Metasploit::Model::Login::Status::ALL</td>
+<td>All the above (An array)</td>
+</tr>
+</tbody>
+</table>
+<p>When you’re done, your code will look something like this:</p>
+<p>https://github.com/rapid7/metasploit-framework/blob/master/lib/metasploit/framework/login_scanner/symantec_web_gateway.rb</p>
+<h2 id="step-4-write-the-auxiliary-module">Step 4: Write the auxiliary module</h2>
+<p>The auxiliary module acts more like an user-interface. You describe what the module does, handles options, initializes objects, and do reporting.</p>
+<p>A basic auxiliary module template in our case would be something like this:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">##</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># This module requires Metasploit: http://metasploit.com/download</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co"># Current source: https://github.com/rapid7/metasploit-framework</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">##</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a>require <span class="st">&#39;msf/core&#39;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>require <span class="st">&#39;metasploit/framework/login_scanner/symantec_web_gateway&#39;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>require <span class="st">&#39;metasploit/framework/credential_collection&#39;</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="kw">class</span> <span class="dt">MetasploitModule</span> &lt; <span class="dt">Msf</span>::<span class="dt">Auxiliary</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a>  include <span class="dt">Msf</span>::<span class="dt">Exploit</span>::<span class="dt">Remote</span>::<span class="dt">HttpClient</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>  include <span class="dt">Msf</span>::<span class="dt">Auxiliary</span>::<span class="dt">AuthBrute</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>  include <span class="dt">Msf</span>::<span class="dt">Auxiliary</span>::<span class="dt">Report</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>  include <span class="dt">Msf</span>::<span class="dt">Auxiliary</span>::<span class="dt">Scanner</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a>  <span class="kw">def</span> initialize(info={})</span>
+<span id="cb10-18"><a href="#cb10-18"></a>    <span class="dv">super</span>(update_info(info,</span>
+<span id="cb10-19"><a href="#cb10-19"></a>      <span class="st">&#39;Name&#39;</span>        =&gt; <span class="st">&#39;Symantec Web Gateway Login Utility&#39;</span>,</span>
+<span id="cb10-20"><a href="#cb10-20"></a>      <span class="st">&#39;Description&#39;</span> =&gt;<span class="ot"> %q{</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="st">        This module will attempt to authenticate to a Symantec Web Gateway.</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="st">      </span><span class="ot">}</span>,</span>
+<span id="cb10-23"><a href="#cb10-23"></a>      <span class="st">&#39;Author&#39;</span>      =&gt; [ <span class="st">&#39;sinn3r&#39;</span> ],</span>
+<span id="cb10-24"><a href="#cb10-24"></a>      <span class="st">&#39;License&#39;</span>     =&gt; <span class="dt">MSF_LICENSE</span>,</span>
+<span id="cb10-25"><a href="#cb10-25"></a>      <span class="st">&#39;DefaultOptions&#39;</span> =&gt;</span>
+<span id="cb10-26"><a href="#cb10-26"></a>        {</span>
+<span id="cb10-27"><a href="#cb10-27"></a>          <span class="st">&#39;RPORT&#39;</span>      =&gt; <span class="dv">443</span>,</span>
+<span id="cb10-28"><a href="#cb10-28"></a>          <span class="st">&#39;SSL&#39;</span>        =&gt; <span class="dv">true</span>,</span>
+<span id="cb10-29"><a href="#cb10-29"></a>          <span class="st">&#39;SSLVersion&#39;</span> =&gt; <span class="st">&#39;TLS1&#39;</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a>        }</span>
+<span id="cb10-31"><a href="#cb10-31"></a>    ))</span>
+<span id="cb10-32"><a href="#cb10-32"></a>  <span class="kw">end</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a></span>
+<span id="cb10-34"><a href="#cb10-34"></a>  <span class="kw">def</span> run_host(ip)</span>
+<span id="cb10-35"><a href="#cb10-35"></a>  <span class="kw">end</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a></span>
+<span id="cb10-37"><a href="#cb10-37"></a><span class="kw">end</span></span></code></pre></div>
+<p>Save it under modules/auxiliary/scanner/http/.</p>
+<p>Our main method is #run_host, so we’ll begin there. But before we do, we must initialize your LoginScanner object. The following is an example of how you will probably write it.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">def</span> scanner(ip)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="ot">@scanner</span> ||= lambda {</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    cred_collection = <span class="dt">Metasploit</span>::<span class="dt">Framework</span>::<span class="dt">CredentialCollection</span>.new(</span>
+<span id="cb11-4"><a href="#cb11-4"></a>      <span class="st">blank_passwords: </span>datastore[<span class="st">&#39;BLANK_PASSWORDS&#39;</span>],</span>
+<span id="cb11-5"><a href="#cb11-5"></a>      <span class="st">pass_file: </span>      datastore[<span class="st">&#39;PASS_FILE&#39;</span>],</span>
+<span id="cb11-6"><a href="#cb11-6"></a>      <span class="st">password: </span>       datastore[<span class="st">&#39;PASSWORD&#39;</span>],</span>
+<span id="cb11-7"><a href="#cb11-7"></a>      <span class="st">user_file: </span>      datastore[<span class="st">&#39;USER_FILE&#39;</span>],</span>
+<span id="cb11-8"><a href="#cb11-8"></a>      <span class="st">userpass_file: </span>  datastore[<span class="st">&#39;USERPASS_FILE&#39;</span>],</span>
+<span id="cb11-9"><a href="#cb11-9"></a>      <span class="st">username: </span>       datastore[<span class="st">&#39;USERNAME&#39;</span>],</span>
+<span id="cb11-10"><a href="#cb11-10"></a>      <span class="st">user_as_pass: </span>   datastore[<span class="st">&#39;USER_AS_PASS&#39;</span>]</span>
+<span id="cb11-11"><a href="#cb11-11"></a>    )</span>
+<span id="cb11-12"><a href="#cb11-12"></a></span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="kw">return</span> <span class="dt">Metasploit</span>::<span class="dt">Framework</span>::<span class="dt">LoginScanner</span>::<span class="dt">SymantecWebGateway</span>.new(</span>
+<span id="cb11-14"><a href="#cb11-14"></a>      configure_http_login_scanner(</span>
+<span id="cb11-15"><a href="#cb11-15"></a>        <span class="st">host: </span>ip,</span>
+<span id="cb11-16"><a href="#cb11-16"></a>        <span class="st">port: </span>datastore[<span class="st">&#39;RPORT&#39;</span>],</span>
+<span id="cb11-17"><a href="#cb11-17"></a>        <span class="st">cred_details: </span>      cred_collection,</span>
+<span id="cb11-18"><a href="#cb11-18"></a>        <span class="st">stop_on_success: </span>   datastore[<span class="st">&#39;STOP_ON_SUCCESS&#39;</span>],</span>
+<span id="cb11-19"><a href="#cb11-19"></a>        <span class="st">bruteforce_speed: </span>  datastore[<span class="st">&#39;BRUTEFORCE_SPEED&#39;</span>],</span>
+<span id="cb11-20"><a href="#cb11-20"></a>        <span class="st">connection_timeout: </span><span class="dv">5</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a>      ))</span>
+<span id="cb11-22"><a href="#cb11-22"></a>    }.call</span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="kw">end</span></span></code></pre></div>
+<p>Notice that this scanner method can be called multiple times, but the use of <a href="http://rubymonk.com/learning/books/1-ruby-primer/chapters/34-lambdas-and-blocks-in-ruby/lessons/77-lambdas-in-ruby">lambda</a> will allow the LoginScanner object to initialize only once. After that first time, every time the method is called, it will just return <span class="citation" data-cites="scanner">@scanner</span> instead of going through the whole initialization process again.</p>
+<p>In some cases you might need to pass more datastore options, maybe not. For example, if you want to allow the URI to be configurable (which is also already an accessor in <a href="https://github.com/rapid7/metasploit-framework/blob/master/lib/metasploit/framework/login_scanner/http.rb#L26">Metasploit::Framework::LoginScanner::HTTP</a>), then you have to create and pass datastore[‘URI’] to configure_http_login_scanner too, like so:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb12-1"><a href="#cb12-1"></a><span class="st">uri: </span>datastore[<span class="st">&#39;URI&#39;</span>]</span></code></pre></div>
+<p>And then in your LoginScanner, pass <code>uri</code> to #send_request:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb13-1"><a href="#cb13-1"></a>send_request({<span class="st">&#39;uri&#39;</span>=&gt;uri})</span></code></pre></div>
+<p>At this point, the scanner method holds our Metasploit::Framework::LoginScanner::SymantecWebGateway object. If we call the #scan! method, it will trigger the #attempt_login method we wrote earlier, and then yield the Result object. Basically like this:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb14-1"><a href="#cb14-1"></a>scanner(ip).scan! <span class="kw">do</span> |result|</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="co"># result = Our Result object</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">end</span></span></code></pre></div>
+<p>With the Result object, we can start reporting. In most cases, you will probably be using #create_credential_login to report a successful login. And use #invalidate_login to report a bad one.</p>
+<p><strong>Reporting a valid credential</strong></p>
+<p>The credential API knows a lot about a credential, such as when it was used, how it was used, serviced tried, target IP, port, etc, etc. So when we report, that’s how much information we are storing for every credential. To make credential reporting easy to use, all you need to do is call the #store_valid_credential method like this:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb15-1"><a href="#cb15-1"></a>store_valid_credential(</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="st">user: </span>result.credential.public,</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="kw">private</span>: result.credential.private,</span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="st">private_type: :password</span>, <span class="co"># This is optional</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="st">proof: </span><span class="dv">nil</span>, <span class="co"># This is optional</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>)</span></code></pre></div>
+<p><strong>Report an invalid credential</strong></p>
+<p>Here’s another example you can use:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Reports a bad credential.</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co">#</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># @param [String] ip Target host</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># @param [Fixnum] port Target port</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co"># @param [Result] The Result object</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co"># @return [void]</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="kw">def</span> report_bad_cred(ip, rport, result)</span>
+<span id="cb16-8"><a href="#cb16-8"></a>  invalidate_login(</span>
+<span id="cb16-9"><a href="#cb16-9"></a>    <span class="st">address: </span>ip,</span>
+<span id="cb16-10"><a href="#cb16-10"></a>    <span class="st">port: </span>rport,</span>
+<span id="cb16-11"><a href="#cb16-11"></a>    <span class="st">protocol: &#39;tcp&#39;</span>,</span>
+<span id="cb16-12"><a href="#cb16-12"></a>    <span class="kw">public</span>: result.credential.public,</span>
+<span id="cb16-13"><a href="#cb16-13"></a>    <span class="kw">private</span>: result.credential.private,</span>
+<span id="cb16-14"><a href="#cb16-14"></a>    <span class="st">realm_key: </span>result.credential.realm_key,</span>
+<span id="cb16-15"><a href="#cb16-15"></a>    <span class="st">realm_value: </span>result.credential.realm,</span>
+<span id="cb16-16"><a href="#cb16-16"></a>    <span class="st">status: </span>result.status,</span>
+<span id="cb16-17"><a href="#cb16-17"></a>    <span class="st">proof: </span>result.proof</span>
+<span id="cb16-18"><a href="#cb16-18"></a>  )</span>
+<span id="cb16-19"><a href="#cb16-19"></a><span class="kw">end</span></span></code></pre></div>
+<p>At this point, you’re pretty much done with the auxiliary module. It will probably look something like this: https://github.com/rapid7/metasploit-framework/blob/master/modules/auxiliary/scanner/http/symantec_web_gateway_login.rb</p>
+<h2 id="test">Test</h2>
+<p>And finally, make sure your module actually works.</p>
+<p>Test for a successful login:</p>
+<pre><code>msf auxiliary(symantec_web_gateway_login) &gt; run
+
+[+] 192.168.1.176:443 SYMANTEC_WEB_GATEWAY - Success: &#39;sinn3r:GoodPassword&#39;
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf auxiliary(symantec_web_gateway_login) &gt;</code></pre>
+<p>Test for a failed login:</p>
+<pre><code>msf auxiliary(symantec_web_gateway_login) &gt; run
+
+[-] 192.168.1.176:443 SYMANTEC_WEB_GATEWAY - Failed: &#39;sinn3r:BadPass&#39;
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf auxiliary(symantec_web_gateway_login) &gt;</code></pre>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="How-to-write-a-module-using-HttpServer-and-HttpClient.html">←prev</a></div><div class="nav-bar-push"><a href="Writing-External-GoLang-Modules.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="How-to-write-a-HTTP-LoginScanner-Module.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>
