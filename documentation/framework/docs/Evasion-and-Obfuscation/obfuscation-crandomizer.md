@@ -1,4 +1,4 @@
-% Metasploit Framework
+% CRandomizer
 % Metasploit Version 4,5
 
 ## What is CRandomizer

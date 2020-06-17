@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Guidelines for accepting modules and enhancements</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+    </ul>
+  </nav>
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li><a href="../.././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+<li>Getting-Started/
+<ul>
+<li><a href="../.././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li><a href="../.././Getting-Started/Contact.html">Contact</a></li>
+<li>Contributing/
+<ul>
+<li><a href="Committer-Keys.html">Committer keys</a></li>
+<li><a href="Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href="How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href="Committer-Rights.html">Metasploit Committers</a></li>
+<li><strong>Guidelines for accepting modules and enhancements</strong></li>
+<li><a href="Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href="Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href="How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href="../.././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href="../.././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href="../.././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li>How-To/
+<ul>
+<li><a href="../.././Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="../.././Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="../.././Modules/How-To/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+</ul></li>
+<li><a href="../.././Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="../.././Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="../.././Modules/module-reference-identifiers.html">Module Reference Identifiers</a></li>
+<li><a href="../.././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="../.././Modules/How-to-get-started-with-writing-a-post-module.html">Post module development</a></li>
+<li><a href="../.././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="../.././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="../.././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li><a href="../.././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href="../.././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href="../.././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href="../.././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href="../.././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="../.././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use Metasploit::Framework::Obfuscation::CRandomizer</a></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="../.././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href="../.././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href="../.././Payloads/Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href="../.././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="../.././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href="../.././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="Committer-Rights.html">←prev</a></div><div class="nav-bar-push"><a href="Adding-Release-Notes-to-PRs.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Guidelines for accepting modules and enhancements</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#acceptance-guidelines">Acceptance Guidelines</a>
+<ul>
+<li><a href="#module-additions">Module Additions</a></li>
+<li><a href="#framework-enhancements">Framework Enhancements</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="acceptance-guidelines">Acceptance Guidelines</h2>
+<p>Contributions from the open source community are the soul of Metasploit, and we love evaluating and landing pull requests that add new Framework features and content. Metasploit Framework has many tens of thousands of users who rely on daily, consistent, and error-free updates. Because of this, Metasploit’s core developers have adopted a fairly high standard for pull requests that add new Framework functionality and Metasploit modules. In order to encourage open and transparent development, this document outlines some general guidelines for Metasploit contributors and developers. Adhering to these guidelines maximizes the chances that your work will be merged into the official Metasploit distribution packages.</p>
+<h3 id="module-additions">Module Additions</h3>
+<p>Most open source community support for Metasploit comes in the form of Metasploit modules. The following should be considered for acceptance; note that these are guidelines and not categorical imperatives (“should”s, not “must”s), since there are always exceptions to the norm—especially when it comes to novel new attacks and techniques.</p>
+<p>Modules should pass <a href="https://github.com/rapid7/metasploit-framework/blob/master/tools/dev/msftidy.rb">msftidy.rb</a> and adhere to the <a href="https://github.com/rapid7/metasploit-framework/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> guidelines. Both are distributed with Metasploit. See [[Style Tips]] for some information on how to take some of the headache out of whitespace issues.</p>
+<p>Modules should have a clear and obvious goal: Exploits should result in a shell. Post modules should result in privilege escalation or loot. Auxiliary modules are an “Everything else” category, but even they should be limited to a well-defined task—(e.g., information gathering to enable an exploit or a post module).</p>
+<p>Modules should not launch other modules, given the complexity of setting multiple payloads. Such actions are usually automation tasks for an external UI.</p>
+<p>Denial of Service modules should be asymmetric and at least have some interesting feature. If it’s comparable to a synflood, it shouldn’t be included. If it’s comparable to Baliwicked, it should be included. Modules that hover the line, such as slowloris, may be included with some justification.</p>
+<p>Modules should be able to function as expected with minimal configuration. Defaults should be sensible and usually correct. Modules should not depend on exact timing, uncontrollable heap states, system DLLs, etc. All memory addresses (ie. a JMP ESP, or a ROP gadget) should be part of the metadata under ‘Targets’, and documented (what instructions it points to, and what DLL). If the exploit is against a specific hardware (e.g., routers, PLCs, etc), or against a software that’s not free (and no trial/demo available), please remember to submit a binary packet capture (pcap-formatted) along with the module that demonstrates the exploit actually works.</p>
+<p>Please don’t use the alphanum encoder as a way to avoid BadChar analysis. Modules which set the <code>EncoderType</code> field in the payload as a way to avoid doing real BadChar analysis will be rejected. These modules are nearly always unreliable in the real world.</p>
+<p>Exploit ranking definitions can be found on the [[Exploit Ranking]] page.</p>
+<p>Exploit modules should implement a <code>check()</code> function when this is trivial to do so. Versions exposed through banners or network protocols should always result in a <code>check()</code> routine when a patch is available that changes this version.</p>
+<p>If a module (auxiliary or post) obtains some sort of information from the victim machine, it should store that data using one (or more) of the following methods:</p>
+<ul>
+<li><p><code>store_loot()</code>: Used to store both stolen files (both text and binary) and “screencaps” of commands such as a <code>ps -ef</code> and <code>ifconfig</code>. The file itself need not be of forensic-level integrity – they may be parsed by a post module to extract only the relevant information for a penetration tester.</p></li>
+<li><p><code>report_auth_info()</code>: Used to store working credentials that are immediately reusable by another module. For example, a module dumping the local SMB hashes would use this, as would a module which reads username:password combinations for a specific host and service. Specifically, merely “likely” usernames and passwords should use <code>store_loot()</code> instead.</p></li>
+<li><p><code>report_vuln()</code>: Auxiliary and post modules that exercise a particular vulnerability should <code>report_vuln()</code> upon success. Note that exploit modules automatically <code>report_vuln()</code> as part of opening a session (there is no need to call it especially).</p></li>
+<li><p><code>report_note()</code>: Modules should make an effort to avoid <code>report_note()</code> when one of the above methods would be a better fit, but there are often cases where “loot” or “cred” or “vuln” classifications are not immediately appropriate. <code>report_note()</code> calls should always set a OID-style dotted <code>:type</code>, such as <code>domain.hosts</code>, so other modules may easily find them in the database.</p></li>
+</ul>
+<p>Modules should take advantage of the normal Metasploit APIs. For example, they should not attempt to create their own TCP sockets or application protocols with native Ruby; they should mediate sockets through <code>Rex</code> and <code>Rex::Proto</code> methods instead. This ensures compatibility with the full set of Framework features, such as pivoting and proxy chaining.</p>
+<p>Web application attacks are generally uninteresting (SQLi, XSS, CSRF), unless the module can reliably result in a shell or exercise some kind of useful information leak. Even in that case, the module should “just work,” as above.</p>
+<p>Web application attacks should be limited only to popular, widely deployed applications. For example, a SQLi module against a popular CMS that results in a shell on the CMS machine would be welcome. A module that causes a private Facebook profile to become public would not (Facebook has exactly one deployed instance).</p>
+<p>Web application attacks should implement an HttpFingerprint constant.</p>
+<p>Modules should only list targets that <strong>you</strong> actually tested the exploit on. Avoid assuming it works on a specific system if it has never been tested on it. Comments above the target entry indicating additional information about a given target (language pack, patch level, etc) greatly assist other developers in creating additional targets and improving your module.</p>
+<p>Modules can exercise unpatched and undisclosed vulnerabilities. However, Rapid7 is happy to assist with the disclosure process by following the Rapid7 policy. This policy provides a fixed 90-day window from when the vendor is contacted until the exploit is released. All vulnerabilities found by Rapid7 staff follow this process. The submitter will receive full credit for the vulnerability and the resulting exploit module regardless of how disclosure is handled.</p>
+<h3 id="framework-enhancements">Framework Enhancements</h3>
+<p>Generally, new functionality to the Metasploit Framework should start life as a plugin. If the functionality becomes useful and popular, we can integrate it more closely, add RPC API exposure, and so on, but it should be well-tested by the community before then.</p>
+<p>Automating a series of discrete functions is generally /not/ the responsibility of the Framework. Automation should be accomplished through the API (see Metasploit Community/Pro, MSFGUI, etc). Past efforts with in-Framework automation prove this out. Components such as <code>db_autopwn</code> and <code>browser_autopwn</code> rarely did what users expected, and configuring these tools became a nightmare through increasingly complex sets of options and arguments. Automating the Framework is easy and should stay easy, but the automation itself should live in resource scripts and other external front-ends to the Framework itself.</p>
+<p>Console functionality should have a focus on exploit and security tool development, with the exploit developer as the typical user. End users should be pointed to an interface such as the Community Edition or MSFGUI and should not expect much in terms of user-friendliness from the console. The console should be considered a debug mode for Metasploit and as close to bare-metal functionality as possible.</p>
+<p>External tools, such <code>msfpayload</code> and <code>msfvenom</code>, are designed to make exploit development easier and exercise specific techniques. We are happy to continue evaluating tools of this nature for inclusion in the Framework; these should be accompanied by documentation (!), how-to tutorials for quick start, and other helpful text.</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="Committer-Rights.html">←prev</a></div><div class="nav-bar-push"><a href="Adding-Release-Notes-to-PRs.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="Guidelines-for-Accepting-Modules-and-Enhancements.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

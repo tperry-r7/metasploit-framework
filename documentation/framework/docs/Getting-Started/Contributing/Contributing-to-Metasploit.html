@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Contributing to Metasploit</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+    </ul>
+  </nav>
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li><a href="../.././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+<li>Getting-Started/
+<ul>
+<li><a href="../.././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li><a href="../.././Getting-Started/Contact.html">Contact</a></li>
+<li>Contributing/
+<ul>
+<li><a href="Committer-Keys.html">Committer keys</a></li>
+<li><a href="Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href="How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href="Committer-Rights.html">Metasploit Committers</a></li>
+<li><a href="Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href="Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><strong>Contributing to Metasploit</strong></li>
+<li><a href="How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href="../.././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href="../.././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href="../.././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li>How-To/
+<ul>
+<li><a href="../.././Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="../.././Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="../.././Modules/How-To/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+</ul></li>
+<li><a href="../.././Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="../.././Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="../.././Modules/module-reference-identifiers.html">Module Reference Identifiers</a></li>
+<li><a href="../.././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="../.././Modules/How-to-get-started-with-writing-a-post-module.html">Post module development</a></li>
+<li><a href="../.././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="../.././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="../.././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li><a href="../.././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href="../.././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href="../.././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href="../.././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href="../.././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="../.././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use Metasploit::Framework::Obfuscation::CRandomizer</a></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="../.././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href="../.././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href="../.././Payloads/Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href="../.././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="../.././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href="../.././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="Adding-Release-Notes-to-PRs.html">←prev</a></div><div class="nav-bar-push"><a href="How-to-deprecate-a-Metasploit-module.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Contributing to Metasploit</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#like-hacking-things-start-here.">Like hacking things? Start here.</a></li>
+<li><a href="#server-exploits">Server exploits</a>
+<ul>
+<li><a href="#client-exploits">Client Exploits</a></li>
+<li><a href="#local-and-privilege-escalation-exploits">Local and Privilege Escalation Exploits</a></li>
+<li><a href="#unstable-modules">Unstable modules</a></li>
+<li><a href="#framework-bugs-and-features">Framework bugs and features</a></li>
+<li><a href="#non-code">Non-code</a></li>
+<li><a href="#the-usual-warnings">The Usual Warnings</a></li>
+<li><a href="#thank-you">Thank you</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="like-hacking-things-start-here.">Like hacking things? Start here.</h2>
+<p>Every so often, we’ll get a request along the lines of, “Hey, I’m new to Metasploit, and I want to help!” The usual answer is something like, “Great! Here’s our <a href="https://github.com/rapid7/metasploit-framework/issues">framework bug tracker</a>, get crackin!”</p>
+<p>However, tackling core Metasploit Framework bugs or particularly squirrelly exploits probably isn’t the right place for the new contributor. Believe me, everyone was a newbie once, there’s no shame in that. Those bugs and vulns are usually complicated, and there are so many to choose from that it’s hard to get started. Here are some ideas to get you started.</p>
+<p>Metasploit is a tool by and for hackers, but the hackers that maintain it also happen to be software engineers. So, we have some hopefully easy-to-remember Do’s and Don’ts in <a href="https://github.com/rapid7/metasploit-framework/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>. Read up on those.</p>
+<h1 id="server-exploits">Server exploits</h1>
+<p>Server exploits are always in demand; why bother with complicated social engineering campaigns when you can go straight to the pain point of a vulnerable network. Here are some search queries to get you started:</p>
+<ul>
+<li><a href="https://www.exploit-db.com/?type=remote">Remote exploits</a> from Exploit-DB</li>
+</ul>
+<h2 id="client-exploits">Client Exploits</h2>
+<p>Client exploits generally run as an “evil service” that a remote client will connect to. They nearly always require some kind of user interaction to trigger, such a viewing a web page, downloading a file, or otherwise connecting to the service controlled by the attacker.</p>
+<ul>
+<li><a href="https://www.google.com/#bav=on.2,or.r_cp.r_qf.&amp;q=site:securityfocus.com+%22Firefox%22+OR+%22Internet+Explorer%22+OR+%22Chrome%22+OR+%22Safari%22+OR+%22Opera%22+-%22Retired%22&amp;safe=off">Browser Vulns</a> from SecurityFocus via Google search terms</li>
+</ul>
+<h2 id="local-and-privilege-escalation-exploits">Local and Privilege Escalation Exploits</h2>
+<p>Privilege escalation exploits tend to require the attacker already have an account on a target computer. They are nearly always going to be implemented as Metasploit exploit modules under one of the <a href="https://github.com/rapid7/metasploit-framework/tree/master/modules/exploits/windows/local">local</a> trees (platform dependent), but sometimes they’re better off as <a href="https://github.com/rapid7/metasploit-framework/tree/master/modules/post">post modules</a>. This is especially true for privilege escalation bugs.</p>
+<ul>
+<li><a href="https://www.exploit-db.com/?type=local">Local Vulns</a> from Exploit-DB</li>
+</ul>
+<h2 id="unstable-modules">Unstable modules</h2>
+<p>Want to pick up where someone else left off? Super! Just check the guide on rescuing [<a href="#unstable-modules">Unstable Modules</a>] and push these poor, unloved modules over the finish line with decent testing and code cleanup.</p>
+<h2 id="framework-bugs-and-features">Framework bugs and features</h2>
+<p>If exploit dev isn’t your thing, but more straightforward Ruby development is, then here are some good places to get started:</p>
+<ul>
+<li><a href="https://github.com/rapid7/metasploit-framework/issues?q=is%3Aissue+is%3Aopen+label%3Abug">Recent Bugs</a>, which tend to be either very easy or very hard to fix (not a lot of middle ground).</li>
+<li><a href="https://github.com/rapid7/metasploit-framework/issues?q=is%3Aissue+is%3Aopen+label%3Afeature">Feature requests</a>, which is often in the same boat.</li>
+</ul>
+<p>Along these same lines is a perennial need for better automated testing, down in the <a href="https://github.com/rapid7/metasploit-framework/tree/master/spec">spec directory</a>. If you have a talent for exploring strange and wonderful code bases, pick out a chunk of the Metasploit core code and define out what you expect for working behavior.</p>
+<h2 id="non-code">Non-code</h2>
+<p>We can always use better documentation. Those guys over at Offensive Security do a great job with <a href="http://www.offensive-security.com/metasploit-unleashed/Main_Page">Metasploit Unleashed</a>, but as with all complex bodies of work, there are surely bugs to be found. If you have ideas on how to make the documentation on Metasploit clear and more accessible to more people, go nuts.</p>
+<p>Write wiki articles in your fork (hint, <a href="https://github.com/gollum/gollum">Gollum</a> is excellent for this) and let someone know about them, we’ll be happy to reflect them here and maintain your credit. If you’re interested in working with us on documentation long-term, that’s even better; reach out on <a href="https://metasploit.com/slack">Slack</a> for info on how best to make changes.</p>
+<p>Ditto with YouTube screencasts of particular common tasks. Narration while you do it is great. People seem to love YouTube videos of this stuff – there are over <a href="http://www.youtube.com/results?search_query=metasploit&amp;oq=metasploit">40,000</a> of the things out there, and we’d love for someone to step up and curate a top 10 or top 100 of those that we can promote here for new and experienced users.</p>
+<p>For developer types: we are slowly but surely converting all of Metasploit to use standardized commenting using <a href="https://yardoc.org">YARD</a>, so we could always use more accurate and more comprehensive YARD documentation for pretty much anything found in <code>lib</code>. We will happily take pull requests that contain nothing but comment docs!</p>
+<p>Again, there’s always room on #metasploit on Freenode. Be helpful with the questions there, and people are more likely to help you in the future. Same goes for the <a href="https://metasploit.com/slack">Metasploit Slack team</a>, where all sorts of new and proficient users and devs are looking for help and camaraderie.</p>
+<h2 id="the-usual-warnings">The Usual Warnings</h2>
+<p>You probably shouldn’t run proof of concept exploit code you find on the Internet on a machine you care about in a network you care about. That is generally considered a Bad Idea. You also probably shouldn’t use your usual computer as a target for exploit development, since you are intentionally inducing unstable behavior.</p>
+<p>Our preferred method of module submission is via a git pull request from a feature branch on your own fork of Metasploit. You can learn how to create one here: https://github.com/rapid7/metasploit-framework/wiki/Landing-Pull-Requests</p>
+<p>Also, please take a peek at our guides on using git and our acceptance guidelines for new modules in case you’re not familiar with them: https://github.com/rapid7/metasploit-framework/wiki</p>
+<p>If you get stuck, try to explain your specific problem as best you can on our <a href="https://freenode.net/">Freenode IRC</a> channel, #metasploit (joining requires a <a href="https://freenode.net/kb/answer/registration">registered nick</a>). Someone should be able to lend a hand. Apparently, some of those people never sleep.</p>
+<h2 id="thank-you">Thank you</h2>
+<p>In case nobody’s said it yet: Thanks for your interest and support! Exploit developers from the open source community are the soul of Metasploit, and by contributing your time and talent, you are helping advance the state of the art for intelligent IT defense. We simply couldn’t do all of this without you.</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="Adding-Release-Notes-to-PRs.html">←prev</a></div><div class="nav-bar-push"><a href="How-to-deprecate-a-Metasploit-module.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="Contributing-to-Metasploit.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

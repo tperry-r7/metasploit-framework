@@ -21,8 +21,9 @@
   <![endif]-->
   <nav class="right">
     <ul>
-      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules">Module Docs</a></li>
-      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/">API</a></li>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
     </ul>
   </nav>
 </head>
@@ -43,6 +44,22 @@
 <li>Getting-Started/
 <ul>
 <li><a href=".././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li><a href=".././Getting-Started/Contact.html">Contact</a></li>
+<li>Contributing/
+<ul>
+<li><a href=".././Getting-Started/Contributing/Committer-Keys.html">Committer keys</a></li>
+<li><a href=".././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href=".././Getting-Started/Contributing/Committer-Rights.html">Metasploit Committers</a></li>
+<li><a href=".././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href=".././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href=".././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href=".././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
 </ul></li>
 <li>Utilities/
 <ul>
@@ -51,33 +68,57 @@
 </ul></li>
 <li>Modules/
 <ul>
-<li><a href=".././Modules/modules.html">Some stuff about modules</a></li>
 <li>How-To/
 <ul>
 <li><a href=".././Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
 <li><a href=".././Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href=".././Modules/How-To/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
 </ul></li>
 <li><a href=".././Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
 <li><a href=".././Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
 <li><a href=".././Modules/module-reference-identifiers.html">Module Reference Identifiers</a></li>
+<li><a href=".././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href=".././Modules/How-to-get-started-with-writing-a-post-module.html">Post module development</a></li>
+<li><a href=".././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
 </ul></li>
 <li>Exploits/
 <ul>
 <li><a href=".././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
 <li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li><a href=".././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href=".././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href=".././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href=".././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
 </ul></li>
-<li>Meterpreter/
+<li>Debugging/
 <ul>
-<li><a href=".././Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
-<li><a href=".././Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
-<li><a href=".././Meterpreter/how-payloads-work.html">How Payloads Work</a></li>
-<li><a href=".././Meterpreter/transport-control.html">Transport Control</a></li>
-<li><a href=".././Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
-<li><a href=".././Meterpreter/payload-debugging.html">Payload Debugging</a></li>
+<li><a href=".././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
 </ul></li>
 <li>Evasion-and-Obfuscation/
 <ul>
-<li><a href=".././Evasion-and-Obfuscation/obfuscation-crandomizer.html">Metasploit Framework</a></li>
+<li><a href=".././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use Metasploit::Framework::Obfuscation::CRandomizer</a></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href=".././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href=".././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href=".././Payloads/Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href=".././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href=".././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href=".././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href=".././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href=".././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -86,7 +127,7 @@
 <div id="article-box">
 
 <div id="header-nav-bar">
-<div><a href="complier-windows-c.html">←prev</a></div><div class="nav-bar-push"><a href=".././Modules/modules.html">next→</a></div>
+<div><a href="complier-windows-c.html">←prev</a></div><div class="nav-bar-push"><a href=".././Modules/How-To/login-scanner.html">next→</a></div>
 </div>
 
 <div id="article-content">
@@ -235,7 +276,7 @@ root@kali:~/ruby-oci8-ruby-oci8-2.2.7#</code></pre>
 </div> <!-- article-content -->
 
 <div id="footer-nav-bar">
-<div><a href="complier-windows-c.html">←prev</a></div><div class="nav-bar-push"><a href=".././Modules/modules.html">next→</a></div>
+<div><a href="complier-windows-c.html">←prev</a></div><div class="nav-bar-push"><a href=".././Modules/How-To/login-scanner.html">next→</a></div>
 </div>
 
 </div> <!-- article-box -->

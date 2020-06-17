@@ -111,22 +111,47 @@ a:hover {
 }
 
 table {
-    background-color: #eee;
-    padding-left: 2px;
-    border: 2px solid #d4d4d4;
+    background-color: #FFFFFF;
+    width: 100%;
+    text-align: left;
     border-collapse: collapse;
-}
-
-th {
-    background-color: #d4d4d4;
-    padding-right: 4px;
-}
-
-tr, td, th {
-    border: 2px solid #d4d4d4;
-    padding-left: 4px;
-    padding-right: 4px;
-}
+  }
+  table td, table th {
+    padding: 3px 2px;
+  }
+  table tbody td {
+    font-size: 13px;
+  }
+  table tr:nth-child(even) {
+    background: #F2F2F2;
+  }
+  table thead {
+    background: #1D77A3;
+    border-bottom: 2px solid #444444;
+  }
+  table thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    border-left: 2px solid #D0E4F5;
+  }
+  table thead th:first-child {
+    border-left: none;
+  }
+  
+  table tfoot td {
+    font-size: 14px;
+  }
+  table tfoot .links {
+    text-align: right;
+  }
+  table tfoot .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
 
 dt {
     font-weight: bold;

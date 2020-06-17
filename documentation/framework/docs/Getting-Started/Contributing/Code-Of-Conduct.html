@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Contributor Code of Conduct</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+    </ul>
+  </nav>
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li><a href="../.././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+<li>Getting-Started/
+<ul>
+<li><a href="../.././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li><a href="../.././Getting-Started/Contact.html">Contact</a></li>
+<li>Contributing/
+<ul>
+<li><a href="Committer-Keys.html">Committer keys</a></li>
+<li><strong>Contributor Code of Conduct</strong></li>
+<li><a href="How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href="Committer-Rights.html">Metasploit Committers</a></li>
+<li><a href="Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href="Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href="Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href="How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href="../.././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href="../.././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href="../.././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li>How-To/
+<ul>
+<li><a href="../.././Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="../.././Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="../.././Modules/How-To/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+</ul></li>
+<li><a href="../.././Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="../.././Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="../.././Modules/module-reference-identifiers.html">Module Reference Identifiers</a></li>
+<li><a href="../.././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="../.././Modules/How-to-get-started-with-writing-a-post-module.html">Post module development</a></li>
+<li><a href="../.././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="../.././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="../.././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li><a href="../.././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href="../.././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href="../.././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href="../.././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href="../.././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="../.././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use Metasploit::Framework::Obfuscation::CRandomizer</a></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="../.././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href="../.././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href="../.././Payloads/Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href="../.././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="../.././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href="../.././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="Committer-Keys.html">←prev</a></div><div class="nav-bar-push"><a href="How-to-add-and-update-gems-in-metasploit-framework.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Contributor Code of Conduct</h1>
+</header>
+<p>As contributors and maintainers of this project, and in the interest of fostering an open and welcoming community, we pledge to respect all people who contribute through reporting issues, posting feature requests, updating documentation, submitting pull requests or patches, and other activities.</p>
+<p>We are committed to making participation in this project a harassment-free experience for everyone, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, or nationality.</p>
+<p>Examples of unacceptable behavior by participants include:</p>
+<ul>
+<li>The use of sexualized language or imagery</li>
+<li>Personal attacks</li>
+<li>Trolling or insulting/derogatory comments</li>
+<li>Public or private harassment</li>
+<li>Publishing other’s private information, such as physical or electronic addresses, without explicit permission</li>
+<li>Other unethical or unprofessional conduct</li>
+</ul>
+<p>Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.</p>
+<p>By adopting this Code of Conduct, project maintainers commit themselves to fairly and consistently applying these principles to every aspect of managing this project. Project maintainers who do not follow or enforce the Code of Conduct may be permanently removed from the project team.</p>
+<p>This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community.</p>
+<p>Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project maintainers at msfdev@metasploit.com. If the incident involves a committer, you may report directly to caitlin_condon@rapid7.com or todb@metasploit.com.</p>
+<p>All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. Maintainers are obligated to maintain confidentiality with regard to the reporter of an incident.</p>
+<p>This Code of Conduct is adapted from the <a href="http://contributor-covenant.org">Contributor Covenant</a>, version 1.3.0, available at <a href="http://contributor-covenant.org/version/1/3/0/">http://contributor-covenant.org/version/1/3/0/</a></p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="Committer-Keys.html">←prev</a></div><div class="nav-bar-push"><a href="How-to-add-and-update-gems-in-metasploit-framework.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="Code-Of-Conduct.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>
