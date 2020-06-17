@@ -384,6 +384,7 @@ def pandoc_process_file(md_fnm):
     pandoc_cmd.append('--css=' + '../' * depth + 'styles.css')
     pandoc_cmd.append('--css=' + 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap')
     pandoc_cmd.extend(['-B', '/tmp/before.html', '-A', '/tmp/after.html'])
+    pandoc_cmd.extend(['-H', 'header.html'])
     pandoc_cmd.extend(['-o', html_fnm])
     subprocess.check_call(pandoc_cmd)
 
@@ -701,6 +702,14 @@ h1, h2, h3, h4, h5, h6 {
 
 h3, h5 {
     font-style: italic;
+}
+
+nav{
+    margin-right: 50px;
+}
+
+nav ul li{
+    margin-right: 10px;
 }
 """
 

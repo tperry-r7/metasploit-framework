@@ -18,6 +18,12 @@
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/">API</a></li>
+    </ul>
+  </nav>
 </head>
 <body>
 
@@ -35,7 +41,7 @@
 <li><a href="markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
 <li>Getting-Started/
 <ul>
-<li><a href="./Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Enviroment</a></li>
+<li><a href="./Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
 </ul></li>
 <li>Utilities/
 <ul>
@@ -44,7 +50,33 @@
 </ul></li>
 <li>Modules/
 <ul>
-<li><a href="./Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="./Modules/modules.html">Some stuff about modules</a></li>
+<li>How-To/
+<ul>
+<li><a href="./Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="./Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+<li><a href="./Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="./Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="./Modules/module-reference-identifiers.html">Module Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="./Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="./Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+</ul></li>
+<li>Meterpreter/
+<ul>
+<li><a href="./Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="./Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="./Meterpreter/how-payloads-work.html">How Payloads Work</a></li>
+<li><a href="./Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href="./Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href="./Meterpreter/payload-debugging.html">Payload Debugging</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="./Evasion-and-Obfuscation/obfuscation-crandomizer.html">Metasploit Framework</a></li>
 </ul></li>
 </ul>
 
@@ -60,7 +92,19 @@
 <header id="title-block-header">
 <h1 class="title">Metasploit Framework</h1>
 </header>
-<p>Some stuff about Metasploit.</p>
+<h1 id="build-status-maintainability-test-coverage-docker-pulls"><a href="https://travis-ci.org/rapid7/metasploit-framework"><img src="https://travis-ci.org/rapid7/metasploit-framework.svg?branch=master" alt="Build Status" /></a> <a href="https://codeclimate.com/github/rapid7/metasploit-framework/maintainability"><img src="https://api.codeclimate.com/v1/badges/943e398e619c09568f3f/maintainability" alt="Maintainability" /></a> <a href="https://codeclimate.com/github/rapid7/metasploit-framework/test_coverage"><img src="https://api.codeclimate.com/v1/badges/943e398e619c09568f3f/test_coverage" alt="Test Coverage" /></a> <a href="https://hub.docker.com/r/metasploitframework/metasploit-framework/"><img src="https://img.shields.io/docker/pulls/metasploitframework/metasploit-framework.svg" alt="Docker Pulls" /></a></h1>
+<p>The Metasploit Framework is released under a BSD-style license. See <a href="COPYING">COPYING</a> for more details.</p>
+<p>The latest version of this software is available from: https://metasploit.com</p>
+<p>Bug tracking and development information can be found at: https://github.com/rapid7/metasploit-framework</p>
+<p>New bugs and feature requests should be directed to: https://r-7.co/MSF-BUGv1</p>
+<p>API documentation for writing modules can be found at: https://rapid7.github.io/metasploit-framework/api</p>
+<p>Questions and suggestions can be sent to: Freenode IRC channel or e-mail the metasploit-hackers mailing list</p>
+<h2 id="installing">Installing</h2>
+<p>Generally, you should use <a href="https://github.com/rapid7/metasploit-framework/wiki/Nightly-Installers">the free installer</a>, which contains all of the dependencies and will get you up and running with a few clicks. See the <a href="Getting-Started/setting-up-metasploit-dev-enviroment.html">Dev Environment Setup</a> if you’d like to deal with dependencies on your own.</p>
+<h2 id="using-metasploit">Using Metasploit</h2>
+<p>Metasploit can do all sorts of things. The first thing you’ll want to do is start <code>msfconsole</code>, but after that, you’ll probably be best served by reading <a href="https://www.offensive-security.com/metasploit-unleashed/" title="Metasploit Unleashed">Metasploit Unleashed</a>, the <a href="https://metasploit.github.io">great community resources</a>, or the <a href="https://github.com/rapid7/metasploit-framework/wiki">wiki</a>.</p>
+<h2 id="contributing">Contributing</h2>
+<p>See the <a href="https://github.com/rapid7/metasploit-framework/wiki/Setting-Up-a-Metasploit-Development-Environment" title="Metasploit Development Environment Setup">Dev Environment Setup</a> guide on GitHub, which will walk you through the whole process from installing all the dependencies, to cloning the repository, and finally to submitting a pull request. For slightly more information, see <a href="https://github.com/rapid7/metasploit-framework/blob/master/CONTRIBUTING.md">Contributing</a>.</p>
 
 </div> <!-- article-content -->
 

@@ -1,4 +1,5 @@
 % Oracle Support working with Kali Linux
+% Metasploit Versions 4, 5
 
 This is an update of the original blog post about how to get Oracle support working with Metasploit and Kali Linux, found here: http://leonjza.github.io/blog/2014/08/17/kali-linux-oracle-support/
 

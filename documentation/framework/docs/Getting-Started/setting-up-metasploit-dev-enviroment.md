@@ -1,4 +1,5 @@
-% Setting up a Metasploit Developer Enviroment
+% Setting up a Metasploit Developer Environment
+% Metasploit Versions 4, 5
 
 This is a guide for setting up a developer environment to contribute modules, documentation, and fixes to the Metasploit Framework. If you just want to use Metasploit for legal, authorized hacking, we recommend instead you:
 
