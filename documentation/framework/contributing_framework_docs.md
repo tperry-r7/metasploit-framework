@@ -15,6 +15,10 @@ Looking for module documentation? See [Module Docs](https://github.com/rapid7/me
       * [Vale error levels](#vale-error-levels)
   * [All plugins](#all-plugins)
   * [Visual Studo Code (VS Code) workspace file](#visual-studo-code-vs-code-workspace-file)
+  * [Framework vs Module vs Wiki](#framework-vs-module-vs-wiki)
+    * [What goes in documentation versus the wiki](#what-goes-in-documentation-versus-the-wiki)
+    * [What lives in both places](#what-lives-in-both-places)
+    * [Module docs](#module-docs)
   * [What's next](#whats-next)
   * [FAQ](#faq)
     * [I ran Vale but don't agree with the results](#i-ran-vale-but-dont-agree-with-the-results)
@@ -132,6 +136,28 @@ Feel free to edit this file for how you like to work. The important configuratio
   }
 }
 ```
+
+## Framework vs Module vs Wiki
+
+### What goes in documentation versus the wiki
+
+| Documentation  | Wiki  |
+|--|--|
+| Tutorials | Feature proposals  |
+| Explanation of features | Nightly Installers |
+| Code samples | Committer Keys |
+| API documentation | Google Summer of Code |
+| | Committer Rights|
+
+### What lives in both places
+
+* Information on contributing
+* Contact
+* Code of Conduct
+
+### Module docs
+
+* No changes there. Keep following the same process as always.
 
 ## What's next
 

@@ -1,7 +1,7 @@
-% External Resources
+% Community Resources
 
-This is a list of resources we think are awesome!
-
+This is a collection of resources from the community we think are great!
+Create a PR to add more.
 
 ## Metasploit
 

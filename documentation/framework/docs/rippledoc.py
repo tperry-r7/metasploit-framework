@@ -685,6 +685,7 @@ dt {
 
 code {
     background-color: #eee;
+    font-size: 15px;
 }
 
 pre {
@@ -725,10 +726,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #1D77A3;
 }
 
-h3, h5 {
-    font-style: italic;
-}
-
 nav{
     margin-right: 50px;
 }
@@ -736,6 +733,14 @@ nav{
 nav ul li{
     margin-right: 10px;
 }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 """
 
 # -----------------------------------
