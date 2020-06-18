@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Create a Login Scanner Module</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <nav class="right">
+    <ul>
+      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+    </ul>
+  </nav>
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="../../index.html">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li>Getting-Started/
+<ul>
+<li><a href="../.././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li>Contributing/
+<ul>
+<li><a href="../.././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href="../.././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href="../.././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href="../.././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href="../.././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href="../.././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href="../.././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href="../.././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href="../.././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href="../.././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+<li><a href="../.././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href="../.././Getting-Started/Contributing/markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href="../.././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+<li><a href="../.././Getting-Started/Contact.html">Contact</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href="../.././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li><a href="../.././Modules/Module-Documentation.html">Module documentation</a></li>
+<li><a href="../.././Modules/Module-Reference-Identifiers.html">Reference Identifiers</a></li>
+<li><a href="../.././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="../.././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href="../.././Modules/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href="../.././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li>Write-Modules/
+<ul>
+<li><a href="How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href="Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+<li><a href="get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href="get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><strong>Create a Login Scanner Module</strong></li>
+<li><a href="http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="../.././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li><a href="../.././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href="../.././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href="../.././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href="../.././Exploits/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href="../.././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href="../.././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li>Write-Exploits/
+<ul>
+<li><a href="../.././Exploits/Write-Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privilege attack with WbemExec</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+</ul></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="../.././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li><a href="../.././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href="../.././Payloads/Payload-UUID.html">Payload UUID</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href="../.././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="../.././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href="../.././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href="../.././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href="../.././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href="../.././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href="../.././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href="../.././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="../.././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use CRandomizer</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href="../.././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href="../.././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href="../.././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li><a href="../.././external-resources.html">External Resources</a></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="Writing-External-GoLang-Modules.html">←prev</a></div><div class="nav-bar-push"><a href="http-login-scanner.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Create a Login Scanner Module</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#credential-objects">Credential Objects</a></li>
+<li><a href="#result-objects">Result Objects</a></li>
+<li><a href="#credentialcollection">CredentialCollection</a></li>
+<li><a href="#loginscanner-base">LoginScanner Base</a>
+<ul>
+<li><a href="#attributes">Attributes</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a>
+<ul>
+<li><a href="#constants">Constants</a></li>
+</ul></li>
+<li><a href="#pulling-it-all-together-in-a-module">Pulling it all together in a module</a>
+<ul>
+<li><a href="#the-cred-collection">The Cred Collection</a></li>
+<li><a href="#initialising-the-scanner">Initialising the Scanner</a></li>
+<li><a href="#the-scan-block">The Scan Block</a></li>
+<li><a href="#ftp_login-final-view"><code>ftp_login</code> Final View</a></li>
+</ul></li>
+</ul>
+</nav>
+<p>So, you want to make a Login Scanner Module in Metasploit, eh? There are a few things you will need to know before you begin. This article will try to illustrate all the moving pieces involved in creating an effective bruteforce/login scanner module.</p>
+<h2 id="credential-objects">Credential Objects</h2>
+<p><code>Metasploit::Framework::Credential (lib/metasploit/framework/credential.rb)</code></p>
+<p>These objects represent the most basic concept of how we now think about Credentials.</p>
+<ul>
+<li><strong>Public</strong>: The public part of a credential refers to the part that can be publicly known. In almost all cases this is the username.</li>
+<li><strong>Private</strong>: The private part of the credential, this is the part that should be a secret. This currently represents: Password, SSH Key, NTLM Hash etc.</li>
+<li><strong>Private Type</strong>: This defines what type of private credential is defined above</li>
+<li><strong>Realm</strong>: This represents an authentication realm that the credential is valid for. This is a tertiary part of the authentication process. Examples include: Active Directory Domain, Postgres Database etc.</li>
+<li><strong>Realm Key</strong>: This defines what type of Realm the Realm Attribute represents.</li>
+<li><strong>Paired</strong>: This attribute is a boolean value that sets whether the Credential must have both a public and private to be valid.</li>
+</ul>
+<p>All LoginScanners use Credential objects as the basis for their attempts.</p>
+<h2 id="result-objects">Result Objects</h2>
+<p><code>Metasploit::Framework::LoginScanner::Result (lib/metasploit/framework/login_scanner/result.rb)</code></p>
+<p>These are the objects yielded by the <code>scan!</code> method on each <code>LoginScanner</code>. They contain:</p>
+<ul>
+<li><strong>Access Level</strong>: An optional Access Level which can describe the level of access granted by the login attempt.</li>
+<li><strong>Credential</strong> : The Credential object that achieved that result</li>
+<li><strong>Proof</strong>: An optional proof string to show why we think the result is valid</li>
+<li><strong>Status</strong>: The status of the login attempt. These values come from Metasploit::model::Login::Status , examples include “Incorrect”, “Unable to Connect”, “Untried” etc</li>
+</ul>
+<h2 id="credentialcollection">CredentialCollection</h2>
+<p><code>Metasploit::Framework::CredentialCollection (lib/metasploit/framework/credential_collection.rb)</code></p>
+<p>This class is used to take datastore options from a module and yield Credential objects from an each method. It takes wordlist files, as well as direct username and password options. It also takes options for username as pass and blank password. It can be passed in as the <code>cred_details</code> on the <code>LoginScanner</code>, and responds to #each and yields crafted Credentials.</p>
+<p><strong>Example (from modules/auxiliary/scanner/ftp/ftp_login.rb)</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb1-1"><a href="#cb1-1"></a>cred_collection = <span class="dt">Metasploit</span>::<span class="dt">Framework</span>::<span class="dt">CredentialCollection</span>.new(</span>
+<span id="cb1-2"><a href="#cb1-2"></a>        <span class="st">blank_passwords: </span>datastore[<span class="st">&#39;BLANK_PASSWORDS&#39;</span>],</span>
+<span id="cb1-3"><a href="#cb1-3"></a>        <span class="st">pass_file: </span>datastore[<span class="st">&#39;PASS_FILE&#39;</span>],</span>
+<span id="cb1-4"><a href="#cb1-4"></a>        <span class="st">password: </span>datastore[<span class="st">&#39;PASSWORD&#39;</span>],</span>
+<span id="cb1-5"><a href="#cb1-5"></a>        <span class="st">user_file: </span>datastore[<span class="st">&#39;USER_FILE&#39;</span>],</span>
+<span id="cb1-6"><a href="#cb1-6"></a>        <span class="st">userpass_file: </span>datastore[<span class="st">&#39;USERPASS_FILE&#39;</span>],</span>
+<span id="cb1-7"><a href="#cb1-7"></a>        <span class="st">username: </span>datastore[<span class="st">&#39;USERNAME&#39;</span>],</span>
+<span id="cb1-8"><a href="#cb1-8"></a>        <span class="st">user_as_pass: </span>datastore[<span class="st">&#39;USER_AS_PASS&#39;</span>],</span>
+<span id="cb1-9"><a href="#cb1-9"></a>        <span class="st">prepended_creds: </span>anonymous_creds</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    )</span></code></pre></div>
+<h2 id="loginscanner-base">LoginScanner Base</h2>
+<p><code>Metasploit::Framework::LoginScanner::Base (lib/metasploit/framework/login_scanner/base.rb)</code></p>
+<p>This is a Ruby Module that contains all the base behaviour for all <code>LoginScanners</code>. All <code>LoginScanner</code> classes should include this module.</p>
+<p>The specs for this behaviour are kept in a shared example group. Specs for your <code>LoginScanner</code> should use the following syntax to include these tests:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb2-1"><a href="#cb2-1"></a>it_behaves_like <span class="st">&#39;Metasploit::Framework::LoginScanner::Base&#39;</span>, <span class="st">has_realm_key: </span><span class="dv">false</span>, <span class="st">has_default_realm: </span><span class="dv">false</span></span></code></pre></div>
+<p>Where <code>has_realm_key</code> and <code>has_default_realm</code> should be set according to whether your <code>LoginScanner</code> has those things. (More on this later)</p>
+<p>LoginScanners always take a collection of Credentials to try and one host and port. So each <code>LoginScanner</code> object attempts to login to only one specific service.</p>
+<h3 id="attributes">Attributes</h3>
+<ul>
+<li><strong><code>connection_timeout</code></strong>: The time to wait for a connection to timeout</li>
+<li><strong><code>cred_details</code></strong>: An object that yields credentials on each (like credentialCollection or an Array)</li>
+<li><strong><code>host</code></strong>: The address for the target host</li>
+<li><strong><code>port</code></strong>: The port number for the target service</li>
+<li><strong><code>proxies</code></strong>: Any proxies to use in the connection (some scanners might not support this)</li>
+<li><strong><code>stop_on_success</code></strong>: Whether to stop trying after a successful login is found</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li><strong><code>each_credential</code></strong> : You will not have to worry much about this method, Be aware that it is there. It iterates through whatever is in <code>cred_details</code>, does some normalization and tries to make sure each Credential is properly setup for use by the given <code>LoginScanner</code>. It yields each Credential in a block.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">def</span> each_credential</span>
+<span id="cb3-2"><a href="#cb3-2"></a>           cred_details.each <span class="kw">do</span> |raw_cred|</span>
+<span id="cb3-3"><a href="#cb3-3"></a>             <span class="co"># This could be a Credential object, or a Credential Core, or an Attempt object</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>             <span class="co"># so make sure that whatever it is, we end up with a Credential.</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>             credential = raw_cred.to_credential</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a>             <span class="kw">if</span> credential.realm.present? &amp;&amp; <span class="dv">self</span>.class::<span class="dt">REALM_KEY</span>.present?</span>
+<span id="cb3-8"><a href="#cb3-8"></a>               credential.realm_key = <span class="dv">self</span>.class::<span class="dt">REALM_KEY</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>               <span class="kw">yield</span> credential</span>
+<span id="cb3-10"><a href="#cb3-10"></a>             <span class="kw">elsif</span> credential.realm.blank? &amp;&amp; <span class="dv">self</span>.class::<span class="dt">REALM_KEY</span>.present? &amp;&amp; <span class="dv">self</span>.class::<span class="dt">DEFAULT_REALM</span>.present?</span>
+<span id="cb3-11"><a href="#cb3-11"></a>               credential.realm_key = <span class="dv">self</span>.class::<span class="dt">REALM_KEY</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>               credential.realm     = <span class="dv">self</span>.class::<span class="dt">DEFAULT_REALM</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>               <span class="kw">yield</span> credential</span>
+<span id="cb3-14"><a href="#cb3-14"></a>             <span class="kw">elsif</span> credential.realm.present? &amp;&amp; <span class="dv">self</span>.class::<span class="dt">REALM_KEY</span>.blank?</span>
+<span id="cb3-15"><a href="#cb3-15"></a>               second_cred = credential.dup</span>
+<span id="cb3-16"><a href="#cb3-16"></a>               <span class="co"># Strip the realm off here, as we don&#39;t want it</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>               credential.realm = <span class="dv">nil</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>               credential.realm_key = <span class="dv">nil</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>               <span class="kw">yield</span> credential</span>
+<span id="cb3-20"><a href="#cb3-20"></a>               <span class="co"># Some services can take a domain in the username like this even though</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>               <span class="co"># they do not explicitly take a domain as part of the protocol.</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>               second_cred.public = <span class="st">&quot;</span><span class="ot">#{</span>second_cred.realm<span class="ot">}</span><span class="st">\\</span><span class="ot">#{</span>second_cred.public<span class="ot">}</span><span class="st">&quot;</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a>               second_cred.realm = <span class="dv">nil</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>               second_cred.realm_key = <span class="dv">nil</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a>               <span class="kw">yield</span> second_cred</span>
+<span id="cb3-26"><a href="#cb3-26"></a>             <span class="kw">else</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>               <span class="kw">yield</span> credential</span>
+<span id="cb3-28"><a href="#cb3-28"></a>             <span class="kw">end</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a>           <span class="kw">end</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a>         <span class="kw">end</span></span></code></pre></div>
+<ul>
+<li><strong><code>set_sane_defaults</code></strong>: This method will be overridden by each specific <code>LoginScanner</code>. This is called at the end of the initializer and sets any sane defaults for attributes that have them and were not given a specific value in the initializer.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># This is a placeholder method. Each LoginScanner class</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>         <span class="co"># will override this with any sane defaults specific to</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>         <span class="co"># its own behaviour.</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>         <span class="co"># @abstract</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>         <span class="co"># @return [void]</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>         <span class="kw">def</span> set_sane_defaults</span>
+<span id="cb4-7"><a href="#cb4-7"></a>           <span class="dv">self</span>.connection_timeout = <span class="dv">30</span> <span class="kw">if</span> <span class="dv">self</span>.connection_timeout.nil?</span>
+<span id="cb4-8"><a href="#cb4-8"></a>         <span class="kw">end</span></span></code></pre></div>
+<ul>
+<li><strong><code>attempt_login</code></strong>: This method is just a stub on the Base mixin. It will be overridden in each LoginScanner class to contain the logic to take one single Credential object and use it to make a login attempt against the target service. It returns a <code>::Metasploit::Framework::LoginScanner::Result</code> object containing all the information about that attempt’s result.</li>
+</ul>
+<p>For an example let’s look at the attempt_login method from <code>Metasploit::Framework::LoginScanner::FTP (lib/metasploit/framework/login_scanner/ftp.rb)</code></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># (see Base#attempt_login)</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>       <span class="kw">def</span> attempt_login(credential)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>         result_options = {</span>
+<span id="cb5-4"><a href="#cb5-4"></a>             <span class="st">credential: </span>credential</span>
+<span id="cb5-5"><a href="#cb5-5"></a>         }</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a>         <span class="kw">begin</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>           success = connect_login(credential.public, credential.private)</span>
+<span id="cb5-9"><a href="#cb5-9"></a>         <span class="kw">rescue</span> ::<span class="dt">EOFError</span>,  <span class="dt">Rex</span>::<span class="dt">AddressInUse</span>, <span class="dt">Rex</span>::<span class="dt">ConnectionError</span>, <span class="dt">Rex</span>::<span class="dt">ConnectionTimeout</span>, ::<span class="dt">Timeout</span>::<span class="dt">Error</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>           result_options[<span class="st">:status</span>] = <span class="dt">Metasploit</span>::<span class="dt">Model</span>::<span class="dt">Login</span>::<span class="dt">Status</span>::<span class="dt">UNABLE_TO_CONNECT</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>           success = <span class="dv">false</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>         <span class="kw">end</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a></span>
+<span id="cb5-15"><a href="#cb5-15"></a>         <span class="kw">if</span> success</span>
+<span id="cb5-16"><a href="#cb5-16"></a>           result_options[<span class="st">:status</span>] = <span class="dt">Metasploit</span>::<span class="dt">Model</span>::<span class="dt">Login</span>::<span class="dt">Status</span>::<span class="dt">SUCCESSFUL</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>         <span class="kw">elsif</span> !(result_options.has_key? <span class="st">:status</span>)</span>
+<span id="cb5-18"><a href="#cb5-18"></a>           result_options[<span class="st">:status</span>] = <span class="dt">Metasploit</span>::<span class="dt">Model</span>::<span class="dt">Login</span>::<span class="dt">Status</span>::<span class="dt">INCORRECT</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>         <span class="kw">end</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a>         ::<span class="dt">Metasploit</span>::<span class="dt">Framework</span>::<span class="dt">LoginScanner</span>::<span class="dt">Result</span>.new(result_options)</span>
+<span id="cb5-22"><a href="#cb5-22"></a></span>
+<span id="cb5-23"><a href="#cb5-23"></a>       <span class="kw">end</span></span></code></pre></div>
+<ul>
+<li><strong><code>scan!</code></strong> : This method is the main one you will be concerned with. This method does several things.
+<ul>
+<li>It calls valid! which will check all of the validations on the class and raise an <code>Metasploit::Framework::LoginScanner::Invalid</code> if any of the Validations fail. This exception will contain all the errors messages for any failing validations.</li>
+<li>it keeps track of the connection error count, and will bail out if we have too many connection errors or too many in a row</li>
+<li>it runs through all of the credentials by calling each_credential with a block</li>
+<li>in that block it passes each credential to <code>#attempt_login</code></li>
+<li>it yields the Result object into the block it is passed</li>
+<li>if stop_on_success is set it will also exit out early if it the result was a success</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Attempt to login with every {Credential credential} in</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>          <span class="co"># {#cred_details}, by calling {#attempt_login} once for each.</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>          <span class="co">#</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>          <span class="co"># If a successful login is found for a user, no more attempts</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>          <span class="co"># will be made for that user.</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>          <span class="co">#</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>          <span class="co"># @yieldparam result [Result] The {Result} object for each attempt</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>          <span class="co"># @yieldreturn [void]</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>          <span class="co"># @return [void]</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>          <span class="kw">def</span> scan!</span>
+<span id="cb6-11"><a href="#cb6-11"></a>            valid!</span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a>            <span class="co"># Keep track of connection errors.</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>            <span class="co"># If we encounter too many, we will stop.</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>            consecutive_error_count = <span class="dv">0</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>            total_error_count = <span class="dv">0</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a></span>
+<span id="cb6-18"><a href="#cb6-18"></a>            successful_users = <span class="dt">Set</span>.new</span>
+<span id="cb6-19"><a href="#cb6-19"></a></span>
+<span id="cb6-20"><a href="#cb6-20"></a>            each_credential <span class="kw">do</span> |credential|</span>
+<span id="cb6-21"><a href="#cb6-21"></a>              <span class="kw">next</span> <span class="kw">if</span> successful_users.include?(credential.public)</span>
+<span id="cb6-22"><a href="#cb6-22"></a></span>
+<span id="cb6-23"><a href="#cb6-23"></a>              result = attempt_login(credential)</span>
+<span id="cb6-24"><a href="#cb6-24"></a>              result.freeze</span>
+<span id="cb6-25"><a href="#cb6-25"></a></span>
+<span id="cb6-26"><a href="#cb6-26"></a>              <span class="kw">yield</span> result <span class="kw">if</span> block_given?</span>
+<span id="cb6-27"><a href="#cb6-27"></a></span>
+<span id="cb6-28"><a href="#cb6-28"></a>              <span class="kw">if</span> result.success?</span>
+<span id="cb6-29"><a href="#cb6-29"></a>                consecutive_error_count = <span class="dv">0</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a>                <span class="kw">break</span> <span class="kw">if</span> stop_on_success</span>
+<span id="cb6-31"><a href="#cb6-31"></a>                successful_users &lt;&lt; credential.public</span>
+<span id="cb6-32"><a href="#cb6-32"></a>              <span class="kw">else</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a>                <span class="kw">if</span> result.status == <span class="dt">Metasploit</span>::<span class="dt">Model</span>::<span class="dt">Login</span>::<span class="dt">Status</span>::<span class="dt">UNABLE_TO_CONNECT</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a>                  consecutive_error_count += <span class="dv">1</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a>                  total_error_count += <span class="dv">1</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a>                  <span class="kw">break</span> <span class="kw">if</span> consecutive_error_count &gt;= <span class="dv">3</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a>                  <span class="kw">break</span> <span class="kw">if</span> total_error_count &gt;= <span class="dv">10</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a>                <span class="kw">end</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a>              <span class="kw">end</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a>            <span class="kw">end</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a>            <span class="dv">nil</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a>          <span class="kw">end</span></span></code></pre></div>
+<h3 id="constants">Constants</h3>
+<p>Although not defined on Base, each <code>LoginScanner</code> has a series of Constants that can be defined on it to assist with critical behaviour.</p>
+<ul>
+<li><strong><code>DEFAULT_PORT</code></strong>: <code>DEFAULT_PORT</code> is a simple constant for use with <code>set_sane_defaults</code>. If the port isn’t set by the user it will use <code>DEFAULT_PORT</code>. This is put in a constant so it can be quickly referenced from outside the scanner.</li>
+</ul>
+<p>These next two Constants are used by the LoginScanner namespace method classes_for_services. This method invoked by <code>Metasploit::Framework::LoginScanner.classes_for_service(&lt;Mdm::service&gt;)</code> will actually return an array of LoginScanner classes that may be useful to try against that particular Service. - <strong><code>LIKELY_PORTS</code></strong> : This constant holds n array of port numbers that it would be likely useful to use this scanner against. - <strong><code>LIKELY_SERVICE_NAMES</code></strong> : Like above except with strings for service names instead of port numbers.</p>
+<ul>
+<li><strong><code>PRIVATE_TYPES</code></strong> : This contains an array of symbols representing the different Private credential types it supports. It should always match the demodulize result for the Private class i.e :password, <code>:ntlm_hash</code>, <code>:ssh_key</code></li>
+</ul>
+<p>These constants are fore <code>LoginScanners</code> that have to deal with Realms such as AD domains or Database Names.</p>
+<ul>
+<li><p><strong><code>REALM_KEY</code></strong>: The type of Realm this scanner expects to deal with. Should always be a constants from <code>Metasploit::Model::Login::Status</code></p></li>
+<li><p><strong><code>DEFAULT_REALM</code></strong>: Some scanners have a default realm (like WORKSTATION for AD domain stuff). If a credential is given to a scanner that requires a realm, but the credential has no realm, this value will be added to the credential as the realm.</p></li>
+<li><p><strong><code>CAN_GET_SESSION</code></strong>: this should be either true or false as to whether we expect we could somehow get a session with a Credential found from this scanner.</p></li>
+</ul>
+<p><strong>example1 ( Metasploit::Framework::LoginScanner::FTP)</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb7-1"><a href="#cb7-1"></a> <span class="dt">DEFAULT_PORT</span>         = <span class="dv">21</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>       <span class="dt">LIKELY_PORTS</span>         = [ <span class="dt">DEFAULT_PORT</span>, <span class="dv">2121</span> ]</span>
+<span id="cb7-3"><a href="#cb7-3"></a>       <span class="dt">LIKELY_SERVICE_NAMES</span> = [ <span class="st">&#39;ftp&#39;</span> ]</span>
+<span id="cb7-4"><a href="#cb7-4"></a>       <span class="dt">PRIVATE_TYPES</span>        = [ <span class="st">:password</span> ]</span>
+<span id="cb7-5"><a href="#cb7-5"></a>       <span class="dt">REALM_KEY</span>           = <span class="dv">nil</span></span></code></pre></div>
+<p><strong>example2 ( Metasploit::Framework::LoginScanner::SMB)</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="dt">CAN_GET_SESSION</span>      = <span class="dv">true</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>        <span class="dt">DEFAULT_REALM</span>        = <span class="st">&#39;WORKSTATION&#39;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>        <span class="dt">LIKELY_PORTS</span>         = [ <span class="dv">139</span>, <span class="dv">445</span> ]</span>
+<span id="cb8-4"><a href="#cb8-4"></a>        <span class="dt">LIKELY_SERVICE_NAMES</span> = [ <span class="st">&quot;smb&quot;</span> ]</span>
+<span id="cb8-5"><a href="#cb8-5"></a>        <span class="dt">PRIVATE_TYPES</span>        = [ <span class="st">:password</span>, <span class="st">:ntlm_hash</span> ]</span>
+<span id="cb8-6"><a href="#cb8-6"></a>        <span class="dt">REALM_KEY</span>            = <span class="dt">Metasploit</span>::<span class="dt">Model</span>::<span class="dt">Realm</span>::<span class="dt">Key</span>::<span class="dt">ACTIVE_DIRECTORY_DOMAIN</span></span></code></pre></div>
+<h2 id="pulling-it-all-together-in-a-module">Pulling it all together in a module</h2>
+<p>So now you hopefully have a good idea of all the moving pieces involved in creating a LoginScanner. The next step is using your brand new LoginScanner in an actual module.</p>
+<p>Let’s look at the <code>ftp_login</code> module:</p>
+<p><code>def run_host(ip)</code></p>
+<p>Every Bruteforce/Login module should be a scanner and should use the run_host method which will run once for each RHOST.</p>
+<h3 id="the-cred-collection">The Cred Collection</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb9-1"><a href="#cb9-1"></a>    cred_collection = <span class="dt">Metasploit</span>::<span class="dt">Framework</span>::<span class="dt">CredentialCollection</span>.new(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>        <span class="st">blank_passwords: </span>datastore[<span class="st">&#39;BLANK_PASSWORDS&#39;</span>],</span>
+<span id="cb9-3"><a href="#cb9-3"></a>        <span class="st">pass_file: </span>datastore[<span class="st">&#39;PASS_FILE&#39;</span>],</span>
+<span id="cb9-4"><a href="#cb9-4"></a>        <span class="st">password: </span>datastore[<span class="st">&#39;PASSWORD&#39;</span>],</span>
+<span id="cb9-5"><a href="#cb9-5"></a>        <span class="st">user_file: </span>datastore[<span class="st">&#39;USER_FILE&#39;</span>],</span>
+<span id="cb9-6"><a href="#cb9-6"></a>        <span class="st">userpass_file: </span>datastore[<span class="st">&#39;USERPASS_FILE&#39;</span>],</span>
+<span id="cb9-7"><a href="#cb9-7"></a>        <span class="st">username: </span>datastore[<span class="st">&#39;USERNAME&#39;</span>],</span>
+<span id="cb9-8"><a href="#cb9-8"></a>        <span class="st">user_as_pass: </span>datastore[<span class="st">&#39;USER_AS_PASS&#39;</span>],</span>
+<span id="cb9-9"><a href="#cb9-9"></a>        <span class="st">prepended_creds: </span>anonymous_creds</span>
+<span id="cb9-10"><a href="#cb9-10"></a>    )</span></code></pre></div>
+<p>So here we see the CredentialCollection getting created using the datastore options. We pass in the options for Cred creation such as wordlists, raw usernames and passwords, whether to try the username as a password, and whether to try blank passwords.</p>
+<p>you’ll also notice an option here called <code>prepended_creds</code>. FTP is one of the only module to make use of this, but it is generally available through the CredentialCollection. This option is an array of <code>Metasploit::Framework::Credential</code> objects that should be spit back by the collection before any others. FTP uses this to deal with testing for anon FTP access.</p>
+<h3 id="initialising-the-scanner">Initialising the Scanner</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb10-1"><a href="#cb10-1"></a>scanner = <span class="dt">Metasploit</span>::<span class="dt">Framework</span>::<span class="dt">LoginScanner</span>::<span class="dt">FTP</span>.new(</span>
+<span id="cb10-2"><a href="#cb10-2"></a>        <span class="st">host: </span>ip,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>        <span class="st">port: </span>rport,</span>
+<span id="cb10-4"><a href="#cb10-4"></a>        <span class="st">proxies: </span>datastore[<span class="st">&#39;PROXIES&#39;</span>],</span>
+<span id="cb10-5"><a href="#cb10-5"></a>        <span class="st">cred_details: </span>cred_collection,</span>
+<span id="cb10-6"><a href="#cb10-6"></a>        <span class="st">stop_on_success: </span>datastore[<span class="st">&#39;STOP_ON_SUCCESS&#39;</span>],</span>
+<span id="cb10-7"><a href="#cb10-7"></a>        <span class="st">connection_timeout: </span><span class="dv">30</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>    )</span></code></pre></div>
+<p>Here we actually create our Scanner object. We set the IP and Port based on data the module already knows about. We can pull any user supplied proxy data from the datatstore. we also pull from the datastore whether to stop on a success for this service. The cred details object is populated by our Credentialcollection which will handle all the credential generation for us invisibly.</p>
+<p>This gives us our scanner object, all configured and ready to go.</p>
+<h3 id="the-scan-block">The Scan Block</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb11-1"><a href="#cb11-1"></a> scanner.scan! <span class="kw">do</span> |result|</span>
+<span id="cb11-2"><a href="#cb11-2"></a>      credential_data = result.to_h</span>
+<span id="cb11-3"><a href="#cb11-3"></a>      credential_data.merge!(</span>
+<span id="cb11-4"><a href="#cb11-4"></a>          <span class="kw">module</span><span class="st">_fullname: </span><span class="dv">self</span>.fullname,</span>
+<span id="cb11-5"><a href="#cb11-5"></a>          <span class="st">workspace_id: </span>myworkspace_id</span>
+<span id="cb11-6"><a href="#cb11-6"></a>      )</span>
+<span id="cb11-7"><a href="#cb11-7"></a>      <span class="kw">if</span> result.success?</span>
+<span id="cb11-8"><a href="#cb11-8"></a>        credential_core = create_credential(credential_data)</span>
+<span id="cb11-9"><a href="#cb11-9"></a>        credential_data[<span class="st">:core</span>] = credential_core</span>
+<span id="cb11-10"><a href="#cb11-10"></a>        create_credential_login(credential_data)</span>
+<span id="cb11-11"><a href="#cb11-11"></a></span>
+<span id="cb11-12"><a href="#cb11-12"></a>        print_good <span class="st">&quot;</span><span class="ot">#{</span>ip<span class="ot">}</span><span class="st">:</span><span class="ot">#{</span>rport<span class="ot">}</span><span class="st"> - LOGIN SUCCESSFUL: </span><span class="ot">#{</span>result.credential<span class="ot">}</span><span class="st">&quot;</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>      <span class="kw">else</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>        invalidate_login(credential_data)</span>
+<span id="cb11-15"><a href="#cb11-15"></a>        print_status <span class="st">&quot;</span><span class="ot">#{</span>ip<span class="ot">}</span><span class="st">:</span><span class="ot">#{</span>rport<span class="ot">}</span><span class="st"> - LOGIN FAILED: </span><span class="ot">#{</span>result.credential<span class="ot">}</span><span class="st"> (</span><span class="ot">#{</span>result.status<span class="ot">}</span><span class="st">: </span><span class="ot">#{</span>result.proof<span class="ot">}</span><span class="st">)&quot;</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a>      <span class="kw">end</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a>    <span class="kw">end</span></span></code></pre></div>
+<p>This is the real heart of the matter here. We call s<code>can!</code> on our scanner, and pass it a block. As we mentioned before, the scanner yields each attempt’s Result object into that block. We check the result’s status to see if it was successful or not.</p>
+<p>The result object now as a <code>.to_h</code> method which returns a hash compatible with our credential creation methods. We take that hash and merge in our module specific information and workspace id.</p>
+<p>In the case of a success we build some info hashes and call <code>create_credential</code>. This is a method found in the metasploit-credential gem under <code>lib/metasploit/credential/creation.rb</code> in a mixin called <code>Metasploit::Credential::Creation</code>. This mixin is included in the Report mixin, so if your module includes that mixin you’ll get these methods for free.</p>
+<p><code>create_credential</code> creates a <code>Metasploit::Credential::Core</code>. We then take that core, the service data, and merge it with some additional data. This additional data includes the access level, the current time (to update last_attempted_at on the <code>Metasploit::Credential::Login</code>), the the status.</p>
+<p>Finally, for a success, we output the result to the console.</p>
+<p>In the case of a failure, we call the <code>invalidate_login</code> method. This method also comes from the Creation mixin. This method looks to see if a Login object already exists for this credential:service pair. If it does, it updates the status to the status we got back from the scanner. This is primarily to account for Login objects created by things like Post modules that have an untried status.</p>
+<h3 id="ftp_login-final-view"><code>ftp_login</code> Final View</h3>
+<p>Pulling it all together, we get a new <code>ftp_login</code> module that looks something like this:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">##</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># This module requires Metasploit: http//metasploit.com/download</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># Current source: https://github.com/rapid7/metasploit-framework</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">##</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a>require <span class="st">&#39;msf/core&#39;</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>require <span class="st">&#39;metasploit/framework/credential_collection&#39;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>require <span class="st">&#39;metasploit/framework/login_scanner/ftp&#39;</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="kw">class</span> <span class="dt">Metasploit3</span> &lt; <span class="dt">Msf</span>::<span class="dt">Auxiliary</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  include <span class="dt">Msf</span>::<span class="dt">Exploit</span>::<span class="dt">Remote</span>::<span class="dt">Ftp</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>  include <span class="dt">Msf</span>::<span class="dt">Auxiliary</span>::<span class="dt">Scanner</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>  include <span class="dt">Msf</span>::<span class="dt">Auxiliary</span>::<span class="dt">Report</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>  include <span class="dt">Msf</span>::<span class="dt">Auxiliary</span>::<span class="dt">AuthBrute</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a></span>
+<span id="cb12-17"><a href="#cb12-17"></a>  <span class="kw">def</span> proto</span>
+<span id="cb12-18"><a href="#cb12-18"></a>    <span class="st">&#39;ftp&#39;</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>  <span class="kw">end</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a></span>
+<span id="cb12-21"><a href="#cb12-21"></a>  <span class="kw">def</span> initialize</span>
+<span id="cb12-22"><a href="#cb12-22"></a>    <span class="dv">super</span>(</span>
+<span id="cb12-23"><a href="#cb12-23"></a>      <span class="st">&#39;Name&#39;</span>        =&gt; <span class="st">&#39;FTP Authentication Scanner&#39;</span>,</span>
+<span id="cb12-24"><a href="#cb12-24"></a>      <span class="st">&#39;Description&#39;</span> =&gt;<span class="ot"> %q{</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="st">        This module will test FTP logins on a range of machines and</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a><span class="st">        report successful logins.  If you have loaded a database plugin</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="st">        and connected to a database this module will record successful</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="st">        logins and hosts so you can track your access.</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="st">      </span><span class="ot">}</span>,</span>
+<span id="cb12-30"><a href="#cb12-30"></a>      <span class="st">&#39;Author&#39;</span>      =&gt; <span class="st">&#39;todb&#39;</span>,</span>
+<span id="cb12-31"><a href="#cb12-31"></a>      <span class="st">&#39;References&#39;</span>     =&gt;</span>
+<span id="cb12-32"><a href="#cb12-32"></a>        [</span>
+<span id="cb12-33"><a href="#cb12-33"></a>          [ <span class="st">&#39;CVE&#39;</span>, <span class="st">&#39;1999-0502&#39;</span>] <span class="co"># Weak password</span></span>
+<span id="cb12-34"><a href="#cb12-34"></a>        ],</span>
+<span id="cb12-35"><a href="#cb12-35"></a>      <span class="st">&#39;License&#39;</span>     =&gt; <span class="dt">MSF_LICENSE</span></span>
+<span id="cb12-36"><a href="#cb12-36"></a>    )</span>
+<span id="cb12-37"><a href="#cb12-37"></a></span>
+<span id="cb12-38"><a href="#cb12-38"></a>    register_options(</span>
+<span id="cb12-39"><a href="#cb12-39"></a>      [</span>
+<span id="cb12-40"><a href="#cb12-40"></a>        <span class="dt">Opt</span>::<span class="dt">RPORT</span>(<span class="dv">21</span>),</span>
+<span id="cb12-41"><a href="#cb12-41"></a>        <span class="dt">OptBool</span>.new(<span class="st">&#39;RECORD_GUEST&#39;</span>, [ <span class="dv">false</span>, <span class="st">&quot;Record anonymous/guest logins to the database&quot;</span>, <span class="dv">false</span>])</span>
+<span id="cb12-42"><a href="#cb12-42"></a>      ], <span class="dv">self</span>.class)</span>
+<span id="cb12-43"><a href="#cb12-43"></a></span>
+<span id="cb12-44"><a href="#cb12-44"></a>    register_advanced_options(</span>
+<span id="cb12-45"><a href="#cb12-45"></a>      [</span>
+<span id="cb12-46"><a href="#cb12-46"></a>        <span class="dt">OptBool</span>.new(<span class="st">&#39;SINGLE_SESSION&#39;</span>, [ <span class="dv">false</span>, <span class="st">&#39;Disconnect after every login attempt&#39;</span>, <span class="dv">false</span>])</span>
+<span id="cb12-47"><a href="#cb12-47"></a>      ]</span>
+<span id="cb12-48"><a href="#cb12-48"></a>    )</span>
+<span id="cb12-49"><a href="#cb12-49"></a></span>
+<span id="cb12-50"><a href="#cb12-50"></a>    deregister_options(<span class="st">&#39;FTPUSER&#39;</span>,<span class="st">&#39;FTPPASS&#39;</span>) <span class="co"># Can use these, but should use &#39;username&#39; and &#39;password&#39;</span></span>
+<span id="cb12-51"><a href="#cb12-51"></a>    <span class="ot">@accepts_all_logins</span> = {}</span>
+<span id="cb12-52"><a href="#cb12-52"></a>  <span class="kw">end</span></span>
+<span id="cb12-53"><a href="#cb12-53"></a></span>
+<span id="cb12-54"><a href="#cb12-54"></a></span>
+<span id="cb12-55"><a href="#cb12-55"></a>  <span class="kw">def</span> run_host(ip)</span>
+<span id="cb12-56"><a href="#cb12-56"></a>    print_status(<span class="st">&quot;</span><span class="ot">#{</span>ip<span class="ot">}</span><span class="st">:</span><span class="ot">#{</span>rport<span class="ot">}</span><span class="st"> - Starting FTP login sweep&quot;</span>)</span>
+<span id="cb12-57"><a href="#cb12-57"></a></span>
+<span id="cb12-58"><a href="#cb12-58"></a>    cred_collection = <span class="dt">Metasploit</span>::<span class="dt">Framework</span>::<span class="dt">CredentialCollection</span>.new(</span>
+<span id="cb12-59"><a href="#cb12-59"></a>        <span class="st">blank_passwords: </span>datastore[<span class="st">&#39;BLANK_PASSWORDS&#39;</span>],</span>
+<span id="cb12-60"><a href="#cb12-60"></a>        <span class="st">pass_file: </span>datastore[<span class="st">&#39;PASS_FILE&#39;</span>],</span>
+<span id="cb12-61"><a href="#cb12-61"></a>        <span class="st">password: </span>datastore[<span class="st">&#39;PASSWORD&#39;</span>],</span>
+<span id="cb12-62"><a href="#cb12-62"></a>        <span class="st">user_file: </span>datastore[<span class="st">&#39;USER_FILE&#39;</span>],</span>
+<span id="cb12-63"><a href="#cb12-63"></a>        <span class="st">userpass_file: </span>datastore[<span class="st">&#39;USERPASS_FILE&#39;</span>],</span>
+<span id="cb12-64"><a href="#cb12-64"></a>        <span class="st">username: </span>datastore[<span class="st">&#39;USERNAME&#39;</span>],</span>
+<span id="cb12-65"><a href="#cb12-65"></a>        <span class="st">user_as_pass: </span>datastore[<span class="st">&#39;USER_AS_PASS&#39;</span>],</span>
+<span id="cb12-66"><a href="#cb12-66"></a>        <span class="st">prepended_creds: </span>anonymous_creds</span>
+<span id="cb12-67"><a href="#cb12-67"></a>    )</span>
+<span id="cb12-68"><a href="#cb12-68"></a></span>
+<span id="cb12-69"><a href="#cb12-69"></a>    scanner = <span class="dt">Metasploit</span>::<span class="dt">Framework</span>::<span class="dt">LoginScanner</span>::<span class="dt">FTP</span>.new(</span>
+<span id="cb12-70"><a href="#cb12-70"></a>        <span class="st">host: </span>ip,</span>
+<span id="cb12-71"><a href="#cb12-71"></a>        <span class="st">port: </span>rport,</span>
+<span id="cb12-72"><a href="#cb12-72"></a>        <span class="st">proxies: </span>datastore[<span class="st">&#39;PROXIES&#39;</span>],</span>
+<span id="cb12-73"><a href="#cb12-73"></a>        <span class="st">cred_details: </span>cred_collection,</span>
+<span id="cb12-74"><a href="#cb12-74"></a>        <span class="st">stop_on_success: </span>datastore[<span class="st">&#39;STOP_ON_SUCCESS&#39;</span>],</span>
+<span id="cb12-75"><a href="#cb12-75"></a>        <span class="st">connection_timeout: </span><span class="dv">30</span></span>
+<span id="cb12-76"><a href="#cb12-76"></a>    )</span>
+<span id="cb12-77"><a href="#cb12-77"></a></span>
+<span id="cb12-78"><a href="#cb12-78"></a>    scanner.scan! <span class="kw">do</span> |result|</span>
+<span id="cb12-79"><a href="#cb12-79"></a>      credential_data = result.to_h</span>
+<span id="cb12-80"><a href="#cb12-80"></a>      credential_data.merge!(</span>
+<span id="cb12-81"><a href="#cb12-81"></a>          <span class="kw">module</span><span class="st">_fullname: </span><span class="dv">self</span>.fullname,</span>
+<span id="cb12-82"><a href="#cb12-82"></a>          <span class="st">workspace_id: </span>myworkspace_id</span>
+<span id="cb12-83"><a href="#cb12-83"></a>      )</span>
+<span id="cb12-84"><a href="#cb12-84"></a>      <span class="kw">if</span> result.success?</span>
+<span id="cb12-85"><a href="#cb12-85"></a>        credential_core = create_credential(credential_data)</span>
+<span id="cb12-86"><a href="#cb12-86"></a>        credential_data[<span class="st">:core</span>] = credential_core</span>
+<span id="cb12-87"><a href="#cb12-87"></a>        create_credential_login(credential_data)</span>
+<span id="cb12-88"><a href="#cb12-88"></a></span>
+<span id="cb12-89"><a href="#cb12-89"></a>        print_good <span class="st">&quot;</span><span class="ot">#{</span>ip<span class="ot">}</span><span class="st">:</span><span class="ot">#{</span>rport<span class="ot">}</span><span class="st"> - LOGIN SUCCESSFUL: </span><span class="ot">#{</span>result.credential<span class="ot">}</span><span class="st">&quot;</span></span>
+<span id="cb12-90"><a href="#cb12-90"></a>      <span class="kw">else</span></span>
+<span id="cb12-91"><a href="#cb12-91"></a>        invalidate_login(credential_data)</span>
+<span id="cb12-92"><a href="#cb12-92"></a>        print_status <span class="st">&quot;</span><span class="ot">#{</span>ip<span class="ot">}</span><span class="st">:</span><span class="ot">#{</span>rport<span class="ot">}</span><span class="st"> - LOGIN FAILED: </span><span class="ot">#{</span>result.credential<span class="ot">}</span><span class="st"> (</span><span class="ot">#{</span>result.status<span class="ot">}</span><span class="st">: </span><span class="ot">#{</span>result.proof<span class="ot">}</span><span class="st">)&quot;</span></span>
+<span id="cb12-93"><a href="#cb12-93"></a>      <span class="kw">end</span></span>
+<span id="cb12-94"><a href="#cb12-94"></a>    <span class="kw">end</span></span>
+<span id="cb12-95"><a href="#cb12-95"></a></span>
+<span id="cb12-96"><a href="#cb12-96"></a>  <span class="kw">end</span></span>
+<span id="cb12-97"><a href="#cb12-97"></a></span>
+<span id="cb12-98"><a href="#cb12-98"></a></span>
+<span id="cb12-99"><a href="#cb12-99"></a>  <span class="co"># Always check for anonymous access by pretending to be a browser.</span></span>
+<span id="cb12-100"><a href="#cb12-100"></a>  <span class="kw">def</span> anonymous_creds</span>
+<span id="cb12-101"><a href="#cb12-101"></a>    anon_creds = [ ]</span>
+<span id="cb12-102"><a href="#cb12-102"></a>    <span class="kw">if</span> datastore[<span class="st">&#39;RECORD_GUEST&#39;</span>]</span>
+<span id="cb12-103"><a href="#cb12-103"></a>      [<span class="st">&#39;IEUser@&#39;</span>, <span class="st">&#39;User@&#39;</span>, <span class="st">&#39;mozilla@example.com&#39;</span>, <span class="st">&#39;chrome@example.com&#39;</span> ].each <span class="kw">do</span> |password|</span>
+<span id="cb12-104"><a href="#cb12-104"></a>        anon_creds &lt;&lt; <span class="dt">Metasploit</span>::<span class="dt">Framework</span>::<span class="dt">Credential</span>.new(<span class="kw">public</span>: <span class="st">&#39;anonymous&#39;</span>, <span class="kw">private</span>: password)</span>
+<span id="cb12-105"><a href="#cb12-105"></a>      <span class="kw">end</span></span>
+<span id="cb12-106"><a href="#cb12-106"></a>    <span class="kw">end</span></span>
+<span id="cb12-107"><a href="#cb12-107"></a>    anon_creds</span>
+<span id="cb12-108"><a href="#cb12-108"></a>  <span class="kw">end</span></span>
+<span id="cb12-109"><a href="#cb12-109"></a></span>
+<span id="cb12-110"><a href="#cb12-110"></a>  <span class="kw">def</span> test_ftp_access(user,scanner)</span>
+<span id="cb12-111"><a href="#cb12-111"></a>    dir = <span class="dt">Rex</span>::<span class="dt">Text</span>.rand_text_alpha(<span class="dv">8</span>)</span>
+<span id="cb12-112"><a href="#cb12-112"></a>    write_check = scanner.send_cmd([<span class="st">&#39;MKD&#39;</span>, dir], <span class="dv">true</span>)</span>
+<span id="cb12-113"><a href="#cb12-113"></a>    <span class="kw">if</span> write_check <span class="kw">and</span> write_check =~ <span class="ot">/^2/</span></span>
+<span id="cb12-114"><a href="#cb12-114"></a>      scanner.send_cmd([<span class="st">&#39;RMD&#39;</span>,dir], <span class="dv">true</span>)</span>
+<span id="cb12-115"><a href="#cb12-115"></a>      print_status(<span class="st">&quot;</span><span class="ot">#{</span>rhost<span class="ot">}</span><span class="st">:</span><span class="ot">#{</span>rport<span class="ot">}</span><span class="st"> - User &#39;</span><span class="ot">#{</span>user<span class="ot">}</span><span class="st">&#39; has READ/WRITE access&quot;</span>)</span>
+<span id="cb12-116"><a href="#cb12-116"></a>      <span class="kw">return</span> <span class="st">&#39;Read/Write&#39;</span></span>
+<span id="cb12-117"><a href="#cb12-117"></a>    <span class="kw">else</span></span>
+<span id="cb12-118"><a href="#cb12-118"></a>      print_status(<span class="st">&quot;</span><span class="ot">#{</span>rhost<span class="ot">}</span><span class="st">:</span><span class="ot">#{</span>rport<span class="ot">}</span><span class="st"> - User &#39;</span><span class="ot">#{</span>user<span class="ot">}</span><span class="st">&#39; has READ access&quot;</span>)</span>
+<span id="cb12-119"><a href="#cb12-119"></a>      <span class="kw">return</span> <span class="st">&#39;Read-only&#39;</span></span>
+<span id="cb12-120"><a href="#cb12-120"></a>    <span class="kw">end</span></span>
+<span id="cb12-121"><a href="#cb12-121"></a>  <span class="kw">end</span></span>
+<span id="cb12-122"><a href="#cb12-122"></a></span>
+<span id="cb12-123"><a href="#cb12-123"></a></span>
+<span id="cb12-124"><a href="#cb12-124"></a><span class="kw">end</span></span></code></pre></div>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="Writing-External-GoLang-Modules.html">←prev</a></div><div class="nav-bar-push"><a href="http-login-scanner.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
+<a href="login-scanner.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

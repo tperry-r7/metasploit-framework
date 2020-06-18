@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Metasploit Versions 4,5" />
-  <title>How to use Metasploit::Framework::Obfuscation::CRandomizer</title>
+  <title>How to use CRandomizer</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -102,102 +102,80 @@
 <div id="nav-box">
 <p>Contents:</p>
 <ul>
-<li><a href=".././markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
 <li>Getting-Started/
 <ul>
 <li><a href=".././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
-<li><a href=".././Getting-Started/Contact.html">Contact</a></li>
 <li>Contributing/
 <ul>
-<li><a href=".././Getting-Started/Contributing/Committer-Keys.html">Committer Keys</a></li>
 <li><a href=".././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
-<li><a href=".././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
-<li><a href=".././Getting-Started/Contributing/Committer-Rights.html">Metasploit Committers</a></li>
+<li><a href=".././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
 <li><a href=".././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
 <li><a href=".././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
-<li><a href=".././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
-<li><a href=".././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
-<li><a href=".././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
 <li><a href=".././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
-<li><a href=".././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href=".././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
 <li><a href=".././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
 <li><a href=".././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+<li><a href=".././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href=".././Getting-Started/Contributing/markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
 </ul></li>
 <li>Kali-Linux/
 <ul>
 <li><a href=".././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
 </ul></li>
-</ul></li>
-<li>Utilities/
-<ul>
-<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
-<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
-<li><a href=".././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
-<li><a href=".././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+<li><a href=".././Getting-Started/Contact.html">Contact</a></li>
 </ul></li>
 <li>Modules/
 <ul>
-<li><a href=".././Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
-<li><a href=".././Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
-<li><a href=".././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
-<li><a href=".././Modules/How-to-get-started-with-writing-a-post-module.html">Post module development</a></li>
 <li><a href=".././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
-<li>How-To/
-<ul>
-<li><a href=".././Modules/How-To/login-scanner.html">Create a Login Scanner Module</a></li>
-<li><a href=".././Modules/How-To/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
-<li><a href=".././Modules/How-To/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
-<li><a href=".././Modules/How-To/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
-<li><a href=".././Modules/How-To/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
-<li><a href=".././Modules/How-To/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
-<li><a href=".././Modules/How-To/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
-<li><a href=".././Modules/How-To/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
-</ul></li>
 <li><a href=".././Modules/Module-Documentation.html">Module documentation</a></li>
-<li><a href=".././Modules/Running-Private-Modules.html">Run private modules</a></li>
-<li><a href=".././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
 <li><a href=".././Modules/Module-Reference-Identifiers.html">Reference Identifiers</a></li>
+<li><a href=".././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href=".././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href=".././Modules/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href=".././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li>Write-Modules/
+<ul>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href=".././Modules/Write-Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
 </ul></li>
 <li>Exploits/
 <ul>
-<li><a href=".././Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
-<li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
 <li><a href=".././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
-<li>How-To/
+<li><a href=".././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href=".././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href=".././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href=".././Exploits/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href=".././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li>Write-Exploits/
 <ul>
-<li><a href=".././Exploits/How-To/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privledge attack with WbemExec</a></li>
-<li><a href=".././Exploits/How-To/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
-<li><a href=".././Exploits/How-To/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
-<li><a href=".././Exploits/How-To/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
-<li><a href=".././Exploits/How-To/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
-<li><a href=".././Exploits/How-To/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
-<li><a href=".././Exploits/How-To/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
-<li><a href=".././Exploits/How-To/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
-<li><a href=".././Exploits/How-To/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href=".././Exploits/Write-Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privilege attack with WbemExec</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
 </ul></li>
-</ul></li>
-<li>Debugging/
-<ul>
-<li><a href=".././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
-<li><a href=".././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
-</ul></li>
-<li>Evasion-and-Obfuscation/
-<ul>
-<li><a href="obfuscation-crandomizer.html">CRandomizer</a></li>
-<li><a href="How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
-<li><strong>How to use Metasploit::Framework::Obfuscation::CRandomizer</strong></li>
 </ul></li>
 <li>Payloads/
 <ul>
-<li><a href=".././Payloads/payload-debugging.html">Payload Debugging</a></li>
 <li><a href=".././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li><a href=".././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href=".././Payloads/Payload-UUID.html">Payload UUID</a></li>
 <li>Meterpreter/
 <ul>
-<li><a href=".././Payloads/Meterpreter/debugging-dead-sessions.html">Debugging Dead Meterpreter Sessions</a></li>
 <li><a href=".././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
 <li><a href=".././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
 <li><a href=".././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
-<li><a href=".././Payloads/Meterpreter/Meterpreter.html">About Meterpreter</a></li>
 <li><a href=".././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
 <li><a href=".././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
 <li><a href=".././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
@@ -214,12 +192,30 @@
 <ul>
 <li><a href=".././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
 </ul></li>
-<li><a href=".././Payloads/Payload-UUID.html">Payload UUID</a></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href=".././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href=".././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><strong>How to use CRandomizer</strong></li>
 </ul></li>
 <li>API/
 <ul>
 <li><a href=".././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
 </ul></li>
+<li>Debugging/
+<ul>
+<li><a href=".././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href=".././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li><a href=".././external-resources.html">External Resources</a></li>
 </ul>
 
 </div>
@@ -227,12 +223,12 @@
 <div id="article-box">
 
 <div id="header-nav-bar">
-<div><a href="How-to-obfuscate-JavaScript-in-Metasploit.html">←prev</a></div><div class="nav-bar-push"><a href=".././Payloads/payload-debugging.html">next→</a></div>
+<div><a href="How-to-obfuscate-JavaScript-in-Metasploit.html">←prev</a></div><div class="nav-bar-push"><a href=".././API/Metasploit-Web-Service.html">next→</a></div>
 </div>
 
 <div id="article-content">
 <header id="title-block-header">
-<h1 class="title">How to use Metasploit::Framework::Obfuscation::CRandomizer</h1>
+<h1 class="title">How to use CRandomizer</h1>
 <p class="author">Metasploit Versions 4,5</p>
 </header>
 <nav id="TOC" role="doc-toc">
@@ -326,7 +322,7 @@
 </div> <!-- article-content -->
 
 <div id="footer-nav-bar">
-<div><a href="How-to-obfuscate-JavaScript-in-Metasploit.html">←prev</a></div><div class="nav-bar-push"><a href=".././Payloads/payload-debugging.html">next→</a></div>
+<div><a href="How-to-obfuscate-JavaScript-in-Metasploit.html">←prev</a></div><div class="nav-bar-push"><a href=".././API/Metasploit-Web-Service.html">next→</a></div>
 </div>
 
 </div> <!-- article-box -->

@@ -1,4 +1,4 @@
-% How to use Metasploit::Framework::Obfuscation::CRandomizer
+% How to use CRandomizer
 % Metasploit Versions 4,5
 
 ## What is CRandomizer

@@ -26,7 +26,7 @@ body {
     float: left;
     width: 320px;
     padding: 10px;
-    font-size: small;
+    font-size: 14px;
 }
 
 #article-box {
@@ -127,7 +127,6 @@ table {
   }
   table thead {
     background: #1D77A3;
-    border-bottom: 2px solid #444444;
   }
   table thead th {
     font-size: 15px;
