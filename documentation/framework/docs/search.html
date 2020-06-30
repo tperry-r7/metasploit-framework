@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Demo Lunr Search</title>
+	<meta charset="utf-8" /> 
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+	<script src="../lunr_index.js"></script>
+  <script src="lunrclient.js"></script>
+  <style>
+    .loading {
+	display: none;
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+.result-title a {
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+.result-title a:hover {
+    text-decoration: underline;
+}
+
+.result-preview {
+    color: #808080;
+}
+
+.search-input {
+    width: 250px;
+}
+
+.resultCount {
+    color: #808080;
+}
+
+.result-query {
+    font-weight: bold;
+}
+
+.pagination {
+	text-align: center;
+	margin: 16px 8px 16px 8px;
+}
+.pagination a {
+	color: black;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+.pagination a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+.pagination a:hover:not(.active) {
+	background-color: #ddd;
+}
+  </style>
+</head>
+<body>
+	<p>Enter a search term, e.g., cat</p>
+	<form id="lunrSearchForm" name="lunrSearchForm">
+		<input class="search-input" name="q" placeholder="Enter search term" type="text"> <input type="submit" value="Search">
+	</form>
+	<div class="loading" id="loading-div">
+		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+		<span class="sr-only">Loading...</span>
+	</div>
+	<p>Search results will be written below:</p>
+	<div class="resultCount" id="resultCount"></div>
+	<div id="searchResults"></div>
+</body>
+</html>
