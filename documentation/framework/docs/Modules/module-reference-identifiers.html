@@ -81,20 +81,22 @@
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-  <nav class="right">
-    <ul>
-      <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
-      <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
-      <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
-    </ul>
-  </nav>
 </head>
 <body>
 
 <div id="main-outer-box">
 
+<nav class="right">
+  <ul>
+    <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+    <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+    <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+     <li style="display: inline;"><a href="../search.html">Search</a></li>
+  </ul>
+</nav>
+
 <div id="my-header">
-  <a href="../index.html">Metasploit Framework</a>
+  <a href="{{path-to-index}}">Metasploit Framework</a>
 </div>
 
 <div id="trunk-box">
@@ -135,7 +137,6 @@
 <ul>
 <li><a href="How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
 <li><a href="Module-Documentation.html">Module documentation</a></li>
-<li><strong>Reference Identifiers</strong></li>
 <li><a href="Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
 <li><a href="Running-Private-Modules.html">Run private modules</a></li>
 <li><a href="How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
@@ -152,6 +153,7 @@
 <li><a href=".././Modules/Write-Modules/login-scanner.html">Create a Login Scanner Module</a></li>
 <li><a href=".././Modules/Write-Modules/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
 </ul></li>
+<li><strong>Reference Identifiers</strong></li>
 </ul></li>
 <li>Exploits/
 <ul>
@@ -230,7 +232,7 @@
 <div id="article-box">
 
 <div id="header-nav-bar">
-<div><a href="Module-Documentation.html">←prev</a></div><div class="nav-bar-push"><a href="Handling-Module-Failures-with-fail_with.html">next→</a></div>
+<div><a href=".././Modules/Write-Modules/http-login-scanner.html">←prev</a></div><div class="nav-bar-push"><a href=".././Exploits/use-exploits.html">next→</a></div>
 </div>
 
 <div id="article-content">
@@ -363,7 +365,7 @@ AKA names for modules are no longer stored as a reference identifier, but rather
 </div> <!-- article-content -->
 
 <div id="footer-nav-bar">
-<div><a href="Module-Documentation.html">←prev</a></div><div class="nav-bar-push"><a href="Handling-Module-Failures-with-fail_with.html">next→</a></div>
+<div><a href=".././Modules/Write-Modules/http-login-scanner.html">←prev</a></div><div class="nav-bar-push"><a href=".././Exploits/use-exploits.html">next→</a></div>
 </div>
 
 </div> <!-- article-box -->
@@ -374,8 +376,9 @@ AKA names for modules are no longer stored as a reference identifier, but rather
 <p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
 <p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
 <p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
-<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p><br/>
-<a href="Module-Reference-Identifiers.md">Pandoc-Markdown source for this page</a><br/>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p>
+<p> This site is built with <a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>, <a href="https://lunrjs.com/">Lunr</a>, and <a href="https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites">BLE-LTER</a>.<br/>
+<a href="module-reference-identifiers.md">Pandoc-Markdown source for this page</a><br/>
 (Docs processed by
 <a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
 </div> <!-- my-footer -->

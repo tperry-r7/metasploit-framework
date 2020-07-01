@@ -25,7 +25,7 @@ VERSION = "2018-08-15"
 project_name = 'Metasploit'
 copyright_info = '2020'
 
-dirs_to_skip = []
+dirs_to_skip = ["search.html", "assets"]
 fnm_to_doc_title = {}
 
 # Needed for ToC in nav box.
@@ -360,6 +360,7 @@ def pandoc_process_file(md_fnm):
     depth = md_fnm.count('/') - 1
 
     html_bef = html_before.replace('{{path-to-index}}', '../' * depth + 'index.html')
+    html_bef = html_before.replace('{{path-to-search}}', '../' * depth + 'search.html')
     html_bef = html_bef.replace('{{project-name}}', project_name)
 
     nav_box_content = get_nav_box_content(md_fnm)
@@ -385,7 +386,7 @@ def pandoc_process_file(md_fnm):
     pandoc_cmd.append('--css=' + '../' * depth + 'styles.css')
     pandoc_cmd.append('--css=' + 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap')
     pandoc_cmd.extend(['-B', '/tmp/before.html', '-A', '/tmp/after.html'])
-    pandoc_cmd.extend(['-H', 'header.html'])
+    # pandoc_cmd.extend(['-H', 'header.html'])
     pandoc_cmd.extend(['-o', html_fnm])
     subprocess.check_call(pandoc_cmd)
 
@@ -469,6 +470,15 @@ def get_rel_path_from_to(fr, to):
 
 html_before = """
 <div id="main-outer-box">
+
+<nav class="right">
+  <ul>
+    <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+    <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+    <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+     <li style="display: inline;"><a href="{{path-to-search}}">Search</a></li>
+  </ul>
+</nav>
 
 <div id="my-header">
   <a href="{{path-to-index}}">{{project-name}}</a>
