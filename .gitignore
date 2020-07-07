@@ -97,3 +97,6 @@ rspec.failures
 
 #Ignore any base disk store files
 db/modules_metadata_base.pstore
+
+#Ignore node modules
+documentation/framework/node_modules

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>How to do reporting and store data during module development</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<nav class="right">
+  <ul>
+    <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+    <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+    <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+     <li style="display: inline;"><a href="../search.html">Search</a></li>
+  </ul>
+</nav>
+
+<div id="my-header">
+  <a href="{{path-to-index}}">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li>Getting-Started/
+<ul>
+<li><a href=".././Getting-Started/Installing-Metasploit.html">Installing Metasploit</a></li>
+<li><a href=".././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li>Contributing/
+<ul>
+<li><a href=".././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href=".././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href=".././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href=".././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href=".././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href=".././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href=".././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href=".././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+<li><a href=".././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href=".././Getting-Started/Contributing/markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href=".././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+<li><a href=".././Getting-Started/Contact.html">Contact</a></li>
+</ul></li>
+<li>Internals/
+<ul>
+<li><a href=".././Internals/workspaces.html">Workspaces</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href="How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li><a href="Module-Documentation.html">Module documentation</a></li>
+<li><a href="Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="Running-Private-Modules.html">Run private modules</a></li>
+<li><strong>How to do reporting and store data during module development</strong></li>
+<li><a href="Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li>Write-Modules/
+<ul>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href=".././Modules/Write-Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+<li><a href="module-reference-identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href=".././Exploits/use-exploits.html">Use exploits</a></li>
+<li><a href=".././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li><a href=".././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href=".././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href=".././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href=".././Exploits/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href=".././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li>Write-Exploits/
+<ul>
+<li><a href=".././Exploits/Write-Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privilege attack with WbemExec</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+</ul></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href=".././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li><a href=".././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href=".././Payloads/Payload-UUID.html">Payload UUID</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href=".././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href=".././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href=".././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href=".././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href=".././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href=".././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href=".././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href=".././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href=".././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use CRandomizer</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href=".././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+<li><a href=".././API/Metasploit-as-a-service.html">Metasploit as a service</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href=".././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href=".././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li><a href=".././external-resources.html">Community Resources</a></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="Running-Private-Modules.html">←prev</a></div><div class="nav-bar-push"><a href="Using-ReflectiveDll-Injection.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">How to do reporting and store data during module development</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#references">References</a></li>
+</ul>
+</nav>
+<ul>
+<li><p><strong>store_loot()</strong> - Used to store both stolen files (both text and binary) and “screencaps” of commands such as a <code>ps -ef</code> and <code>ifconfig</code>. The file itself need not be of forensic-level integrity – they may be parsed by a post module to extract only the relevant information for a penetration tester.</p></li>
+<li><p><strong>report_auth_info()</strong> - Used to store working credentials that are immediately reusable by another module. For example, a module dumping the local SMB hashes would use this, as would a module which reads username:password combinations for a specific host and service. Specifically, merely “likely” usernames and passwords should use store_loot() instead.</p></li>
+<li><p><strong>report_vuln()</strong> - Auxiliary and post modules that exercise a particular vulnerability should report_vuln() upon success. Note that exploit modules automatically report_vuln() as part of opening a session (there is no need to call it especially).</p></li>
+<li><p><strong>report_note()</strong> - Modules should make an effort to avoid report_note() when one of the above methods would be a better fit, but there are often cases where “loot” or “cred” or “vuln” classifications are not immediately appropriate. report_note() calls should always set a OID-style dotted :type, such as domain.hosts, so other modules may easily find them in the database.</p></li>
+<li><p><strong>report_host()</strong> - Reports a host’s liveness and attributes such as operating system and service pack. This is less common because other reporting methods already do this, such as <code>report_service</code>, <code>report_exploit_success</code>, <code>report_client</code>, <code>report_note</code>, <code>report_host_tag</code>, <code>report_vuln</code>, <code>report_event</code>, <code>report_loot</code>, etc. Try not to repeat it.</p></li>
+<li><p><strong>report_service()</strong> - Reports a new service (port) that’s been detected by your module.</p></li>
+<li><p><strong>report_client()</strong> - Reports a client running a host, such as a web browser.</p></li>
+<li><p><strong>report_web_site()</strong> - Reports a website, and must be tied to an existing <code>:service</code>. If there is no <code>:service</code>, you will have to supply <code>:host</code>, <code>:port</code>, <code>:ssl</code>.</p></li>
+<li><p><strong>report_web_page()</strong> - You can use this if your module discovers a webpage that look interesting.</p></li>
+<li><p><strong>report_web_form()</strong> - You can use this if your module discovers web forms that look interesting.</p></li>
+<li><p><strong>report_web_vuln()</strong> - Reports a web application vulnerability. Exploits don’t really need to use this. It’s more suitable for auxiliary modules that exploit a bug that determines that it is vulnerable.</p></li>
+<li><p><strong>report_loot()</strong> - Very rarely, modules might actually want to export loots without using store_loot(). Typically they do this with Ruby’s file IO, but this won’t be logged in the database so can’t be tracked by Metasploit Framework. In that case, a <code>report_loot()</code> is needed. However, 99.9% of the time you should be using <code>store_loot()</code>.</p></li>
+</ul>
+<h3 id="references">References</h3>
+<p>https://github.com/rapid7/metasploit-framework/wiki/Guidelines-for-Accepting-Modules-and-Enhancements</p>
+<p>https://github.com/rapid7/metasploit-framework/blob/master/lib/msf/core/auxiliary/report.rb</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="Running-Private-Modules.html">←prev</a></div><div class="nav-bar-push"><a href="Using-ReflectiveDll-Injection.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p>
+<p> This site is built with <a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>, <a href="https://lunrjs.com/">Lunr</a>, and <a href="https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites">BLE-LTER</a>.<br/>
+<a href="How-to-do-reporting-or-store-data-in-module-development.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

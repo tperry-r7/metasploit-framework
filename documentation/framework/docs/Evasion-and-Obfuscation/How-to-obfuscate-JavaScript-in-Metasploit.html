@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Metasploit versions 4,5" />
+  <title>Obfuscate JavaScript</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<nav class="right">
+  <ul>
+    <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+    <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+    <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+     <li style="display: inline;"><a href="../search.html">Search</a></li>
+  </ul>
+</nav>
+
+<div id="my-header">
+  <a href="{{path-to-index}}">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li>Getting-Started/
+<ul>
+<li><a href=".././Getting-Started/Installing-Metasploit.html">Installing Metasploit</a></li>
+<li><a href=".././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li>Contributing/
+<ul>
+<li><a href=".././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href=".././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href=".././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href=".././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href=".././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href=".././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href=".././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href=".././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+<li><a href=".././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href=".././Getting-Started/Contributing/markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href=".././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+<li><a href=".././Getting-Started/Contact.html">Contact</a></li>
+</ul></li>
+<li>Internals/
+<ul>
+<li><a href=".././Internals/workspaces.html">Workspaces</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href=".././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li><a href=".././Modules/Module-Documentation.html">Module documentation</a></li>
+<li><a href=".././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href=".././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href=".././Modules/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href=".././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li>Write-Modules/
+<ul>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href=".././Modules/Write-Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+<li><a href=".././Modules/module-reference-identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href=".././Exploits/use-exploits.html">Use exploits</a></li>
+<li><a href=".././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li><a href=".././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href=".././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href=".././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href=".././Exploits/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href=".././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li>Write-Exploits/
+<ul>
+<li><a href=".././Exploits/Write-Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privilege attack with WbemExec</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+</ul></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href=".././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li><a href=".././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href=".././Payloads/Payload-UUID.html">Payload UUID</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href=".././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href=".././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href=".././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href=".././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href=".././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href=".././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href=".././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href=".././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><strong>Obfuscate JavaScript</strong></li>
+<li><a href="How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use CRandomizer</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href=".././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+<li><a href=".././API/Metasploit-as-a-service.html">Metasploit as a service</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href=".././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href=".././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li><a href=".././external-resources.html">Community Resources</a></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="obfuscation-crandomizer.html">←prev</a></div><div class="nav-bar-push"><a href="How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Obfuscate JavaScript</h1>
+<p class="author">Metasploit versions 4,5</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#the-rand_text_alpha-trick">The rand_text_alpha trick</a></li>
+<li><a href="#the-obfuscatejs-class">The ObfuscateJS class</a></li>
+<li><a href="#the-jsobfu-class">The JSObfu class</a></li>
+<li><a href="#references">Reference(s)</a></li>
+</ul>
+</nav>
+<p>Stealth is an important feature to think about during exploit development. If your exploit gets caught all the time, it doesn’t matter how awesome or how technically challenging your exploit is, it is most likely not very usable in a real penetration test. Browser exploits in particular, heavily rely on JavaScript to trigger vulnerabilities, therefore a lot of antivirus or signature-based intrusion detection/prevention systems will scan the JavaScript and flag specific lines as malicious. The following code used to be considered as MS12-063 by multiple <a href="https://www.virustotal.com/en/file/90fdf2beab48cf3c269f70d8c9cf7736f3442430ea023d06b65ff073f724870e/analysis/1388888489/">antivirus vendors</a> even though it is not necessarily harmful or malicious, we’ll use this as an example throughout the wiki:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">var</span> arrr <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>()<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>arrr[<span class="dv">0</span>] <span class="op">=</span> windows<span class="op">.</span><span class="at">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">&quot;img&quot;</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>arrr[<span class="dv">0</span>][<span class="st">&quot;src&quot;</span>] <span class="op">=</span> <span class="st">&quot;a&quot;</span><span class="op">;</span></span></code></pre></div>
+<p>To avoid getting flagged, there are some common evasive tricks we can try. For example, you can manually modify the code a little bit to make it not recognizable by any signatures. Or if the antivirus relies on cached webpages to scan for exploits, it is possible to make the browser not cache your exploit so you stay undetected. Or in this case, you can obfuscate your code, which is what this writeup will focus on.</p>
+<p>In Metasploit, there are three common ways to obfuscate your JavaScript. The first one is simply by using the <code>rand_text_alpha</code> method (in <a href="https://github.com/rapid7/metasploit-framework/blob/master/lib/rex/text.rb#L1223">Rex</a>) to randomize your variables. The second one is by using the <a href="https://github.com/rapid7/metasploit-framework/blob/master/lib/rex/exploitation/obfuscatejs.rb">ObfuscateJS</a> class. And the third option is the <a href="https://github.com/rapid7/metasploit-framework/blob/master/lib/rex/exploitation/jsobfu.rb">JSObfu</a> class.</p>
+<h2 id="the-rand_text_alpha-trick">The rand_text_alpha trick</h2>
+<p>Using <code>rand_text_alpha</code> is the most basic form of evasion, but also the least effective. If this is your choice, you should randomize whatever can be randomized without breaking the code.</p>
+<p>By using the above MS12-063, here’s how you would use <code>rand_text_alpha</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Randomizes the array variable</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Max size = 6, Min = 3</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>var_array = rand_text_alpha(rand(<span class="dv">6</span>) + <span class="dv">3</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Randomizes the src value</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>val_src   = rand_text_alpha(<span class="dv">1</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a>js =<span class="ot"> %Q|</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="st">var</span><span class="ot"> </span><span class="co">#{var_array} = new Array();</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#{var_array}[0] = windows.document.createElement(&quot;img&quot;);</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#{var_array}[0][&quot;src&quot;] = &quot;#{val_src}&quot;;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>|</span></code></pre></div>
+<h2 id="the-obfuscatejs-class">The ObfuscateJS class</h2>
+<p>The ObfuscateJS class is like the <code>rand_text_alpha</code> technique on steroids, but even better. It allows you to replace symbol names such as variables, methods, classes, and namespaces. It can also obfuscate strings by either randomly using <code>fromCharCode</code> or <code>unescape</code>. And lastly, it can strip JavaScript comments, which is handy because exploits often are hard to understand and read so you need comments to remember why something is written in a specific way, but you don’t want to show or leak those comments in a pentest.</p>
+<p>To use ObfuscateJS, let’s use the MS12-063 example again to demonstrate. If you feel like following the steps yourself without writing a module, what you can do is go ahead and run <code>msfconsole</code>, and then switch to irb, like this:</p>
+<pre><code>$ ./msfconsole -q
+msf &gt; irb
+[*] Starting IRB shell...
+
+&gt;&gt; </code></pre>
+<p>And then you are ready to go.</p>
+<p>The first thing you do with ObfuscateJS is you need to initialize it with the JavaScript you want to obfuscate, so in this case, begin like the following:</p>
+<pre><code>js = %Q|
+var arrr = new Array();
+arrr[0] = windows.document.createElement(&quot;img&quot;);
+arrr[0][&quot;src&quot;] = &quot;a&quot;;
+|
+
+obfu = ::Rex::Exploitation::ObfuscateJS.new(js)</code></pre>
+<p><code>obfu</code> should return a <a href="https://github.com/rapid7/metasploit-framework/blob/master/lib/rex/exploitation/obfuscatejs.rb">Rex::Exploitation::ObfuscateJS</a> object. It allows you to do a lot of things, you can really just call <code>methods</code>, or look at the source to see what methods are available (with additional API documentation). But for demo purposes, we’ll showcase the most common one: the <code>obfuscate</code> method.</p>
+<p>To actually obfuscate, you need to call the <code>obfuscate</code> method. This method accepts a symbols argument that allows you to manually specify what symbol names (variables, methods, classes, etc) to obfuscate, it should be in a hash like this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb5-1"><a href="#cb5-1"></a>{</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="st">&#39;Variables&#39;</span>  =&gt; [ <span class="st">&#39;var1&#39;</span>, ... ],</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="st">&#39;Methods&#39;</span>    =&gt; [ <span class="st">&#39;method1&#39;</span>, ... ],</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="st">&#39;Namespaces&#39;</span> =&gt; [ <span class="ch">&#39;n&#39;</span>, ... ],</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="st">&#39;Classes&#39;</span>    =&gt; [ { <span class="st">&#39;Namespace&#39;</span> =&gt; <span class="ch">&#39;n&#39;</span>, <span class="st">&#39;Class&#39;</span> =&gt; <span class="ch">&#39;y&#39;</span>}, ... ]</span>
+<span id="cb5-6"><a href="#cb5-6"></a>}</span></code></pre></div>
+<p>So if I want to obfuscate the variable <code>arrr</code>, and I want to obfuscate the src string, here’s how:</p>
+<pre><code>&gt;&gt; obfu.obfuscate(&#39;Symbols&#39; =&gt; {&#39;Variables&#39;=&gt;[&#39;arrr&#39;]}, &#39;Strings&#39; =&gt; true)
+=&gt; &quot;\nvar QqLFS = new Array();\nQqLFS[0] = windows.document.createElement(unescape(String.fromCharCode(  37, 54, 071, 045, 0x36, 0144, 37, 066, 067 )));\nQqLFS[0][String.fromCharCode(  115, 0x72, 0143 )] = unescape(String.fromCharCode(  045, 0x36, 0x31 ));\n&quot;</code></pre>
+<p>In some cases, you might actually want to know the obfuscated version of a symbol name. One scenario is calling a JavaScript function from an element’s event handler, such as this:</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;script&gt;
+function test() {
+    alert(&quot;hello, world!&quot;);
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload=&quot;test();&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>The obfuscated version would look like the following:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb8-1"><a href="#cb8-1"></a>js =<span class="ot"> %Q|</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">function</span><span class="ot"> </span>test() {</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    alert(<span class="st">&quot;hello, world!&quot;</span>);</span>
+<span id="cb8-4"><a href="#cb8-4"></a>}</span>
+<span id="cb8-5"><a href="#cb8-5"></a>|</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>obfu = ::<span class="dt">Rex</span>::<span class="dt">Exploitation</span>::<span class="dt">ObfuscateJS</span>.new(js)</span>
+<span id="cb8-8"><a href="#cb8-8"></a>obfu.obfuscate(<span class="st">&#39;Symbols&#39;</span> =&gt; {<span class="st">&#39;Methods&#39;</span>=&gt;[<span class="st">&#39;test&#39;</span>]}, <span class="st">&#39;Strings&#39;</span> =&gt; <span class="dv">true</span>)</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a>html =<span class="ot"> %Q|</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="st">&lt;html&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="st">&lt;head&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="st">&lt;script&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="ot">#{</span>js<span class="ot">}</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="st">&lt;/script&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="st">&lt;/head&gt;</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="st">&lt;body</span><span class="ot"> </span>onload=<span class="st">&quot;</span><span class="ot">#{</span>obfu.sym(<span class="st">&#39;test&#39;</span>)<span class="ot">}</span><span class="st">();&quot;</span>&gt;</span>
+<span id="cb8-18"><a href="#cb8-18"></a>&lt;<span class="ot">/body&gt;</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="ot">&lt;/</span>html&gt;</span>
+<span id="cb8-20"><a href="#cb8-20"></a>|</span>
+<span id="cb8-21"><a href="#cb8-21"></a></span>
+<span id="cb8-22"><a href="#cb8-22"></a>puts html</span></code></pre></div>
+<h2 id="the-jsobfu-class">The JSObfu class</h2>
+<p>The JSObfu class used to be ObfuscateJS’ cousin, but it has been completely rewritten since September 2014, and packaged as a <a href="https://rubygems.org/gems/jsobfu">gem</a>. The obfuscation is more complex and you can actually tell it to obfuscate multiple times. You also no longer have to manually specify what symbol names to change, it just knows.</p>
+<p><strong>Trying JSObfu in Rex</strong></p>
+<p>Let’s get back to irb again to demonstrate how easy it is to use JSObfu:</p>
+<pre><code>$ ./msfconsole -q
+msf &gt; irb
+[*] Starting IRB shell...
+
+&gt;&gt; </code></pre>
+<p>This time we’ll do a “hello world” example:</p>
+<pre><code>&gt;&gt; js = ::Rex::Exploitation::JSObfu.new %Q|alert(&#39;hello, world!&#39;);|
+=&gt; alert(&#39;hello, world!&#39;);
+&gt;&gt; js.obfuscate
+=&gt; nil</code></pre>
+<p>And here’s the output:</p>
+<pre><code>window[(function () { var _d=&quot;t&quot;,y=&quot;ler&quot;,N=&quot;a&quot;; return N+y+_d })()]((function () { var f=&#39;d!&#39;,B=&#39;orl&#39;,Q2=&#39;h&#39;,m=&#39;ello, w&#39;; return Q2+m+B+f })());</code></pre>
+<p>Like ObfuscateJS, if you need to get the randomized version of a symbol name, you can still do that. We’ll demonstrate this with the following example:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb12-1"><a href="#cb12-1"></a>&gt;&gt; js = ::<span class="dt">Rex</span>::<span class="dt">Exploitation</span>::<span class="dt">JSObfu</span>.new %Q|function test() { alert(<span class="st">&quot;hello&quot;</span>); }|</span>
+<span id="cb12-2"><a href="#cb12-2"></a>=&gt; function test() {</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  alert(<span class="st">&quot;hello&quot;</span>);</span>
+<span id="cb12-4"><a href="#cb12-4"></a>}</span>
+<span id="cb12-5"><a href="#cb12-5"></a>&gt;&gt; js.obfuscate</span></code></pre></div>
+<p>Say we want to know the randomized version of the method name “test”:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb13-1"><a href="#cb13-1"></a>&gt;&gt; puts js.sym(<span class="st">&quot;test&quot;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>_</span></code></pre></div>
+<p>OK, double check right quick:</p>
+<pre><code>&gt;&gt; puts js
+function _(){window[(function () { var N=&quot;t&quot;,r=&quot;r&quot;,i=&quot;ale&quot;; return i+r+N })()](String.fromCharCode(0150,0x65,0154,0x6c,0x6f));}</code></pre>
+<p>Yup, that looks good to me.</p>
+<p>And finally, let’s try to obfuscate a few times to see how that goes:</p>
+<pre><code>&gt;&gt; js = ::Rex::Exploitation::JSObfu.new %Q|alert(&#39;hello, world!&#39;);|
+=&gt; alert(&#39;hello, world!&#39;);
+&gt;&gt; js.obfuscate(:iterations=&gt;3)
+=&gt; window[String[((function(){var s=(function () { var r=&quot;e&quot;; return r })(),Q=(function () { var I=&quot;d&quot;,dG=&quot;o&quot;; return dG+I })(),c=String.fromCharCode(0x66,114),w=(function () { var i=&quot;C&quot;,v=&quot;r&quot;,f=&quot;omCh&quot;,j=&quot;a&quot;; return f+j+v+i })();return c+w+Q+s;})())]((&#39;Urx&#39;.length*((0x1*(01*(1*020+5)+1)+3)*&#39;u&#39;.length+(&#39;SGgdrAJ&#39;.length-7))+((&#39;Iac&#39;.length*&#39;XLR&#39;.length+2)*&#39;qm&#39;.length+0)),((&#39;l&#39;.length*((function () { var vZ=&#39;k&#39;; return vZ })()[((function () { var E=&quot;h&quot;,t=&quot;t&quot;,O=&quot;leng&quot;; return O+t+E })())]*(0x12*1+0)+&#39;xE&#39;.length)+&#39;h&#39;.length)*(function () { var Z=&#39;uA&#39;,J=&#39;tR&#39;,D=&#39;x&#39;; return D+J+Z })()[((function () { var m=&quot;th&quot;,o=&quot;g&quot;,U=&quot;l&quot;,Y=&quot;en&quot;; return U+Y+o+m })())]+&#39;lLc&#39;.length),(&#39;mQ&#39;.length*(02*023+2)+(&#39;Tt&#39;.length*&#39;OEzGiMVf&#39;.length+5)),(String.fromCharCode(0x48,0131)[((function () { var i=&quot;gth&quot;,r=&quot;len&quot;; return r+i })())]*(&#39;E&#39;.length*0x21+19)+(0x1*&#39;XlhgGJ&#39;.length+4)),(String.fromCharCode(0x69)[((function () { var L=&quot;th&quot;,Q=&quot;n&quot;,$=&quot;l&quot;,I=&quot;g&quot;,x=&quot;e&quot;; return $+x+Q+I+L })())]*(&#39;QC&#39;.length*0x2b+3)+(01*26+1)))]((function(){var C=String[((function () { var w=&quot;rCode&quot;,j=&quot;mCha&quot;,A=&quot;fr&quot;,B=&quot;o&quot;; return A+B+j+w })())]((6*0x10+15),(&#39;riHey&#39;.length*(&#39;NHnex&#39;.length*0x4+2)+4),(01*95+13),(1*(&#39;Z&#39;.length*(0x1*(01*(0x3*6+5)+1)+18)+12)+46),(0x1*(01*013+6)+16)),JQ=String[((function () { var NO=&quot;ode&quot;,T=&quot;rC&quot;,HT=&quot;fromCha&quot;; return HT+T+NO })())]((&#39;J&#39;.length*0x54+17),(0x2*051+26),(&#39;TFJAGR&#39;.length*(&#39;ymYaSJtR&#39;.length*&#39;gv&#39;.length+0)+12),(01*0155+2),(0xe*&#39;FBc&#39;.length+2),(0x1*22+10),(3*(01*043+1)+11)),g=(function(){var N=(function () { var s=&#39;h&#39;; return s })();return N;})();return g+JQ+C;})());</code></pre>
+<p><strong>Using JSObfu for module development</strong></p>
+<p>When you are writing a module, you should not call Rex directly like the above examples. Instead, you should be using the <code>#js_obfuscate</code> method found in <a href="https://github.com/rapid7/metasploit-framework/blob/master/lib/msf/core/exploit/jsobfu.rb">JSObfu mixin</a>. When you’re using JavaScript in your module, always do write it like this:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># This returns a Rex::Exploitation::JSObfu object</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>js = js_obfuscate(your_code)</span></code></pre></div>
+<p>Note that by default, even though your module is calling the #js_obfuscate method, obfuscation will not kick in unless the user sets the JsObfuscate datastore option. This option is an OptInt, which allows you to set the number of times to obfuscate (default is 0).</p>
+<h2 id="references">Reference(s)</h2>
+<p>https://community.rapid7.com/community/metasploit/blog/2011/07/08/jsobfu</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="obfuscation-crandomizer.html">←prev</a></div><div class="nav-bar-push"><a href="How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p>
+<p> This site is built with <a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>, <a href="https://lunrjs.com/">Lunr</a>, and <a href="https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites">BLE-LTER</a>.<br/>
+<a href="How-to-obfuscate-JavaScript-in-Metasploit.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

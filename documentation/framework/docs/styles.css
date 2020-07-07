@@ -1,0 +1,216 @@
+body {
+    color: #222;
+    line-height: 1.5;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#main-outer-box {
+    /* Contains all other divs for the page. */
+}
+
+#my-header {
+    font-weight: bold;
+    font-size: large;
+    padding: 4px 10px 10px 10px;
+}
+
+#my-header a {
+    text-decoration: none;
+}
+
+#trunk-box {
+    /* ... */
+}
+
+#nav-box {
+    float: left;
+    width: 320px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+#article-box {
+    margin-left: 370px;
+    width: 850px;
+}
+
+#header-nav-bar, #footer-nav-bar {
+    font-size: small;
+    display: flex;
+}
+
+.nav-bar-push {
+    margin-left: auto;
+}
+
+#header-nav-bar {
+    padding: 6px 6px 8px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#article-content {
+    /*padding: 20px;*/
+}
+
+/* Pandoc automatically puts title, subtitle, author, and date
+   into a header elem at the top of the page. */
+
+/*   font-family: 'Open Sans Light';
+   font-style: normal;
+   font-weight: 300; */
+
+header .author { 
+  font-weight: 300;
+  font-style: italic;
+} /* The version number */
+
+header .date { 
+    display: none
+}
+/* Pandoc's doc-specific ToC. */
+nav#TOC {
+    border-bottom: 1px solid gray;
+}
+
+#footer-nav-bar {
+    padding: 6px 6px 10px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.left{
+text-align:left;
+float:left;
+}
+.right{
+float:right;
+text-align:right;
+}
+.centered{
+text-align:center;
+}
+
+caption {
+    font-style: italic;
+    font-size: small;
+    color: #555;
+}
+
+a{
+  text-decoration: none;
+}
+a:link {
+    color: #2596CD;
+}
+
+a:visited {
+    color: #1D77A3;
+}
+
+a:hover {
+  border-bottom: 1px solid #2596CD;
+}
+
+table {
+    background-color: #FFFFFF;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+  }
+  table td, table th {
+    padding: 3px 2px;
+  }
+  table tbody td {
+    font-size: 13px;
+  }
+  table tr:nth-child(even) {
+    background: #F2F2F2;
+  }
+  table thead {
+    background: #1D77A3;
+  }
+  table thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    border-left: 2px solid #D0E4F5;
+  }
+  table thead th:first-child {
+    border-left: none;
+  }
+  
+  table tfoot td {
+    font-size: 14px;
+  }
+  table tfoot .links {
+    text-align: right;
+  }
+  table tfoot .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+
+dt {
+    font-weight: bold;
+}
+
+code {
+    background-color: #eee;
+    font-size: 15px;
+}
+
+pre {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    padding-left: 6px;
+    padding-right: 2px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+blockquote {
+    background-color: #d8deea;
+    border: 1px solid #c6d1e7;
+    border-radius: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.warning{
+  background-color: #F8D7DA;
+}
+blockquote code, blockquote pre {
+    background-color: #cad2e4;
+    border-style: none;
+}
+
+#my-footer {
+    clear: both;
+    padding: 10px;
+    font-style: italic;
+    font-size: x-small;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #1D77A3;
+}
+
+nav{
+    margin-right: 50px;
+}
+
+nav ul li{
+    margin-right: 10px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+

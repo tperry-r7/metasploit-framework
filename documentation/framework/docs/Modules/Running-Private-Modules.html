@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Metasploit Versions 4,5" />
+  <title>Run private modules</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<nav class="right">
+  <ul>
+    <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+    <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+    <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+     <li style="display: inline;"><a href="../search.html">Search</a></li>
+  </ul>
+</nav>
+
+<div id="my-header">
+  <a href="{{path-to-index}}">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li>Getting-Started/
+<ul>
+<li><a href=".././Getting-Started/Installing-Metasploit.html">Installing Metasploit</a></li>
+<li><a href=".././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li>Contributing/
+<ul>
+<li><a href=".././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href=".././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href=".././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href=".././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href=".././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href=".././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href=".././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href=".././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+<li><a href=".././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href=".././Getting-Started/Contributing/markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href=".././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+<li><a href=".././Getting-Started/Contact.html">Contact</a></li>
+</ul></li>
+<li>Internals/
+<ul>
+<li><a href=".././Internals/workspaces.html">Workspaces</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href="How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li><a href="Module-Documentation.html">Module documentation</a></li>
+<li><a href="Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><strong>Run private modules</strong></li>
+<li><a href="How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href="Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li>Write-Modules/
+<ul>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href=".././Modules/Write-Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+<li><a href="module-reference-identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href=".././Exploits/use-exploits.html">Use exploits</a></li>
+<li><a href=".././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li><a href=".././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href=".././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href=".././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href=".././Exploits/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href=".././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li>Write-Exploits/
+<ul>
+<li><a href=".././Exploits/Write-Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privilege attack with WbemExec</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+</ul></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href=".././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li><a href=".././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href=".././Payloads/Payload-UUID.html">Payload UUID</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href=".././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href=".././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href=".././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href=".././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href=".././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href=".././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href=".././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href=".././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href=".././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use CRandomizer</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href=".././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+<li><a href=".././API/Metasploit-as-a-service.html">Metasploit as a service</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href=".././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href=".././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li><a href=".././external-resources.html">Community Resources</a></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="Handling-Module-Failures-with-fail_with.html">←prev</a></div><div class="nav-bar-push"><a href="How-to-do-reporting-or-store-data-in-module-development.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Run private modules</h1>
+<p class="author">Metasploit Versions 4,5</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#mirror-the-real-metasploit-module-paths">Mirror the “real” Metasploit module paths</a></li>
+<li><a href="#create-an-appropriate-category">Create an appropriate category</a></li>
+<li><a href="#create-the-module">Create the module</a></li>
+<li><a href="#test-it-all-out">Test it all out</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a>
+<ul>
+<li><a href="#metasploit-community-and-pro-editions">Metasploit Community and Pro editions</a></li>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#new-mixins-and-protocols">New mixins and protocols</a></li>
+</ul></li>
+<li><a href="#a-final-warning">A final warning</a></li>
+</ul>
+</nav>
+<p>If you’re in the business of writing or collecting Metasploit modules that aren’t part of the standard distribution, then you need a convenient way to load those modules in Metasploit. Never fear, it’s pretty easy, using Metasploit’s default local module search path, <code>$HOME/.msf4/modules</code>, and there are just a couple caveats:</p>
+<h2 id="mirror-the-real-metasploit-module-paths">Mirror the “real” Metasploit module paths</h2>
+<p>You must first set up a directory structure that fits with Metasploit’s expectations of path names. What this typically means is that you should first create an “exploits” directory structure, like so:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">mkdir</span> -p <span class="va">$HOME</span>/.msf4/modules/exploits</span></code></pre></div>
+<p>If you are using <code>auxiliary</code> or <code>post</code> modules, or are writing <code>payloads</code> you’ll want to <code>mkdir</code> those as well.</p>
+<h2 id="create-an-appropriate-category">Create an appropriate category</h2>
+<p>Modules are sorted by (somewhat arbitrary) categories. These can be anything you like; I usually use <code>test</code> or <code>private</code>, but if you are developing a module with an eye toward providing it to the main Metasploit distribution, you will want to mirror the real module path. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">mkdir</span> -p <span class="va">$HOME</span>/.msf4/modules/exploits/windows/fileformat</span></code></pre></div>
+<p>… if you are developing a file format exploit for Windows.</p>
+<h2 id="create-the-module">Create the module</h2>
+<p>Once you have a directory to place it in, feel free to download or start writing your module.</p>
+<h2 id="test-it-all-out">Test it all out</h2>
+<p>If you already have msfconsole running, use a <code>reload_all</code> command to pick up your new modules. If not, just start msfconsole and they’ll be picked up automatically. If you’d like to test with something generic, I have a module posted up as a gist, here: https://gist.github.com/todb-r7/5935519 , so let’s give it a shot:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">mkdir</span> -p <span class="va">$HOME</span>/.msf4/modules/exploits/test</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">curl</span> -Lo ~/.msf4/modules/exploits/test/test_module.rb https://gist.github.com/todb-r7/5935519/raw/17f7e40ab9054051c1f7e0655c6f8c8a1787d4f5/test_module.rb</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="ex">todb@ubuntu</span>:~$ mkdir -p <span class="va">$HOME</span>/.msf4/modules/exploits/test</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="ex">todb@ubuntu</span>:~$ curl -Lo ~/.msf4/modules/exploits/test/test_module.rb https://gist.github.com/todb-r7/5935519/raw/6e5d2da61c82b0aa8cec36825363118e9dd5f86b/test_module.rb </span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="ex">%</span> Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span>
+<span id="cb3-6"><a href="#cb3-6"></a>                                 <span class="ex">Dload</span>  Upload   Total   Spent    Left  Speed</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="ex">100</span>  1140    0  1140    0     0   3607      0 --:--:-- --:--:-- --:--:--  7808</span></code></pre></div>
+<p>Then, in my msfconsole window:</p>
+<pre><code>msf &gt; reload_all
+[*] Reloading modules from all module paths...
+IIIIII    dTb.dTb        _.---._
+  II     4&#39;  v  &#39;B   .&#39;&quot;&quot;.&#39;/|\`.&quot;&quot;&#39;.
+  II     6.     .P  :  .&#39; / | \ `.  :
+  II     &#39;T;. .;P&#39;  &#39;.&#39;  /  |  \  `.&#39;
+  II      &#39;T; ;P&#39;    `. /   |   \ .&#39;
+IIIIII     &#39;YvP&#39;       `-.__|__.-&#39;
+
+I love shells --egypt
+
+
+       =[ metasploit v4.6.2-2013052901 [core:4.6 api:1.0]
++ -- --=[ 1122 exploits - 707 auxiliary - 192 post
++ -- --=[ 307 payloads - 30 encoders - 8 nops
+
+msf &gt; use exploit/test/test_module 
+msf exploit(test_module) &gt; info
+
+       Name: Fake Test Module
+     Module: exploit/test/test_module
+    Version: 0
+   Platform: Windows
+ Privileged: No
+    License: Metasploit Framework License (BSD)
+       Rank: Excellent
+
+Provided by:
+  todb &lt;todb@metasploit.com&gt;
+
+Available targets:
+  Id  Name
+  --  ----
+  0   Universal
+
+Basic options:
+  Name  Current Setting  Required  Description
+  ----  ---------------  --------  -----------
+  DATA  Hello, world!    yes       The output data
+
+Payload information:
+
+Description:
+  If this module loads, you know you&#39;re doing it right.
+
+References:
+  http://cvedetails.com/cve/1970-0001/
+
+msf exploit(test_module) &gt; exploit
+
+[*] Started reverse handler on 192.168.145.1:4444 
+[+] Hello, world!
+msf exploit(test_module) &gt; </code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>That’s really all there is to it. The most common problems that people (including myself) run into are:</p>
+<ul>
+<li>Attempting to create a module in <code>$HOME/.msf4/modules/</code>. This won’t work because you need to specify if it’s an exploit or a payload or something. Check <code>ls /opt/metasploit/apps/pro/msf3/modules/</code> (or where your install of Metasploit lives).</li>
+<li>Attempting to create a module in <code>$HOME/.msf4/modules/auxiliary/</code>. This won’t work because you need at least one level of categorization. It can be new, like <code>auxiliary/0day/</code>, or existing, like <code>auxiliary/scanner/scada/</code>.</li>
+<li>Attempting to create a module in <code>$HOME/.msf4/exploit/</code> or <code>$HOME/.msf4/posts/</code>. Note the pluralization of the directory names; they’re different for different things. Exploits, payloads, encoders, and nops are plural, while auxiliary and post are singular.</li>
+</ul>
+<h3 id="metasploit-community-and-pro-editions">Metasploit Community and Pro editions</h3>
+<p>Note that the <code>$HOME</code> directory for Metasploit Community Edition is going to be <code>root</code> and not your own user directory, so if you are expecting modules to show up in the Metasploit CE (or Express, or Pro) web UIs, you will want to stash your external modules in <code>/root/.msf4/modules</code>. Of course, this means you need root access to the machine in question, but hey, you’re a l33t Metasploit user, so that shouldn’t be too hard.</p>
+<p>Also note that if your modules are not displaying in the web UI, you should restart Pro service.</p>
+<h3 id="windows">Windows</h3>
+<p>For Windows users, the above is all true, except for accessing the modules from the web GUI. Sadly, you’re a little out of luck; the module load paths on Windows are a little more restrictive and don’t allow for external modules. However, the Console2-based Metasploit Console (Start &gt; Programs &gt; Metasploit &gt; Metasploit Console) will work out just fine.</p>
+<h3 id="new-mixins-and-protocols">New mixins and protocols</h3>
+<p>Any module that requires on changes to core library functions, such as new protocol parsers or other library mixins, aren’t going to work out for you this way – you’re going to end up spewing errors all over the place as your module tries to load these classes. It’s possible to write modules as completely self-contained in nearly all cases (thanks to Ruby’s open class architecture), but such modules nearly always get refactored later to make the protocol and other mixin bits available to other modules.</p>
+<p>In this case, it would be better to work with modules like that using a proper GitHub checkout with a development branch – see the <a href="https://github.com/rapid7/metasploit-framework/wiki/Setting-Up-a-Metasploit-Development-Environment">dev environment setup docs</a> for tons more on that.</p>
+<h2 id="a-final-warning">A final warning</h2>
+<p>If you are loading new and exciting Metasploit modules, know that these things will tend to have access to anything you have access to; doubly so if you’re dropping them in root. Metasploit modules are plain text Ruby, so you can read them – but please be careful, and only add external modules from trusted sources; don’t just go grabbing any old thing you see on the Internet, because you may find yourself backdoored (or worse) in short order.</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="Handling-Module-Failures-with-fail_with.html">←prev</a></div><div class="nav-bar-push"><a href="How-to-do-reporting-or-store-data-in-module-development.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p>
+<p> This site is built with <a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>, <a href="https://lunrjs.com/">Lunr</a>, and <a href="https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites">BLE-LTER</a>.<br/>
+<a href="Running-Private-Modules.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

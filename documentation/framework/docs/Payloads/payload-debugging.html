@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Metasploit Versions 4,5" />
+  <title>Payload Debugging</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<nav class="right">
+  <ul>
+    <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+    <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+    <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+     <li style="display: inline;"><a href="../search.html">Search</a></li>
+  </ul>
+</nav>
+
+<div id="my-header">
+  <a href="{{path-to-index}}">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li>Getting-Started/
+<ul>
+<li><a href=".././Getting-Started/Installing-Metasploit.html">Installing Metasploit</a></li>
+<li><a href=".././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li>Contributing/
+<ul>
+<li><a href=".././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href=".././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href=".././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href=".././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href=".././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href=".././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href=".././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href=".././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+<li><a href=".././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href=".././Getting-Started/Contributing/markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href=".././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+<li><a href=".././Getting-Started/Contact.html">Contact</a></li>
+</ul></li>
+<li>Internals/
+<ul>
+<li><a href=".././Internals/workspaces.html">Workspaces</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href=".././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li><a href=".././Modules/Module-Documentation.html">Module documentation</a></li>
+<li><a href=".././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href=".././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href=".././Modules/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href=".././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li>Write-Modules/
+<ul>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href=".././Modules/Write-Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+<li><a href=".././Modules/module-reference-identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href=".././Exploits/use-exploits.html">Use exploits</a></li>
+<li><a href=".././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li><a href=".././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href=".././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href=".././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href=".././Exploits/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href=".././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li>Write-Exploits/
+<ul>
+<li><a href=".././Exploits/Write-Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privilege attack with WbemExec</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+</ul></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="how-payloads-work.html">How Payloads Work</a></li>
+<li><strong>Payload Debugging</strong></li>
+<li><a href="Payload-UUID.html">Payload UUID</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href=".././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href=".././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href=".././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href=".././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href=".././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href=".././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href=".././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href=".././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href=".././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href=".././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use CRandomizer</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href=".././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+<li><a href=".././API/Metasploit-as-a-service.html">Metasploit as a service</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href=".././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href=".././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li><a href=".././external-resources.html">Community Resources</a></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="how-payloads-work.html">←prev</a></div><div class="nav-bar-push"><a href="Payload-UUID.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Payload Debugging</h1>
+<p class="author">Metasploit Versions 4,5</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#terminology">Terminology</a></li>
+<li><a href="#general-notes">General Notes</a></li>
+<li><a href="#framework-side">Framework Side</a>
+<ul>
+<li><a href="#general-meterpreter-api-architecture">General Meterpreter API Architecture</a></li>
+</ul></li>
+<li><a href="#target-side-windowsmeterpreter">Target Side (<code>windows/meterpreter</code>)</a></li>
+<li><a href="#target-side-pythonmeterpreter">Target Side (<code>python/meterpreter</code>)</a></li>
+<li><a href="#target-side-mettle-meterpreter">Target Side (Mettle Meterpreter)</a></li>
+</ul>
+</nav>
+<p>When debugging Metasploit Framework payloads, it’s important to identify on which side the issue is that needs to be examined. It’s possible and common to debug both sides (the framework side and the target side )but the process to configure each is unique.</p>
+<h2 id="terminology">Terminology</h2>
+<p><strong>Framework Side</strong> – What is referred to as the “framework side” within this article is the host on which the Metasploit Framework is running. The code on this side is generally Ruby and debugging usually involves inspecting the various modules and libraries provided by Metasploit.</p>
+<p><strong>Target Side</strong> – What is referred to as the “target side” within this article is the host on which the payload is being executed. In the context of an exploit module, this would be the <code>RHOST</code>. Debugging the target side is very dependent on which payload is being inspected. For example, the Windows native Meterpreter requires a custom build process and more complex errors may require a native debugger to be used such as WinDBG.</p>
+<h2 id="general-notes">General Notes</h2>
+<p>If a payload fails to execute, first try to identify if it is an issue specific to the payload, or the way in which it is executed. If (for example) both Meterpreter and Shell payloads are failing, the issue could be with the exploit module that delivered them.</p>
+<p>If a Meterpreter session is not being fully established, it’s possibly due to an issue with the stager component rather than Meterpreter itself. To test this, try to switch to a different staged payload such as a shell or VNC configuration.</p>
+<h2 id="framework-side">Framework Side</h2>
+<h3 id="general-meterpreter-api-architecture">General Meterpreter API Architecture</h3>
+<p>When a post module invokes a method that leverages the running Meterpreter instance, it uses a method defined in Ruby within the <code>lib/rex/post/meterpreter/extensions</code> directory. This function typically processes the arguments and turns them into one or more TLVs to be dispatched by the core Meterpreter code. These TLVs are then placed within a transport-specific protocol and transmitted to Meterpreter.</p>
+<h2 id="target-side-windowsmeterpreter">Target Side (<code>windows/meterpreter</code>)</h2>
+<p>Debugging the Windows native Meterpreter requires building from source with a specific set of options. The <a href="https://github.com/rapid7/metasploit-payloads/tree/master/c/meterpreter">README.md</a> file outlines these steps but to summarize, it involves using Visual Studio, opening the project and selecting the debug configuration.</p>
+<p>With this configuration in place, various information will be logged by the Meterpreter process using the Windows API function <a href="https://docs.microsoft.com/en-us/windows/win32/api/debugapi/nf-debugapi-outputdebugstringa"><code>OutputDebugStringA</code></a>. To receive this output, it’s necessary to have a debugger such as WinDBG attached to the process in which the Meterpreter is running (use the <code>getpid</code> command to view the current process ID).</p>
+<h2 id="target-side-pythonmeterpreter">Target Side (<code>python/meterpreter</code>)</h2>
+<p>The Python Meterpreter can generate debugging output by setting the following datastore options:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Datastore Option</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>PythonMeterpreterDebug</code></td>
+<td><code>true</code></td>
+<td>Enable generating debug output</td>
+</tr>
+<tr class="even">
+<td><code>MeterpreterTryToFork</code></td>
+<td><code>false</code></td>
+<td>Keep the process in the foreground</td>
+</tr>
+</tbody>
+</table>
+<p>With these two options set, the payload can be executed from the command line and diagnostic information will be displayed. To interact with and debug the payload, use Python’s included <code>pdb</code> module. Write the stager output to a file, then start it with the debugger attached using the command <code>python -m pdb meterpreter.py</code>. For a more fully-featured debugging CLI, use the third-party IPython variant <code>ipdb</code>.</p>
+<h2 id="target-side-mettle-meterpreter">Target Side (Mettle Meterpreter)</h2>
+<p>The Mettle Meterpreter can generate debugging output by setting the following datastore options:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Datastore Option</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>MeterpreterDebugLevel</code></td>
+<td><code>3</code></td>
+<td>Increase the level of output</td>
+</tr>
+<tr class="even">
+<td><code>PrependFork</code></td>
+<td><code>false</code></td>
+<td>Keep the process in the foreground</td>
+</tr>
+</tbody>
+</table>
+<p>With these two options set, the payload can be executed from the command line and diagnostic information will be displayed. To interactively debug the payload (inspect the state, memory, set breakpoints etc.) use a native debugger for the specific platform on which it is running (e.g. use <code>gdb</code> when debugging on the Linux platform).</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="how-payloads-work.html">←prev</a></div><div class="nav-bar-push"><a href="Payload-UUID.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p>
+<p> This site is built with <a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>, <a href="https://lunrjs.com/">Lunr</a>, and <a href="https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites">BLE-LTER</a>.<br/>
+<a href="payload-debugging.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

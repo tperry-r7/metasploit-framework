@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Metasploit Versions 4,5" />
+  <title>How to use CRandomizer</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<nav class="right">
+  <ul>
+    <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+    <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+    <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+     <li style="display: inline;"><a href="../search.html">Search</a></li>
+  </ul>
+</nav>
+
+<div id="my-header">
+  <a href="{{path-to-index}}">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li>Getting-Started/
+<ul>
+<li><a href=".././Getting-Started/Installing-Metasploit.html">Installing Metasploit</a></li>
+<li><a href=".././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li>Contributing/
+<ul>
+<li><a href=".././Getting-Started/Contributing/Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href=".././Getting-Started/Contributing/Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href=".././Getting-Started/Contributing/Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href=".././Getting-Started/Contributing/Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href=".././Getting-Started/Contributing/Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href=".././Getting-Started/Contributing/Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href=".././Getting-Started/Contributing/How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href=".././Getting-Started/Contributing/Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href=".././Getting-Started/Contributing/Style-Tips.html">Style Tips</a></li>
+<li><a href=".././Getting-Started/Contributing/Reporting-a-Bug.html">Metasploit Bug Reporting</a></li>
+<li><a href=".././Getting-Started/Contributing/markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href=".././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+<li><a href=".././Getting-Started/Contact.html">Contact</a></li>
+</ul></li>
+<li>Internals/
+<ul>
+<li><a href=".././Internals/workspaces.html">Workspaces</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href=".././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li><a href=".././Modules/Module-Documentation.html">Module documentation</a></li>
+<li><a href=".././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href=".././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href=".././Modules/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href=".././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li>Write-Modules/
+<ul>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href=".././Modules/Write-Modules/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href=".././Modules/Write-Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href=".././Modules/Write-Modules/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href=".././Modules/Write-Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href=".././Modules/Write-Modules/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+<li><a href=".././Modules/module-reference-identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href=".././Exploits/use-exploits.html">Use exploits</a></li>
+<li><a href=".././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li><a href=".././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href=".././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href=".././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href=".././Exploits/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href=".././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href=".././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li>Write-Exploits/
+<ul>
+<li><a href=".././Exploits/Write-Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privilege attack with WbemExec</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href=".././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+</ul></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href=".././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li><a href=".././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href=".././Payloads/Payload-UUID.html">Payload UUID</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href=".././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href=".././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href=".././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href=".././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href=".././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href=".././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href=".././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href=".././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href=".././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href=".././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href=".././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href=".././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><strong>How to use CRandomizer</strong></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href=".././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+<li><a href=".././API/Metasploit-as-a-service.html">Metasploit as a service</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href=".././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href=".././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li><a href=".././external-resources.html">Community Resources</a></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="How-to-obfuscate-JavaScript-in-Metasploit.html">←prev</a></div><div class="nav-bar-push"><a href=".././API/Metasploit-Web-Service.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">How to use CRandomizer</h1>
+<p class="author">Metasploit Versions 4,5</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#what-is-crandomizer">What is CRandomizer</a></li>
+<li><a href="#components">Components</a></li>
+<li><a href="#code-factory">Code Factory</a></li>
+<li><a href="#modifier">Modifier</a></li>
+<li><a href="#parser">Parser</a></li>
+<li><a href="#utility">Utility</a></li>
+<li><a href="#code-example">Code Example</a>
+<ul>
+<li><a href="#creating-a-new-stub">Creating a new stub</a></li>
+<li><a href="#randomizing-source-code">Randomizing source code</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="what-is-crandomizer">What is CRandomizer</h2>
+<p>CRandomizer is an obfuscation feature in Metasploit Framework that allows you to randomize C code. It is done by injecting random statements such as native API calls, custom fake function calls, or other routines, etc. The CRandomizer is also supported by Metasploit Framework’s code compiling API, which allows you to build a custom application that is unique (in terms of checksums), also harder to reverse-engineer.</p>
+<p>The randomness of the modification is based on a weight, an arbitrary number from 0 - 100. The higher the number, the more random the code gets.</p>
+<h2 id="components">Components</h2>
+<p>CRandomizer relies on Metasm to be able to parse C code. The following components are built to parse and modify the source code.</p>
+<h2 id="code-factory">Code Factory</h2>
+<p>Also known as <code>Metasploit::Framework::Obfuscation::CRandomizer::CodeFactory</code>.</p>
+<p>The <code>CodeFactory</code> module is used to make the random stubs that will get injected later in the source code. Currently, the things this class is capable of making include small stubs like if statements, a switch, fake functions, and Windows API calls, etc. Each stub tends to be small, and considered as benign by most AVs.</p>
+<p>Every class in CodeFactory, except for Base, FakeFunction, and FakeFunctionCollection, is a stub candidate that gets randomly selected and used in the source code.</p>
+<p>If a stub requires a native API call, then the class can specify <code>@dep</code> to set that dependency. If the source code does not support the API call, then the next stub candidate is used (or until one is found).</p>
+<p>For example, the <code>CRandomizer::CodeFactory::OutputDebugString</code> class is used to generate a fake OutputDebugString call, and the dependency is set as <code>['OutputDebugString']</code>. If the source code includes the Windows.h header, the CRandomizer knows it is okay to inject OutputDebugString. If not, CRandomizer will not use it.</p>
+<h2 id="modifier">Modifier</h2>
+<p>Also known as <code>Metasploit::Framework::Obfuscation::CRandomizer::Modifier</code>.</p>
+<p>The Modifier class decides how something should be modified, and actually modifies the source code, for example: a function, different if statements, loops, nested blocks, etc.</p>
+<p>While the modifier walks through the source, it will randomly inject extra code (provided by the CodeFactory class) at each statement, until there are no more functions to modify.</p>
+<h2 id="parser">Parser</h2>
+<p>Also known as <code>Metasploit::Framework::Obfuscation::CRandomizer::Parser</code>.</p>
+<p>The main purpose of the Parser class is to convert the source code into a parsable format using Metasm, and then pass the functions to the Modifier class to process.</p>
+<h2 id="utility">Utility</h2>
+<p>The Utility class provides quick-to-use methods that any CRandomizer classes could use.</p>
+<h1 id="code-example">Code Example</h1>
+<h2 id="creating-a-new-stub">Creating a new stub</h2>
+<p>First, add a new file under the code_factory with an arbitrary file name. For example: hello.rb. In this example, let’s create a new stub that will printf() “Hello World”. Your stub should be written as a class under the CodeFactory namespace, and make sure to inherit the Base class. Like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb1-1"><a href="#cb1-1"></a>require <span class="st">&#39;metasploit/framework/obfuscation/crandomizer/code_factory/base&#39;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">module</span> <span class="dt">Metasploit</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">module</span> <span class="dt">Framework</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="kw">module</span> <span class="dt">Obfuscation</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>      <span class="kw">module</span> <span class="dt">CRandomizer</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>        <span class="kw">module</span> <span class="dt">CodeFactory</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>          <span class="kw">class</span> <span class="dt">Printf</span> &lt; <span class="dt">Base</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>            <span class="kw">def</span> initialize</span>
+<span id="cb1-11"><a href="#cb1-11"></a>              <span class="dv">super</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>              <span class="ot">@dep</span> = [<span class="st">&#39;printf&#39;</span>]</span>
+<span id="cb1-13"><a href="#cb1-13"></a>            <span class="kw">end</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a>            <span class="kw">def</span> stub</span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="ot">              %Q|</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="ot">              </span>int printf(const char*);</span>
+<span id="cb1-18"><a href="#cb1-18"></a>              void stub() {</span>
+<span id="cb1-19"><a href="#cb1-19"></a>                printf(<span class="st">&quot;Hello World&quot;</span>);</span>
+<span id="cb1-20"><a href="#cb1-20"></a>              }|</span>
+<span id="cb1-21"><a href="#cb1-21"></a>            <span class="kw">end</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>          <span class="kw">end</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a></span>
+<span id="cb1-24"><a href="#cb1-24"></a>        <span class="kw">end</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>      <span class="kw">end</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>    <span class="kw">end</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>  <span class="kw">end</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="kw">end</span></span></code></pre></div>
+<p>Notice a couple of things:</p>
+<ul>
+<li>Every class should have its own <code>stub</code> method. And this <code>stub</code> method should return a string that contains the code you wish to inject. In addition, your code should be written as a function so that Metasm knows how to pick it up, hence the printf is in a <code>void stub()</code> function.</li>
+<li>If your stub requires a native API (in this case, we are using <code>printf</code>), then you must add this function name in the <code>@dep</code> instance variable, which is an array.</li>
+<li>Please keep in mind that your stub should remain simple and small, and not unique. For example, avoid:
+<ul>
+<li>Allocate a huge chunk of memory</li>
+<li>Avoid marking or allocating executable memory</li>
+<li>Loops</li>
+<li>Load referenced section, resource, or .data</li>
+<li>Anti-debugging functions from the Windows API</li>
+<li>Lots of function calls</li>
+<li>Unique strings</li>
+<li>APIs that access the Windows registry or the file system</li>
+<li>XOR</li>
+<li>Shellcode</li>
+<li>Any other suspicious code patterns that are unique to malware.</li>
+</ul></li>
+</ul>
+<h2 id="randomizing-source-code">Randomizing source code</h2>
+<p>Please refer to tools/exploit/random_compile_c.rb for example.</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="How-to-obfuscate-JavaScript-in-Metasploit.html">←prev</a></div><div class="nav-bar-push"><a href=".././API/Metasploit-Web-Service.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p>
+<p> This site is built with <a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>, <a href="https://lunrjs.com/">Lunr</a>, and <a href="https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites">BLE-LTER</a>.<br/>
+<a href="How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>

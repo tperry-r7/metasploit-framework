@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Metasploit Bug Reporting</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<nav class="right">
+  <ul>
+    <li style="display: inline;"> <a href="https://github.com/rapid7/metasploit-framework/tree/master/documentation/modules" target="_blank">Module Docs</a></li>
+    <li style="display: inline;"><a href="https://rapid7.github.io/metasploit-framework/api/" target="_blank">API</a></li>
+    <li style="display: inline;"><a href="https://github.com/rapid7/metasploit-framework" target="_blank">Metasploit GitHub</a></li>
+     <li style="display: inline;"><a href="../../search.html">Search</a></li>
+  </ul>
+</nav>
+
+<div id="my-header">
+  <a href="{{path-to-index}}">Metasploit Framework</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-box">
+<p>Contents:</p>
+<ul>
+<li>Getting-Started/
+<ul>
+<li><a href="../.././Getting-Started/Installing-Metasploit.html">Installing Metasploit</a></li>
+<li><a href="../.././Getting-Started/setting-up-metasploit-dev-enviroment.html">Setting up a Metasploit Developer Environment</a></li>
+<li>Contributing/
+<ul>
+<li><a href="Code-Of-Conduct.html">Contributor Code of Conduct</a></li>
+<li><a href="Contributing-to-Metasploit.html">Contributing to Metasploit</a></li>
+<li><a href="Guidelines-for-Accepting-Modules-and-Enhancements.html">Guidelines for accepting modules and enhancements</a></li>
+<li><a href="Adding-Release-Notes-to-PRs.html">Adding release notes to PRs</a></li>
+<li><a href="Landing-Pull-Requests.html">Landing pull requests</a></li>
+<li><a href="Keeping-in-sync-with-rapid7-master.html">Keep in sync with master</a></li>
+<li><a href="How-to-add-and-update-gems-in-metasploit-framework.html">How to add and update gems</a></li>
+<li><a href="How-to-deprecate-a-Metasploit-module.html">How to deprecate a Metasploit module</a></li>
+<li><a href="Rolling-back-merges.html">Roll back merges</a></li>
+<li><a href="Style-Tips.html">Style Tips</a></li>
+<li><strong>Metasploit Bug Reporting</strong></li>
+<li><a href="markdown-cheat-sheet.html">Markdown Cheat Sheet</a></li>
+</ul></li>
+<li>Kali-Linux/
+<ul>
+<li><a href="../.././Getting-Started/Kali-Linux/How-to-get-Oracle-Support-working-with-Kali-Linux.html">Use Oracle support with Kali Linux</a></li>
+</ul></li>
+<li><a href="../.././Getting-Started/Contact.html">Contact</a></li>
+</ul></li>
+<li>Internals/
+<ul>
+<li><a href="../.././Internals/workspaces.html">Workspaces</a></li>
+</ul></li>
+<li>Modules/
+<ul>
+<li><a href="../.././Modules/How-to-use-a-Metasploit-module-appropriately.html">Properly use a module</a></li>
+<li><a href="../.././Modules/Module-Documentation.html">Module documentation</a></li>
+<li><a href="../.././Modules/Handling-Module-Failures-with-fail_with.html">Handing modules failures with <code>fail_with</code></a></li>
+<li><a href="../.././Modules/Running-Private-Modules.html">Run private modules</a></li>
+<li><a href="../.././Modules/How-to-do-reporting-or-store-data-in-module-development.html">How to do reporting and store data during module development</a></li>
+<li><a href="../.././Modules/Using-ReflectiveDll-Injection.html">Using the ReflectiveDll loader in a Metasploit module</a></li>
+<li>Write-Modules/
+<ul>
+<li><a href="../.././Modules/Write-Modules/How-to-write-a-module-using-HttpServer-and-HttpClient.html">How to write a module using HTTPServer and HTTPClient</a></li>
+<li><a href="../.././Modules/Write-Modules/Writing-External-Metasploit-Modules.html">Writing External Metasploit Modules</a></li>
+<li><a href="../.././Modules/Write-Modules/get-started-writing-auxillary-module.html">Get started with writing an auxiliary module</a></li>
+<li><a href="../.././Modules/Write-Modules/How-to-write-a-HTTP-LoginScanner-Module.html">How to write a HTTP LoginScanner Module</a></li>
+<li><a href="../.././Modules/Write-Modules/Writing-External-Python-Modules.html">Writing Python Modules for Metasploit</a></li>
+<li><a href="../.././Modules/Write-Modules/get-started-writing-post-module.html">Get started with writing a post module</a></li>
+<li><a href="../.././Modules/Write-Modules/Writing-External-GoLang-Modules.html">Writing external GoLang modules</a></li>
+<li><a href="../.././Modules/Write-Modules/login-scanner.html">Create a Login Scanner Module</a></li>
+<li><a href="../.././Modules/Write-Modules/http-login-scanner.html">How to write a HTTP LoginScanner Module</a></li>
+</ul></li>
+<li><a href="../.././Modules/module-reference-identifiers.html">Reference Identifiers</a></li>
+</ul></li>
+<li>Exploits/
+<ul>
+<li><a href="../.././Exploits/use-exploits.html">Use exploits</a></li>
+<li><a href="../.././Exploits/Information-About-Unmet-Browser-Exploit-Requirements.html">Unmet browser exploit requirements</a></li>
+<li><a href="../.././Exploits/How-to-use-Powershell-in-an-exploit.html">Add PowerShell mixin to an exploit</a></li>
+<li><a href="../.././Exploits/How-to-clean-up-files-using-FileDropper.html">How to clean up files using FileDropper</a></li>
+<li><a href="../.././Exploits/How-to-use-PhpEXE-to-exploit-an-arbitrary-file-upload-bug.html">PhpEXE arbitrary file upload</a></li>
+<li><a href="../.././Exploits/How-to-use-Railgun-for-Windows-post-exploitation.html">Use Railgun for Windows</a></li>
+<li><a href="../.././Exploits/How-to-use-command-stagers.html">Use command stagers</a></li>
+<li><a href="../.././Exploits/exploit-ranking.html">Exploit Ranking</a></li>
+<li>Write-Exploits/
+<ul>
+<li><a href="../.././Exploits/Write-Exploits/writing-exploits.html">Get Started Writing an Exploit</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-use-WbemExec-for-a-write-privilege-attack-on-Windows.html">Write a privilege attack with WbemExec</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-Use-the-FILEFORMAT-mixin-to-create-a-file-format-exploit.html">How to use the FILEFORMAT mixin</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-HttpServer.html">How to write a browser exploit using HTTP Server</a></li>
+<li><a href="../.././Exploits/Write-Exploits/How-to-write-a-browser-exploit-using-BrowserExploitServer.html">Write a browser exploit with BrowserExploitServer</a></li>
+</ul></li>
+</ul></li>
+<li>Payloads/
+<ul>
+<li><a href="../.././Payloads/how-payloads-work.html">How Payloads Work</a></li>
+<li><a href="../.././Payloads/payload-debugging.html">Payload Debugging</a></li>
+<li><a href="../.././Payloads/Payload-UUID.html">Payload UUID</a></li>
+<li>Meterpreter/
+<ul>
+<li><a href="../.././Payloads/Meterpreter/about-meterpreter.html">About Meterpreter</a></li>
+<li><a href="../.././Payloads/Meterpreter/meterpreter-configuration.html">Meterpreter Configuration</a></li>
+<li><a href="../.././Payloads/Meterpreter/transport-control.html">Transport Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Reliable-Network-Communication.html">Reliable Network Communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Unicode-Support.html">Unicode Support</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-HTTP-Communication.html">Meterpreter HTTP communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Sleep-Control.html">Sleep Control</a></li>
+<li><a href="../.././Payloads/Meterpreter/Meterpreter-Paranoid-Mode.html">Paranoid Mode</a></li>
+<li><a href="../.././Payloads/Meterpreter/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers.html">HTTP and HTTPS communication</a></li>
+<li><a href="../.././Payloads/Meterpreter/Python-Extension.html">Python Extension</a></li>
+</ul></li>
+<li>msfvenom/
+<ul>
+<li><a href="../.././Payloads/msfvenom/How-to-use-msfvenom.html">How to use msfvenom</a></li>
+</ul></li>
+<li>Shell/
+<ul>
+<li><a href="../.././Payloads/Shell/How-to-use-a-reverse-shell-in-Metasploit.html">How to use a reverse shell</a></li>
+</ul></li>
+</ul></li>
+<li>Utilities/
+<ul>
+<li><a href="../.././Utilities/complier-windows-c.html">How to use Metasploit Framework Compiler Windows to compile C code</a></li>
+<li><a href="../.././Utilities/oracle-support-kali-linux.html">Oracle Support working with Kali Linux</a></li>
+<li><a href="../.././Utilities/How-to-zip-files-with-Msf-Util-EXE.to_zip.html">How to zip files with Msf::Util::EXE.to_zip</a></li>
+<li><a href="../.././Utilities/How-to-use-the-Msf-Exploit-Remote-Tcp-mixin.html">How to use the Msf::Exploit::Remote::Tcp mixin</a></li>
+</ul></li>
+<li>Evasion-and-Obfuscation/
+<ul>
+<li><a href="../.././Evasion-and-Obfuscation/obfuscation-crandomizer.html">CRandomizer</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-obfuscate-JavaScript-in-Metasploit.html">Obfuscate JavaScript</a></li>
+<li><a href="../.././Evasion-and-Obfuscation/How-to-use-Metasploit-Framework-Obfuscation-CRandomizer.html">How to use CRandomizer</a></li>
+</ul></li>
+<li>API/
+<ul>
+<li><a href="../.././API/Metasploit-Web-Service.html">Metasploit web service</a></li>
+<li><a href="../.././API/Metasploit-as-a-service.html">Metasploit as a service</a></li>
+</ul></li>
+<li>Debugging/
+<ul>
+<li><a href="../.././Debugging/How-to-log-in-Metasploit.html">Log Files in Metasploit</a></li>
+<li><a href="../.././Debugging/Why-CVE-is-not-available.html">Why is a CVE Not Available?</a></li>
+</ul></li>
+<li><a href="../.././external-resources.html">Community Resources</a></li>
+</ul>
+
+</div>
+
+<div id="article-box">
+
+<div id="header-nav-bar">
+<div><a href="Style-Tips.html">←prev</a></div><div class="nav-bar-push"><a href="markdown-cheat-sheet.html">next→</a></div>
+</div>
+
+<div id="article-content">
+<header id="title-block-header">
+<h1 class="title">Metasploit Bug Reporting</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#when-not-to-use-metasploits-issue-tracker">When NOT to use Metasploit’s issue tracker</a>
+<ul>
+<li><a href="#metasploit-pro-customers">Metasploit Pro Customers</a></li>
+<li><a href="#security-issues">Security Issues</a></li>
+</ul></li>
+<li><a href="#general-rules">General Rules</a></li>
+<li><a href="#information-to-include">Information to Include</a>
+<ul>
+<li><a href="#steps-to-reproduce">Steps to reproduce</a></li>
+<li><a href="#which-os-are-you-using-what-do-we-need-to-know-about-your-environment-andor-target">Which OS are you using? What do we need to know about your environment and/or target?</a></li>
+<li><a href="#expected-behavior">Expected behavior</a></li>
+<li><a href="#current-behavior">Current behavior</a></li>
+<li><a href="#metasploit-version">Metasploit version</a></li>
+</ul></li>
+<li><a href="#avoid-duplicates">Avoid Duplicates</a></li>
+<li><a href="#other-notes">Other Notes</a></li>
+<li><a href="#prs-accepted">PRs Accepted!</a></li>
+<li><a href="#public-discussion">Public Discussion</a></li>
+<li><a href="#resolved-bugs">Resolved Bugs</a></li>
+</ul>
+</nav>
+<p>Metasploit gets hundreds of issue reports every year on our <a href="https://github.com/rapid7/metasploit-framework/issues">issue tracker</a>. Some issues aren’t bug reports at all, but instead requests for new features or questions about Metasploit usage. We appreciate feature or enhancement requests, and you should feel free to keep submitting those to our issue tracker. Some questions, such as whether an odd error or behavior is intended, are okay to submit to the issue tracker as well. Other questions, such as basic support requests or questions on beginning Framework usage, are better to ask the community on <a href="https://metasploit.com/slack">Slack</a>. If you believe you have discovered a legitimate bug in Metasploit Framework, you should open a bug report on our <a href="https://github.com/rapid7/metasploit-framework/issues">issue tracker</a>. The rest of this page will discuss how to submit detailed, useful bug reports so we can understand and triage your issue as quickly as possible.</p>
+<p>But first…two important exceptions to bug/issue reports.</p>
+<h2 id="when-not-to-use-metasploits-issue-tracker">When NOT to use Metasploit’s issue tracker</h2>
+<p><strong>NOTE:</strong> There are two situations where, even if you have found what you know is a bug, you should not open a bug report on our public issue tracker. 1. You should not open a bug report on Metasploit Framework’s issue tracker if you are a Metasploit Pro customer. 2. You should not open a bug report when you have found a security issue with Metasploit itself.</p>
+<h3 id="metasploit-pro-customers">Metasploit Pro Customers</h3>
+<p>If you are a Metasploit Pro customer, you can log in to Rapid7’s customer support portal <a href="https://www.rapid7.com/for-customers/">here</a>. You are also able to reach out to your CSM or support representative if you prefer. To provide a consistent customer experience, Metasploit Framework community members, committers, and open-source developers do not offer support for commercial Rapid7 products. Rapid7’s support resources and team members are well-equipped to handle your Metasploit Pro support needs!</p>
+<h3 id="security-issues">Security Issues</h3>
+<p>If you have a security issue with Metasploit itself, you should email security@rapid7.com or let us know <a href="https://www.rapid7.com/security/">here</a>. Rapid7’s disclosure policy is <a href="https://www.rapid7.com/security/disclosure/">here</a>. In general, our security teams are happy to give you credit, inform you about progress, and explore related issues with you if you’d like. They’re also happy to keep you anonymous if that’s what you prefer. All of this is significantly easier if you report security issues in a manner that lets our teams quickly work with you to understand the problem! Clear communication and coordinated disclosure give us the best chance of fixing any security issues quickly and protecting users.</p>
+<p>Now on to the good stuff! The Metasploit development community has read thousands of bug reports over the past 15 years, and a well-written bug report makes fixing bugs much faster and easier. In fact, in our experience, how quickly we can understand and fix an issue has more to do with bug report quality than the complexity of the bug itself.</p>
+<h2 id="general-rules">General Rules</h2>
+<ul>
+<li>Ensure the platform you’re reporting the issue for is supported. We do not, for instance, support Termux currently. If your platform is not officially supported, the community may still have resources to help, but you should search for and ask about those outside Metasploit’s issue tracker.</li>
+<li>When possible, it helps if you are running the latest stable version of Metasploit Framework, or the latest release of Kali, BlackArch Linux, or your other favorite security distribution that ships with Metasploit. Metasploit’s <a href="https://github.com/rapid7/metasploit-framework/wiki/Nightly-Installers">nightly installers are here</a> and typically offer the latest Framework release.</li>
+<li>Review our <a href="https://github.com/rapid7/metasploit-framework/blob/master/CODE_OF_CONDUCT.md">code of conduct</a> before submitting issues.</li>
+<li>Use a specific title so we can understand immediately which part of Metasploit is causing the unexpected behavior. “NoMethodError raised on smb_login module” is a great title. “Problem with Metasploit target” is not.</li>
+<li>Redact any private or sensitive data, such as target IPs or URLs, passwords, or personally identifying information.</li>
+<li>Please don’t comment on closed issues; instead, open a new issue and link to any previous relevant issues.</li>
+</ul>
+<h2 id="information-to-include">Information to Include</h2>
+<p>We ask for several different pieces of information when users report issues in Metasploit. As of June 2020, our core engineering team in Belfast is developing a <code>debug</code> command that will automatically give you all the information we require when you encounter an issue and then run the command in msfconsole. For now, the following information ensures that we can more effectively triage and address bugs. <strong>If you do not provide this information, it is likely that response time will be significantly longer!</strong></p>
+<h3 id="steps-to-reproduce">Steps to reproduce</h3>
+<p>What did you do to get the results you got? Can you give us step-by-step instructions to get the same results you got? Are you able to consistently reproduce the issue in your own environment?</p>
+<h3 id="which-os-are-you-using-what-do-we-need-to-know-about-your-environment-andor-target">Which OS are you using? What do we need to know about your environment and/or target?</h3>
+<p>Tell us which operating system you’re using and any relevant information about your setup. If the module or feature you’re having trouble with requires any external dependencies, check whether they are installed, and (if not) whether installing them could solve your problem.</p>
+<p>If you’re having problems with a target (victim), tell us the target operating system and service versions.(Please ensure you’ve redacted any private or sensitive data!) If the module or feature you’re having trouble with requires any external dependencies, check whether that could solve your problem.</p>
+<p>If you’re testing a module in a lab or virtual environment, we would appreciate as much data about the target as you can provide. This means exact versions of the target including patch levels, pcaps if you can capture them, and any kind of logging inside or outside of Framework. We will often ask for the <code>framework.log</code>.</p>
+<h3 id="expected-behavior">Expected behavior</h3>
+<p>What should happen? If what you’re trying to do used to work but no longer does, what was the behavior you encountered <em>before</em> you ran into a problem?</p>
+<h3 id="current-behavior">Current behavior</h3>
+<p>What happens now? Please give us as many technical details as possible. Once again, we also strongly recommend that you send us any relevant logs and/or stack traces. In case you haven’t noticed by now, we absolutely love logs and screen captures, and your including them will make us happy.</p>
+<h3 id="metasploit-version">Metasploit version</h3>
+<p>Get this with the <code>version</code> command in msfconsole (or <code>git log -1 --pretty=oneline</code> for a source install). Did you install Metasploit with… - [ ] Kali package via apt - [ ] Omnibus installer (nightly) - [ ] Commercial installer (from http://www.rapid7.com/products/metasploit/download.jsp) - [ ] Source install (please specify Ruby version)</p>
+<p>This list isn’t intended to be exhaustive—it’s simply the bare minimum set of details we need to reproduce and diagnose your bug. You should feel free to include as much detailed information as you need to help us understand how you got the results you did.</p>
+<h2 id="avoid-duplicates">Avoid Duplicates</h2>
+<p>You may not be the first person to notice the problem you’re seeing as a Framework user, and the more bug reports we get, the more difficult it is to sort through them all for easy fixes or high-priority issues. Here are some ways to help a previously-reported bug get noticed more quickly and prioritized (if necessary).</p>
+<ul>
+<li>Having a problem with a module? Try <a href="https://github.com/rapid7/metasploit-framework/issues?q=is%3Aissue+is%3Aopen+psexec">searching that module’s name</a> to see if anyone else has reported (or fixed!) your problem recently.</li>
+<li>Getting a strange error and not sure what it means? <a href="https://github.com/rapid7/metasploit-framework/issues?q=is%3Aissue+URI.unescape">Search for the error</a> to see if others have had or addressed the same problem you are facing.</li>
+<li>Pro tip: Search both <a href="https://github.com/rapid7/metasploit-framework/issues?q=is%3Aissue">open and closed issues</a> to see if what you’re reporting was resolved (in which case you might simply need to update to a later version of Metasploit) or if there’s a workaround someone else has discovered that might help you while we get to your issue.</li>
+<li>If you DO discover that someone else has already reported the issue you’re experiencing, please do update that issue with any new information—for instance, that you’re experiencing the issue on a different OS or in a different version of Metasploit than what the original issue reports described.</li>
+<li>If you find closed issues or resolved bugs that describe a problem you’re having on a later version of Metasploit, that could indicate a regression (old bugs that have been reintroduced). It helps us if you note this in your issue report. Fixes for regressions can be fast, so making note of possible regressions is useful.</li>
+<li>Finally, you might find a bug that’s been rejected or closed without resolution. In many of these cases, the problem is something external to Metasploit: user error, configuration issues, known incompatibilities, etc. If you think that the original resolution was in error or incomplete, open a <strong>new</strong> issue report and refer to any related issue reports.</li>
+</ul>
+<h2 id="other-notes">Other Notes</h2>
+<ul>
+<li>Networking is hard, as we’ve often said even among ourselves! You might want to see if your network configuration is unusual in any way, or do a regular old internet search to check whether your config might be the problem.</li>
+<li>Antivirus frequently causes strange behavior. Ensure antivirus is disabled on your system or in any VMs where you’re using Metasploit.</li>
+<li>GitHub pull requests frequently contain a LOT of conversation and context. If a bug already has a pull request associated with it, check the pull request conversation for other information that might be useful to you.</li>
+</ul>
+<h2 id="prs-accepted">PRs Accepted!</h2>
+<p>If you’re a superhero and you figured out the root cause of a bug AND found a way to fix it, you can send your Metasploit fixes and improvements our way! The best way to get your fix into Metasploit quickly is to patch your own fork and submit a <a href="https://github.com/rapid7/metasploit-framework/wiki/Metasploit-Development-Environment#wiki-pull">pull request</a> to Metasploit. You get extra gratitude from all of us when you do this, and you’ll also get a shout-out in the <a href="https://blog.rapid7.com/tag/metasploit-weekly-wrapup/">weekly Metasploit wrap-up</a>.</p>
+<p>You can find a guide on setting up your own <a href="https://github.com/rapid7/metasploit-framework/wiki/Metasploit-Development-Environment">Metasploit Development Environment here</a>.</p>
+<h2 id="public-discussion">Public Discussion</h2>
+<p>Some projects and companies don’t like discussing bugs in the bug report itself. Some even have policies of not doing this. Metasploit is not one of those projects. We greatly prefer public communication over private communication because it makes community knowledge accessible and searchable to everyone. That said, if you have specific privacy or security concerns, we’re always happy to speak privately. You can get in touch with us at msfdev@metasploit.com.</p>
+<h2 id="resolved-bugs">Resolved Bugs</h2>
+<p>Your bug should be considered “Resolved” once there’s a fix landed in the <a href="https://github.com/rapid7/metasploit-framework">Metasploit-Framework master branch</a>. People who track that branch will have the fix available quickly. It may take other distributions that include Metasploit (e.g., Kali) a few days to pull in fixes, depending on their individual release cadences.</p>
+<p>Thanks for helping us get to diagnoses and resolutions quickly and efficiently for all Framework users!</p>
+
+</div> <!-- article-content -->
+
+<div id="footer-nav-bar">
+<div><a href="Style-Tips.html">←prev</a></div><div class="nav-bar-push"><a href="markdown-cheat-sheet.html">next→</a></div>
+</div>
+
+</div> <!-- article-box -->
+
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<p>Copyright <a href="https://metasploit.com/">Metasploit</a>, 2020</p>
+<p><a href="https://join.slack.com/t/metasploit/shared_invite/enQtOTMxMjg5ODY3NDYxLTYyZTVlNDM1ZTI3ZGQ0YTQ0NmI1YjgxMGEwYzFhOWNiZWQ4NDNmNTE1MWNiYzJhMzgwMGY0ZWY2NTY0MjA2M2I">Slack team - metasploit.slack.com</a></p>
+<p><a href="https://twitter.com/metasploit">#twitter handle - @metasploit</a></p>
+<p><a href="mailto:msfdev@metasploit.com">development questions - msfdev [ @ ] metasploit.com</a></p>
+<p> This site is built with <a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>, <a href="https://lunrjs.com/">Lunr</a>, and <a href="https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites">BLE-LTER</a>.<br/>
+<a href="Reporting-a-Bug.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+
+</body>
+</html>
