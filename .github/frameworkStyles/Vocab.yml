@@ -1,37 +1,25 @@
 extends: substitution
-message: "Review your use of '%s'. Make sure it matches its intented use. Try '%s'. These are commonly misspelled or missused words. "
+message: "Use '%s' instead of '%s'".
 link: ''
 level: warning
 ignorecase: true
 swap:
   abort: use end, exit or stop
-  access privileges : user rights
-  access rights: user rights
   afterwards: afterward
   anti-virus: antivirus
   backwards: backward
-  bottom left: lower left
-  bottom right: lower right
-  Cascading menu: submenu
-  center around: center on
   checkbox: check box
   checkmark: check mark
-  click on: Click in the window 
-  click at: Click in the window
   code snipped: code example | code sample
   code snippet: code example | code sample
-  preset: built-in
   doubleclick: double-click
   doubleclicking: double-clicking
   e.g: for example
   eg: for example
   etc.: Do not use. Just write out the list
   etc: Do not use, just write out the list
-  type: enter
   ig: in other words
   i.g.: in other words
-  right-click: secondary click
-  right click: secondary click
   unix: Unix
   useage: usage
   via: through
@@ -46,7 +34,6 @@ swap:
   below: later | following
   unmark: clear | deselect
   child folder: subfolder
-  type: enter
   per: for each
   via: through
   i.e.: such as | for example
@@ -68,9 +55,6 @@ swap:
   doubleclick: double-click
   double click: double-click
   web site: website
-  set up: setup (noun)
-  set-up: setup (noun) | set up (verb)
-  setup: set up (verb)
   drop-down: dropdown
   drop down: dropdown
   plug-in: plugin
@@ -80,7 +64,6 @@ swap:
   chat bot: chatbot
   white list: whitelist
   white-list: whitelist
-  R7: Rapid7
   MS: Metasploit
 
 
